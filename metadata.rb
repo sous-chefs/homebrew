@@ -1,3 +1,4 @@
+name             "homebrew"
 maintainer       "Graeme Mathieson"
 maintainer_email "mathie@woss.name"
 license          "Apache 2.0"
