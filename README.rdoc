@@ -9,6 +9,19 @@ for additional background.
 
 = Requirements
 
+== Prerequisites
+
+In order for this recipe to work, you will have to already own
+<tt>/usr/local</tt>. This is outside the scope of the cookbook because it's
+anticipated that you'll run the cookbook as your own user, not root and you'd
+have to be root to take ownership of the directory. Easiest way to get started:
+
+    sudo chown -R `whoami`:staff /usr/local
+
+Bear in mind that this will take ownership of the entire folder and its
+contents, so if you've already got stuff in there (eg MySQL owned by a +mysql+
+user) you'll need to be a touch more careful.
+
 == Platform
 
 This is only going to work on platforms that Homebrew supports which is, I
