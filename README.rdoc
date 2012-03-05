@@ -51,7 +51,7 @@ packages. You can add:
   include_recipe 'homebrew'
 
 to all your recipes that install packages, or you can just make sure it's on
-the run list somewhere early on. The bookbook itself ensures that Homebrew is
+the run list somewhere early on. The cookbook itself ensures that Homebrew is
 installed and up to date.
 
 = License and Author
