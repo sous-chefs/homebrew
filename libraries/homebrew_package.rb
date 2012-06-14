@@ -17,7 +17,7 @@ class Chef
         end
 
         def install_package(name, version)
-          brew('install', name)
+          brew('install', @new_resource.options, name)
         end
 
         # Homebrew doesn't really have a notion of upgrading packages, just
@@ -27,11 +27,12 @@ class Chef
         end
 
         def remove_package(name, version)
-          brew('uninstall', name)
+          brew('uninstall', @new_resource.options, name)
         end
 
         # Homebrew doesn't really have a notion of purging, so just remove.
         def purge_package(name, version)
+          @new_resource.options = ((@new_resource.options || "") << " --force").strip
           remove_package(name, version)
         end
 
