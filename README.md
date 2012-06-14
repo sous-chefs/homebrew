@@ -37,6 +37,8 @@ and on platforms that Homebrew supports in the future.
 
 # Resources and Providers
 
+## package / homebrew\_package
+
 This cookbook provides a package provider called `homebrew_package`
 which will install/remove packages using Homebrew. This becomes the
 default provider for `package` if your platform is Mac OS X.
@@ -51,7 +53,7 @@ resource. However, a couple notes:
 * Likewise, Homebrew doesn't have a purge, but the "purge" action will
   act like "remove".
 
-## Examples
+### Examples
 
     package "mysql" do
       action :install
@@ -61,6 +63,27 @@ resource. However, a couple notes:
 
     package "mysql" do
       provider Chef::Provider::Package::Homebrew
+    end
+
+## homebrew\_tap
+
+LWRP for `brew tap`, a Homebrew command used to add additional formula
+repositories. From the `brew` man page:
+
+    tap [tap]
+           Tap a new formula repository from GitHub, or list existing taps.
+
+           tap is of the form user/repo, e.g. brew tap homebrew/dupes.
+
+Default action is `:tap` which enables the repository. Use `:untap` to
+disable a tapped repository.
+
+### Examples
+
+    homebrew_tap "homebrew/dupes"
+
+    homebrew_tap "homebrew/dupes" do
+      action :untap
     end
 
 # Usage
