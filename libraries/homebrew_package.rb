@@ -5,6 +5,18 @@ require 'chef/resource/package'
 require 'chef/platform'
 
 class Chef
+  class Exceptions
+    class Homebrew
+      class NoRunAsUser < RuntimeError
+        def initialize(message="You must set the attribute node['homebrew']['run_as'] before installing with brew")
+          super(message)
+        end
+      end
+    end
+  end
+end
+
+class Chef
   class Provider
     class Package
       class Homebrew < Package
@@ -12,12 +24,11 @@ class Chef
           @current_resource = Chef::Resource::Package.new(@new_resource.name)
           @current_resource.package_name(@new_resource.package_name)
           @current_resource.version(current_installed_version)
-
           @current_resource
         end
 
         def install_package(name, version)
-          brew('install', @new_resource.options, name)
+          brew_as_user('install', @new_resource.options, name)
         end
 
         def upgrade_package(name, version)
@@ -35,6 +46,14 @@ class Chef
         end
 
         protected
+	def run_as
+          user_name = node["homebrew"]["run_as"] || raise(Chef::Exceptions::Homebrew::NoRunAsUser)
+	end
+
+	def brew_as_user(*args)
+          get_response_from_command("sudo -u #{run_as} brew #{args.join(' ')}")
+	end
+	
         def brew(*args)
           get_response_from_command("brew #{args.join(' ')}")
         end
