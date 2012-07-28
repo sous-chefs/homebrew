@@ -27,6 +27,14 @@ contents, so if you’ve already got stuff in there (eg MySQL owned by a
 `mysql` user) you’ll need to be a touch more careful. This is a
 recommendation from the Homebrew
 
+brew does not like installing packages as root and will refuse to do so.
+We therefore need a nominated non-root user to install stuff as.
+
+ node["homebrew"]["run_as"] = "leftbrained"
+
+The above attribute must be set to a valid username in order to install
+packages.  If the attribute isn't set on the node an exception with be thrown.
+
 ## Platform
 
 * Mac OS X (10.6+)
