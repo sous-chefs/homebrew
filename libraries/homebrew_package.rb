@@ -17,7 +17,11 @@ class Chef
         end
 
         def install_package(name, version)
-          brew('install', @new_resource.options, name)
+          if head_only?
+            brew 'install', @new_resource.options, '--HEAD', name
+          else
+            brew 'install', @new_resource.options, name
+          end
         end
 
         def upgrade_package(name, version)
@@ -40,16 +44,24 @@ class Chef
         end
 
         def current_installed_version
-          get_version_from_command("brew list --versions | awk '/^#{@new_resource.package_name} / { print $2 }'")
+          version = get_response_from_command("brew list --versions | awk '/^#{@new_resource.package_name} / { print $2 }'")
+          version.empty? ? nil : version
+        end
+
+        def head_only?
+          candidate_version == 'HEAD'
         end
 
         def candidate_version
-          get_version_from_command("brew info #{@new_resource.package_name} | awk '/^#{@new_resource.package_name} / { print $2 }'")
-        end
+          info = get_response_from_command("brew info #{@new_resource.package_name} | grep ^#{@new_resource.package_name}:")
 
-        def get_version_from_command(command)
-          version = get_response_from_command(command).chomp
-          version.empty? ? nil : version
+          stable = info.match(/stable (.+?),?/)
+          devel  = info.match(/devel (.+?),?/)
+
+          # we need the group so the map below works correctly
+          head = info.match(/(HEAD)/)
+
+          return [stable, devel, head].compact.map {|md| md[1] }.first
         end
 
         # Nicked from lib/chef/package/provider/macports.rb and tweaked
