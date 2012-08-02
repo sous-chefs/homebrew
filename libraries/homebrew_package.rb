@@ -63,7 +63,7 @@ class Chef
               raise Chef::Exceptions::Package, "Could not read from STDOUT on command: #{command}\nException: #{e.inspect}"
             end
           end
-          unless (0..1).include? status.exitstatus
+          unless status.success?
             raise Chef::Exceptions::Package, "#{command} failed - #{status.inspect}"
           end
           output
