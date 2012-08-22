@@ -3,11 +3,15 @@
 require 'chef/provider/package'
 require 'chef/resource/package'
 require 'chef/platform'
+require 'chef/mixin/shell_out'
 
 class Chef
   class Provider
     class Package
       class Homebrew < Package
+
+        include Chef::Mixin::ShellOut
+
         def load_current_resource
           @current_resource = Chef::Resource::Package.new(@new_resource.name)
           @current_resource.package_name(@new_resource.package_name)
@@ -52,21 +56,9 @@ class Chef
           version.empty? ? nil : version
         end
 
-        # Nicked from lib/chef/package/provider/macports.rb and tweaked
-        # slightly.
         def get_response_from_command(command)
-          output = nil
-          status = popen4(command) do |pid, stdin, stdout, stderr|
-            begin
-              output = stdout.read
-            rescue Exception => e
-              raise Chef::Exceptions::Package, "Could not read from STDOUT on command: #{command}\nException: #{e.inspect}"
-            end
-          end
-          unless (0..1).include? status.exitstatus
-            raise Chef::Exceptions::Package, "#{command} failed - #{status.inspect}"
-          end
-          output
+          output = shell_out!(command)
+          output.stdout
         end
       end
     end
