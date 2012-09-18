@@ -101,8 +101,10 @@ The default itself ensures that Homebrew is installed and up to date.
 # License and Author
 
 Author:: Graeme Mathieson (<mathie@woss.name>)
+Author:: Joshua Timberman (<joshua@opscode.com>)
 
 Copyright:: 2011, Graeme Mathieson
+Copyright:: 2012, Opscode, Inc <legal@opscode.com>
 
 Licensed under the Apache License, Version 2.0 (the “License”); you may
 not use this file except in compliance with the License. You may obtain

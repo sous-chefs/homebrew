@@ -1,3 +1,8 @@
+## v1.3.0:
+
+* [COOK-1425] - use new json output format for formula
+* [COOK-1578] - Use shell_out! instead of popen4
+
 ## v1.2.0:
 
 Opscode has taken maintenance of this cookbook as the original author
