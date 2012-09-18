@@ -48,7 +48,7 @@ class Chef
         end
 
         def candidate_version
-          get_version_from_command("brew info #{@new_resource.package_name} | awk '/^#{@new_resource.package_name} / { print $2 }'")
+          get_version_from_command("brew info #{@new_resource.package_name} | awk '/^#{@new_resource.package_name}: / { print $0 }' | sed 's/.*stable \\([^ ,]*\\).*/\\1/'")
         end
 
         def get_version_from_command(command)
