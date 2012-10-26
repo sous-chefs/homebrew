@@ -51,7 +51,7 @@ class Chef
 
         def candidate_version
           pkg = get_version_from_formula
-          pkg.stable.version || pkg.version
+          pkg.stable.version.to_s || pkg.version.to_s
         end
 
         def get_version_from_command(command)
