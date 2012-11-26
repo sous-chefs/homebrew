@@ -1,3 +1,11 @@
+## v1.3.2:
+
+* [COOK-1793] - use homebrew "go" script to install homebrew
+* [COOK-1821] - Discovered version using Homebrew Formula factory
+  fails check that verifies that version is a String
+* [COOK-1843] - Homebrew README.md contains non-ASCII characters,
+  triggering same issue as COOK-522
+
 ## v1.3.0:
 
 * [COOK-1425] - use new json output format for formula
