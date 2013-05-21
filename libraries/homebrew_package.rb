@@ -25,7 +25,7 @@ class Chef
           if versions.include?(version)
             brew('switch', name, version)
           else
-            checkout(version)
+            checkout(version) unless formula.version == version
             brew('install', @new_resource.options, name)
             reset_repo
           end
@@ -76,14 +76,13 @@ class Chef
         end
 
         def sha_for(version)
-          pkg = formula
-          sha_for_version = false
-          pkg.versions do |v, sha|
-            if v.to_s == version
-              sha_for_version = sha
+          begin
+            formula.versions do |v, sha|
+              return sha if v.to_s == version
             end
+          rescue FormulaUnavailableError
           end
-          sha_for_version
+          false
         end
 
         def get_response_from_command(command)
@@ -92,7 +91,12 @@ class Chef
         end
 
         def checkout(version)
-          shell_out!("cd `brew --prefix` && git checkout #{sha_for(version)} #{formula.pretty_relative_path}")
+          if sha=sha_for(version)
+            shell_out!("cd `brew --prefix` && git checkout #{sha_for(version)} #{formula.pretty_relative_path}")
+          else
+            Chef::Log.warn("unable to check out the formula with version #{version} using version #{formula.version} insted")
+            version = formula.version
+          end
         end
 
         def reset_repo
