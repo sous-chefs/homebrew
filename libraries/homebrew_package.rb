@@ -21,7 +21,14 @@ class Chef
         end
 
         def install_package(name, version)
-          brew('install', @new_resource.options, name)
+          versions = formula.to_hash['installed'].map {|v| v['version']}
+          if versions.include?(version)
+            brew('switch', name, version)
+          else
+            checkout(version) unless formula.version == version
+            brew('install', @new_resource.options, name)
+            reset_repo
+          end
         end
 
         def upgrade_package(name, version)
@@ -44,35 +51,56 @@ class Chef
         end
 
         def current_installed_version
-          pkg = get_version_from_formula
-          versions = pkg.to_hash['installed'].map {|v| v['version']}
-          versions.join(" ") unless versions.empty?
+          formula.to_hash['linked_keg']
         end
 
         def candidate_version
-          pkg = get_version_from_formula
+          pkg = formula
           pkg.stable.version.to_s || pkg.version.to_s
         end
 
-        def get_version_from_command(command)
-          version = get_response_from_command(command).chomp
-          version.empty? ? nil : version
+        def formula
+          @formula ||= get_formula
         end
 
-        def get_version_from_formula
+        def get_formula
           brew_cmd = shell_out!("brew --prefix")
           libpath = ::File.join(brew_cmd.stdout.chomp, "Library", "Homebrew")
           $:.unshift(libpath)
 
           require 'global'
           require 'cmd/info'
+          require 'cmd/versions'
 
           Formula.factory new_resource.package_name
+        end
+
+        def sha_for(version)
+          begin
+            formula.versions do |v, sha|
+              return sha if v.to_s == version
+            end
+          rescue FormulaUnavailableError
+          end
+          false
         end
 
         def get_response_from_command(command)
           output = shell_out!(command)
           output.stdout
+        end
+
+        def checkout(version)
+          if sha=sha_for(version)
+            shell_out!("cd `brew --prefix` && git checkout #{sha_for(version)} #{formula.pretty_relative_path}")
+          else
+            Chef::Log.warn("unable to check out the formula with version #{version} using version #{formula.version} insted")
+            version = formula.version
+          end
+        end
+
+        def reset_repo
+          shell_out!("cd `brew --prefix && git reset . || git checkout .`")
         end
       end
     end
