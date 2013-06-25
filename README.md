@@ -85,6 +85,41 @@ disable a tapped repository.
     homebrew_tap "homebrew/dupes" do
       action :untap
     end
+    
+## homebrew\_cask
+
+LWRP for `brew cask`, a Homebrew-style CLI workflow for the administration
+of Mac applications distributed as binaries. It's implemented as a homebrew
+"external command" called cask.
+
+[homebrew-cask on GitHub](https://github.com/phinze/homebrew-cask)
+
+## Prerequisites
+
+You must have the homebrew-cask repository tapped.
+
+    homebrew_tap 'phinze/cask' 
+    
+And then install the homebrew cask package before using this LWRP.
+
+    package "brew-cask" do
+      action :install
+    end
+
+
+### Examples
+
+    homebrew_cask "google-chrome"
+
+    homebrew_tap "google-chrome" do
+      action :uncask
+    end
+
+Default action is `:cask` which installs the Application binary . Use `:uncask` to
+uninstall a an Application.
+
+[View the list of available Casks](https://github.com/phinze/homebrew-cask/tree/master/Casks)
+
 
 # Usage
 
