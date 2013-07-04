@@ -11,6 +11,7 @@ class Chef
       class Homebrew < Package
 
         include Chef::Mixin::ShellOut
+        include ::Homebrew::Mixin
 
         def load_current_resource
           @current_resource = Chef::Resource::Package.new(@new_resource.name)
@@ -60,7 +61,7 @@ class Chef
         end
 
         def get_version_from_formula
-          brew_cmd = shell_out!("brew --prefix")
+          brew_cmd = shell_out!("brew --prefix", :user => homebrew_owner)
           libpath = ::File.join(brew_cmd.stdout.chomp, "Library", "Homebrew")
           $:.unshift(libpath)
 
@@ -71,7 +72,8 @@ class Chef
         end
 
         def get_response_from_command(command)
-          output = shell_out!(command)
+          Chef::Log.debug "Executing '#{command}' as #{homebrew_owner}"
+          output = shell_out!(command, :user => homebrew_owner)
           output.stdout
         end
       end
