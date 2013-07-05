@@ -12,7 +12,7 @@ end
 
 execute homebrew_go do
   user owner
-  not_if { File.exist? '/usr/local/bin/brew' }
+  not_if { ::File.exist? '/usr/local/bin/brew' }
 end
 
 package 'git' do
