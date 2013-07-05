@@ -18,7 +18,7 @@ module Homebrew
     end
 
     def homebrew_owner_attr
-      node['homebrew'] && node['homebrew']['owner']
+      node['homebrew']['owner']
     end
 
     def sudo_user
