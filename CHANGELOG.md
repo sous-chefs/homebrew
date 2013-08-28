@@ -3,6 +3,11 @@ homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
 
+v1.4.0
+------
+### Bug
+- **[COOK-3283](https://tickets.opscode.com/browse/COOK-3283)** - Support running homebrew cookbook as root user, with sudo, or a non-privileged user
+
 v1.3.2
 ------
 - [COOK-1793] - use homebrew "go" script to install homebrew
