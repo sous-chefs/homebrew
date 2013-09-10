@@ -100,4 +100,9 @@ class Chef
   end
 end
 
-Chef::Platform.set :platform => :mac_os_x, :resource => :package, :provider => Chef::Provider::Package::Homebrew
+# Set Homebrew as the default package manager for nodes running mac_os_x and mac_os_x_server
+if node[:platform] == "mac_os_x_server" then
+  Chef::Platform.set :platform => :mac_os_x_server, :resource => :package, :provider => Chef::Provider::Package::Homebrew
+else
+  Chef::Platform.set :platform => :mac_os_x, :resource => :package, :provider => Chef::Provider::Package::Homebrew
+end
