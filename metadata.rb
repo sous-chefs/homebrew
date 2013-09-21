@@ -7,3 +7,4 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "1.4.1"
 recipe           "homebrew", "Install Homebrew"
 supports         "mac_os_x"
+supports         "mac_os_x_server"
