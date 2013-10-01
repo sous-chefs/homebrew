@@ -3,6 +3,11 @@ homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
 
+v1.5.0
+------
+### Bug
+- **[COOK-3589](https://tickets.opscode.com/browse/COOK-3589)** - Add homebrew as the default package manager on OS X Server
+
 v1.4.0
 ------
 ### Bug
