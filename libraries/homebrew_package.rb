@@ -91,8 +91,11 @@ class Chef
         end
 
         def get_response_from_command(command)
+          require 'etc'
+          home_dir = Etc.getpwnam(homebrew_owner).dir
+
           Chef::Log.debug "Executing '#{command}' as #{homebrew_owner}"
-          output = shell_out!(command, :user => homebrew_owner)
+          output = shell_out!(command, :user => homebrew_owner, :environment => {'HOME' => home_dir})
           output.stdout
         end
       end
