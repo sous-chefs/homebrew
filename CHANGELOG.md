@@ -3,6 +3,11 @@ homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
 
+v1.5.2
+------
+- [COOK-3825] setting $HOME on homebrew_package
+
+
 v1.5.0
 ------
 ### Bug
