@@ -2,7 +2,7 @@
 # Author:: Joshua Timberman (<jtimberman@opscode.com>)
 # Author:: Graeme Mathieson (<mathie@woss.name>)
 # Cookbook Name:: homebrew
-# Recipes:: default
+# Recipes:: update
 #
 # Copyright 2011-2013, Opscode, Inc.
 #
