@@ -27,7 +27,7 @@ owner = homebrew_owner
 Chef::Log.debug("Homebrew owner is '#{homebrew_owner}'")
 
 remote_file homebrew_go do
-  source node['homebrew']['install_script_uri']
+  source node['homebrew']['install_script']
   mode 00755
 end
 
