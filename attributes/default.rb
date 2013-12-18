@@ -20,4 +20,4 @@
 #
 
 default['homebrew']['owner'] = nil
-default['homebrew']['install_script_uri'] = 'https://raw.github.com/mxcl/homebrew/go/install'
+default['homebrew']['install_script_uri'] = 'https://raw.github.com/Homebrew/homebrew/go/install'
