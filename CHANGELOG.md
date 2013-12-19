@@ -3,6 +3,12 @@ homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
 
+v1.5.4
+------
+- [COOK-4023] Fix installer script's URL.
+- Fixing up style for rubocop
+
+
 v1.5.2
 ------
 - [COOK-3825] setting $HOME on homebrew_package
