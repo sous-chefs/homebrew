@@ -27,8 +27,9 @@ require 'chef/mixin/shell_out'
 class Chef
   class Provider
     class Package
+      # Package
       class Homebrew < Package
-
+        # Homebrew packagex
         include Chef::Mixin::ShellOut
         include ::Homebrew::Mixin
 
@@ -54,19 +55,20 @@ class Chef
 
         # Homebrew doesn't really have a notion of purging, so just remove.
         def purge_package(name, version)
-          @new_resource.options = ((@new_resource.options || "") << " --force").strip
+          @new_resource.options = ((@new_resource.options || '') << ' --force').strip
           remove_package(name, version)
         end
 
         protected
+
         def brew(*args)
           get_response_from_command("brew #{args.join(' ')}")
         end
 
         def current_installed_version
           pkg = get_version_from_formula
-          versions = pkg.to_hash['installed'].map {|v| v['version']}
-          versions.join(" ") unless versions.empty?
+          versions = pkg.to_hash['installed'].map { |v| v['version'] }
+          versions.join(' ') unless versions.empty?
         end
 
         def candidate_version
@@ -80,9 +82,9 @@ class Chef
         end
 
         def get_version_from_formula
-          brew_cmd = shell_out!("brew --prefix", :user => homebrew_owner)
-          libpath = ::File.join(brew_cmd.stdout.chomp, "Library", "Homebrew")
-          $:.unshift(libpath)
+          brew_cmd = shell_out!('brew --prefix', :user => homebrew_owner)
+          libpath = ::File.join(brew_cmd.stdout.chomp, 'Library', 'Homebrew')
+          $LOAD_PATH.unshift(libpath)
 
           require 'global'
           require 'cmd/info'
@@ -95,7 +97,7 @@ class Chef
           home_dir = Etc.getpwnam(homebrew_owner).dir
 
           Chef::Log.debug "Executing '#{command}' as #{homebrew_owner}"
-          output = shell_out!(command, :user => homebrew_owner, :environment => {'HOME' => home_dir})
+          output = shell_out!(command, :user => homebrew_owner, :environment => { 'HOME' => home_dir })
           output.stdout
         end
       end

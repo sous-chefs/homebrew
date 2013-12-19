@@ -19,7 +19,7 @@
 # limitations under the License.
 #
 
-self.extend(Homebrew::Mixin)
+extend(Homebrew::Mixin)
 
 homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
 owner = homebrew_owner
@@ -37,10 +37,10 @@ execute homebrew_go do
 end
 
 package 'git' do
-  not_if "which git"
+  not_if 'which git'
 end
 
-execute "update homebrew from github" do
+execute 'update homebrew from github' do
   user owner
-  command "/usr/local/bin/brew update || true"
+  command '/usr/local/bin/brew update || true'
 end
