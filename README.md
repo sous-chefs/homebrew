@@ -74,7 +74,7 @@ Default action is `:tap` which enables the repository. Use `:untap` to disable a
 ```ruby
 homebrew_tap 'homebrew/dupes'
 
-homebrew_tap "homebrew/dupes" do
+homebrew_tap 'homebrew/dupes' do
   action :untap
 end
 ```
@@ -98,7 +98,7 @@ homebrew_tap 'phinze/cask'
 And then install the homebrew cask package before using this LWRP.
 
 ```ruby
-package "brew-cask" do
+package 'brew-cask' do
   action :install
 end
 ```
@@ -106,9 +106,9 @@ end
 ### Examples
 
 ```ruby
-homebrew_cask "google-chrome"
+homebrew_cask 'google-chrome'
 
-homebrew_cask "google-chrome" do
+homebrew_cask 'google-chrome' do
   action :uncask
 end
 ```
