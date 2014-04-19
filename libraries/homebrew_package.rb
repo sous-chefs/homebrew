@@ -89,7 +89,7 @@ class Chef
           require 'global'
           require 'cmd/info'
 
-          Formula.factory new_resource.package_name
+          Formula[new_resource.package_name]
         end
 
         def get_response_from_command(command)
