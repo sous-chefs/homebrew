@@ -73,7 +73,7 @@ class Chef
 
         def candidate_version
           pkg = get_version_from_formula
-          pkg.stable.version.to_s || pkg.version.to_s
+          pkg.stable ? pkg.stable.version.to_s : pkg.version.to_s
         end
 
         def get_version_from_command(command)
@@ -89,7 +89,7 @@ class Chef
           require 'global'
           require 'cmd/info'
 
-          Formula.factory new_resource.package_name
+          Formula[new_resource.package_name]
         end
 
         def get_response_from_command(command)
