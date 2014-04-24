@@ -3,6 +3,13 @@ homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
 
+v1.6.0 (2014-04-23)
+-------------------
+- [COOK-3960] Added LWRP for brew cask
+- [COOK-4508] Add ChefSpec matchers for homebrew_tap
+- [COOK-4566] Guard against "HEAD only" formulae
+
+
 v1.5.4
 ------
 - [COOK-4023] Fix installer script's URL.
