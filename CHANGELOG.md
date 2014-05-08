@@ -3,6 +3,11 @@ homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
 
+v1.6.2 (2014-05-08)
+-------------------
+- Fixing typo in cask provider: 's/brew brew/brew/'
+
+
 v1.6.0 (2014-04-23)
 -------------------
 - [COOK-3960] Added LWRP for brew cask
