@@ -97,7 +97,7 @@ class Chef
           home_dir = Etc.getpwnam(homebrew_owner).dir
 
           Chef::Log.debug "Executing '#{command}' as #{homebrew_owner}"
-          output = shell_out!(command, :user => homebrew_owner, :environment => { 'HOME' => home_dir })
+          output = shell_out!(command, :user => homebrew_owner, :environment => { 'HOME' => home_dir, 'RUBYOPT' => nil })
           output.stdout
         end
       end
