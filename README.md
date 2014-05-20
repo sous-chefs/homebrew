@@ -84,13 +84,13 @@ LWRP for `brew cask`, a Homebrew-style CLI workflow for the administration
 of Mac applications distributed as binaries. It's implemented as a homebrew
 "external command" called cask.
 
-[homebrew-cask on GitHub](https://github.com/phinze/homebrew-cask)
+[homebrew-cask on GitHub](https://github.com/caskroom/homebrew-cask)
 
 ## Prerequisites
 
 You must have the homebrew-cask repository tapped.
 
-    homebrew_tap 'phinze/cask' 
+    homebrew_tap 'caskroom/cask' 
     
 And then install the homebrew cask package before using this LWRP.
 
@@ -110,7 +110,7 @@ And then install the homebrew cask package before using this LWRP.
 Default action is `:cask` which installs the Application binary . Use `:uncask` to
 uninstall a an Application.
 
-[View the list of available Casks](https://github.com/phinze/homebrew-cask/tree/master/Casks)
+[View the list of available Casks](https://github.com/caskroom/homebrew-cask/tree/master/Casks)
 
 >>>>>>> sergiopatino-master
 
