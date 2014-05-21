@@ -19,6 +19,8 @@
 # limitations under the License.
 #
 
+include ::Homebrew::Mixin
+
 def load_current_resource
   @tap = Chef::Resource::HomebrewTap.new(new_resource.name)
   tap_dir = @tap.name.gsub('/', '-')
@@ -35,6 +37,7 @@ action :tap do
   unless @tap.tapped
     execute "tapping #{new_resource.name}" do
       command "/usr/local/bin/brew tap #{new_resource.name}"
+      user homebrew_owner
     end
   end
 end
@@ -43,6 +46,7 @@ action :untap do
   if @tap.tapped
     execute "untapping #{new_resource.name}" do
       command "/usr/local/bin/brew untap #{new_resource.name}"
+      user homebrew_owner
     end
   end
 end
