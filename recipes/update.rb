@@ -2,7 +2,7 @@
 # Author:: Joshua Timberman (<jtimberman@opscode.com>)
 # Author:: Graeme Mathieson (<mathie@woss.name>)
 # Cookbook Name:: homebrew
-# Attributes:: default
+# Recipes:: update
 #
 # Copyright 2011-2013, Opscode, Inc.
 #
@@ -19,5 +19,7 @@
 # limitations under the License.
 #
 
-default['homebrew']['owner'] = nil
-default["homebrew"]["force_update"] = true
+execute 'update homebrew from github' do
+  user owner
+  command '/usr/local/bin/brew update || true'
+end
