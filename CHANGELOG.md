@@ -3,6 +3,13 @@ homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
 
+v1.6.6 (2014-05-29)
+-------------------
+- [COOK-3283] Use homebrew_owner for cask and tap
+- [COOK-4670] homebrew_tap provider is not idempotent
+- [COOK-4671] Syntax Error in README
+
+
 v1.6.4 (2014-05-08)
 -------------------
 - Fixing cask provider correctly this time. "brew cask list"
