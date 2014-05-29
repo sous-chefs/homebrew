@@ -74,10 +74,11 @@ Default action is `:tap` which enables the repository. Use `:untap` to disable a
 ```ruby
 homebrew_tap 'homebrew/dupes'
 
-    homebrew_tap "homebrew/dupes" do
-      action :untap
-    end
-    
+homebrew_tap 'homebrew/dupes' do
+  action :untap
+end
+```
+
 ## homebrew\_cask
 
 LWRP for `brew cask`, a Homebrew-style CLI workflow for the administration
@@ -111,8 +112,6 @@ Default action is `:cask` which installs the Application binary . Use `:uncask` 
 uninstall a an Application.
 
 [View the list of available Casks](https://github.com/phinze/homebrew-cask/tree/master/Casks)
-
->>>>>>> sergiopatino-master
 
 
 Usage
