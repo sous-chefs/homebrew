@@ -20,3 +20,4 @@
 #
 
 default['homebrew']['owner'] = nil
+default['homebrew']['file_cache_path'] = Chef::Config[:file_cache_path]

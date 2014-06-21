@@ -21,7 +21,7 @@
 
 extend(Homebrew::Mixin)
 
-homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
+homebrew_go = "#{node[:homebrew][:file_cache_path]}/homebrew_go"
 owner = homebrew_owner
 
 Chef::Log.debug("Homebrew owner is '#{homebrew_owner}'")
