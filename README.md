@@ -104,7 +104,7 @@ And then install the homebrew cask package before using this LWRP.
 
     homebrew_cask "google-chrome"
 
-    homebrew_tap "google-chrome" do
+    homebrew_cask "google-chrome" do
       action :uncask
     end
 
