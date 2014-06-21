@@ -85,9 +85,9 @@ LWRP for `brew cask`, a Homebrew-style CLI workflow for the administration
 of Mac applications distributed as binaries. It's implemented as a homebrew
 "external command" called cask.
 
-[homebrew-cask on GitHub](https://github.com/phinze/homebrew-cask)
+[homebrew-cask on GitHub](https://github.com/caskroom/homebrew-cask)
 
-## Prerequisites
+### Prerequisites
 
 You must have the homebrew-cask repository tapped.
 
