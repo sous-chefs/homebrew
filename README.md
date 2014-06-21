@@ -91,14 +91,15 @@ of Mac applications distributed as binaries. It's implemented as a homebrew
 
 You must have the homebrew-cask repository tapped.
 
-    homebrew_tap 'caskroom/cask' 
-    
+    homebrew_tap 'caskroom/cask'
+
 And then install the homebrew cask package before using this LWRP.
 
     package "brew-cask" do
       action :install
     end
 
+You can include the `homebrew::cask` recipe to do this.
 
 ### Examples
 
