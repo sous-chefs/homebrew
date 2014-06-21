@@ -40,7 +40,4 @@ package 'git' do
   not_if 'which git'
 end
 
-execute 'update homebrew from github' do
-  user owner
-  command '/usr/local/bin/brew update || true'
-end
+include_recipe "homebrew::update" if node.homebrew.force_update
