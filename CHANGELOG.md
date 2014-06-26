@@ -3,6 +3,11 @@ homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
 
+v1.7.0 (2014-06-26)
+-------------------
+#38 - Add homebrew::cask recipe
+
+
 v1.6.6 (2014-05-29)
 -------------------
 - [COOK-3283] Use homebrew_owner for cask and tap
