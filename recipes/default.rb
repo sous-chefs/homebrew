@@ -36,11 +36,13 @@ execute homebrew_go do
   not_if { ::File.exist? '/usr/local/bin/brew' }
 end
 
-package 'git' do
-  not_if 'which git'
-end
+if node['homebrew']['auto-update']
+  package 'git' do
+    not_if 'which git'
+  end
 
-execute 'update homebrew from github' do
-  user owner
-  command '/usr/local/bin/brew update || true'
+  execute 'update homebrew from github' do
+    user owner
+    command '/usr/local/bin/brew update || true'
+  end
 end

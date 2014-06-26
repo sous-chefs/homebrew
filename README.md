@@ -29,7 +29,7 @@ The only platform supported by Homebrew itself at the time of this writing is Ma
 Attributes
 ----------
 - `node['homebrew']['owner']` - The user that will own the Homebrew installation and packages. Setting this will override the default behavior which is to use the non-privileged user that has invoked the Chef run (or the `SUDO_USER` if invoked with sudo). The default is `nil`.
-
+- `node['homebrew']['auto-update']` - Whether the default recipe should automatically update homebrew each run or not. The default is `true` to maintain compatibility. Set to false or nil to disable. Note that disabling this feature may cause formula to not work.
 
 Resources and Providers
 -----------------------
