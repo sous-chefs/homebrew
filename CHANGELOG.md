@@ -3,6 +3,11 @@ homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
 
+v1.7.2 (2014-06-26)
+-------------------
+- Implement attribute to control auto-update
+
+
 v1.7.0 (2014-06-26)
 -------------------
 #38 - Add homebrew::cask recipe
