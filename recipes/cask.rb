@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: homebrew
-# Recipes:: default
+# Recipes:: cask
 #
 # Copyright 2014, Chef Software, Inc <legal@getchef.com>
 #
