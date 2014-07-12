@@ -23,7 +23,7 @@ actions :tap, :untap
 attribute :name,
           :name_attribute => true,
           :kind_of        => String,
-          :regex          => /\w+(?:\/\w+)+/
+          :regex          => /^[\w-]+(?:\/[\w-]+)+$/
 
 attribute :tapped,
           :kind_of => [TrueClass, FalseClass]
