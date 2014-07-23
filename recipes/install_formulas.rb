@@ -1,10 +1,8 @@
 #
-# Author:: Joshua Timberman (<jtimberman@opscode.com>)
-# Author:: Graeme Mathieson (<mathie@woss.name>)
 # Cookbook Name:: homebrew
-# Attributes:: default
+# Recipes:: install_casks
 #
-# Copyright 2011-2013, Opscode, Inc.
+# Copyright 2014, Chef Software, Inc <legal@getchef.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +17,8 @@
 # limitations under the License.
 #
 
-default['homebrew']['owner'] = nil
-default['homebrew']['auto-update'] = true
-default['homebrew']['casks'] = []
-default['homebrew']['formula'] = []
+include_recipe 'homebrew'
+
+node['homebrew']['formula'].each do |formula|
+  package formula
+end
