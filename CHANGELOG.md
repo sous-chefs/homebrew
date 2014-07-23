@@ -2,6 +2,9 @@ homebrew Cookbook CHANGELOG
 ===========================
 This file is used to list changes made in each version of the homebrew cookbook.
 
+v1.8.0 (2014-07-23)
+-------------------
+- Add recipes to install an array of formulas/casks
 
 v1.7.2 (2014-06-26)
 -------------------
