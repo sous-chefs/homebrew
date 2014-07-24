@@ -19,6 +19,6 @@
 
 include_recipe 'homebrew'
 
-node['homebrew']['formula'].each do |formula|
+node['homebrew']['formulas'].each do |formula|
   package formula
 end
