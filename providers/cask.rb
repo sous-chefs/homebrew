@@ -2,6 +2,12 @@ require 'chef/mixin/shell_out'
 include Chef::Mixin::ShellOut
 include ::Homebrew::Mixin
 
+use_inline_resources if defined?(:use_inline_resources)
+
+def whyrun_supported?
+  true
+end
+
 def load_current_resource
   @cask = Chef::Resource::HomebrewCask.new(new_resource.name)
   Chef::Log.debug("Checking whether #{new_resource.name} is installed")
@@ -26,10 +32,5 @@ action :uninstall do
   end
 end
 
-action :cask do
-  action_install
-end
-
-action :uncask do
-  action_uninstall
-end
+alias_method :action_cask, :action_install
+alias_method :action_uncask, :action_uninstall
