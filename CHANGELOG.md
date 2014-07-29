@@ -2,6 +2,31 @@ homebrew Cookbook CHANGELOG
 ===========================
 This file is used to list changes made in each version of the homebrew cookbook.
 
+v1.9.0 (2014-07-29)
+-------------------
+
+Improvements:
+
+- #35 Modernize the cask provider (use why run mode, inline resources)
+- #43 Use `brew cask list` to determine if casks are installed
+- #45 Add `default_action` and print warning messages on earlier
+   versions of Chef (10.10)
+
+New Features:
+
+- #44 Add `:install` and `:uninstall` actions and alias previous `:cask`,
+  `:uncask` actions to them
+
+Bug Fixes:
+
+- #27 Fix name for taps adding the `/homebrew` prefix
+- #28 Set `RUBYOPT` to `nil` so Chef can execute in a bundle (bundler
+   sets `RUBYOPT` and this can cause issues when running the
+   underlying `brew` commands)
+- #40 Fix regex for cask to match current homebrew conventions
+- #42 Fix attribute for list of formulas to match the README and
+   maintain backward compat for 6 day old version
+
 v1.8.0 (2014-07-23)
 -------------------
 - Add recipes to install an array of formulas/casks
