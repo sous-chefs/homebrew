@@ -82,8 +82,8 @@ class Chef
         end
 
         def get_version_from_formula
-          brew_cmd = shell_out!('brew --prefix', :user => homebrew_owner)
-          libpath = ::File.join(brew_cmd.stdout.chomp, 'Library', 'Homebrew')
+          brew_prefix = get_response_from_command('brew --prefix').chomp
+          libpath = ::File.join(brew_prefix, 'Library', 'Homebrew')
           $LOAD_PATH.unshift(libpath)
 
           require 'global'
@@ -97,7 +97,7 @@ class Chef
           home_dir = Etc.getpwnam(homebrew_owner).dir
 
           Chef::Log.debug "Executing '#{command}' as #{homebrew_owner}"
-          output = shell_out!(command, :user => homebrew_owner, :environment => { 'HOME' => home_dir })
+          output = shell_out!(command, :user => homebrew_owner, :environment => { 'HOME' => home_dir, 'RUBYOPT' => nil })
           output.stdout
         end
       end
