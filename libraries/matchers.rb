@@ -5,7 +5,7 @@ if defined?(ChefSpec)
   end
 
   def untap_homebrew_tap(tap)
-    ChefSpec::Matchers::ResourceMatcher.new(:homebrew_tap, :tap, tap)
+    ChefSpec::Matchers::ResourceMatcher.new(:homebrew_tap, :untap, tap)
   end
 
 end
