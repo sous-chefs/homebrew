@@ -56,6 +56,10 @@ homebrew_package 'mysql'
 package 'mysql' do
   provider Chef::Provider::Package::Homebrew
 end
+
+package 'wireshark' do
+  options '--with-qt --devel'
+end
 ```
 
 ### homebrew\_tap
