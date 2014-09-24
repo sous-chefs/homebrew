@@ -11,7 +11,7 @@ end
 def load_current_resource
   @cask = Chef::Resource::HomebrewCask.new(new_resource.name)
   Chef::Log.debug("Checking whether #{new_resource.name} is installed")
-  @cask.casked shell_out("/usr/local/bin/brew cask list #{new_resource.name}").exitstatus == 0
+  @cask.casked shell_out("/usr/local/bin/brew cask list | grep #{new_resource.name}").exitstatus == 0
 end
 
 action :install do
