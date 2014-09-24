@@ -27,7 +27,7 @@ owner = homebrew_owner
 Chef::Log.debug("Homebrew owner is '#{homebrew_owner}'")
 
 remote_file homebrew_go do
-  source 'https://raw.github.com/Homebrew/homebrew/go/install'
+  source 'https://raw.githubusercontent.com/Homebrew/install/master/install'
   mode 00755
 end
 
