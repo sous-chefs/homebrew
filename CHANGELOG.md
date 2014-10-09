@@ -2,6 +2,15 @@ homebrew Cookbook CHANGELOG
 ===========================
 This file is used to list changes made in each version of the homebrew cookbook.
 
+v1.9.2 (2014-10-09)
+-------------------
+
+Bug Fixes:
+
+- #57 Update url per homebrew error: Upstream, the homebrew project
+   has changed the URL for the installation script. All users of this
+   cookbook are advised to update to this version.
+
 v1.9.0 (2014-07-29)
 -------------------
 
