@@ -1,4 +1,3 @@
 # test
 
-TODO: Enter the cookbook description here.
-
+Test cookbook for homebrew cookbook

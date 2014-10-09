@@ -1,8 +1,5 @@
 name             'test'
-maintainer       ''
-maintainer_email ''
-license          ''
-description      'Installs/Configures test'
-long_description 'Installs/Configures test'
+license          'Apache 2.0'
+description      'Test cookbook for homebrew'
 version          '0.1.0'
 
