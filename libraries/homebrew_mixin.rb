@@ -18,12 +18,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# Include the mixin from Chef 12 if its defined, when we get to the
+# #homebrew_owner method below...
+class Chef12HomebrewOwner
+  include Chef::Mixin::HomebrewOwner if defined?(Chef::Mixin::HomebrewOwner)
+end
 
 module Homebrew
   # Homebrew
   module Mixin
     def homebrew_owner
-      @homebrew_owner ||= calculate_owner
+      if defined?(Chef::Mixin::HomebrewOwner)
+        @homebrew_owner ||= Chef12HomebrewOwner.new.homebrew_owner(node)
+      else
+        @homebrew_owner ||= calculate_owner
+      end
     end
 
     private
