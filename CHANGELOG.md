@@ -2,6 +2,13 @@ homebrew Cookbook CHANGELOG
 ===========================
 This file is used to list changes made in each version of the homebrew cookbook.
 
+v1.10.0 (2014-12-09)
+--------------------
+
+- #55 This cookbook no longer sets its `homebrew_package` as the
+   `package` provider for OS X when running under Chef 12
+- List CHEF as the maintainer instead of Opscode.
+
 v1.9.2 (2014-10-09)
 -------------------
 
