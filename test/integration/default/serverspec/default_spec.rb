@@ -9,6 +9,6 @@ describe 'brew package for redis' do
   end
 
   describe command(%Q[chef-apply -l info -e 'Chef::Log.info(Chef::Platform.find(:mac_os_x, nil)[:package])']) do
-    its(:stdout) { should match('INFO: Chef::Provider::Package::Macports') }
+    its(:stdout) { should match('INFO: Chef::Provider::Package::Homebrew') }
   end
 end

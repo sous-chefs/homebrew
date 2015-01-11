@@ -12,10 +12,12 @@ platforms:
   # https://github.com/timsutton/osx-vm-templates
   # https://github.com/opscode/bento/blob/master/packer/macosx-10.9.json
   - name: macosx-10.9
+  - name: macosx-10.10
 
 suites:
   - name: default
     run_list:
       - recipe[build-essential]
       - recipe[homebrew::default]
+      - recipe[test]
     attributes:
