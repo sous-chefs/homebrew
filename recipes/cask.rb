@@ -16,7 +16,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+extend(Homebrew::Mixin)
+owner = homebrew_owner
 
 homebrew_tap 'caskroom/cask'
 
 package 'brew-cask'
+
+execute 'update homebrew cask from github' do
+  user owner
+  command '/usr/local/bin/brew upgrade brew-cask && /usr/local/bin/brew cask cleanup || true'
+  only_if { node['homebrew']['auto-update'] }
+end

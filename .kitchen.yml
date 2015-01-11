@@ -19,5 +19,6 @@ suites:
     run_list:
       - recipe[build-essential]
       - recipe[homebrew::default]
+      - recipe[homebrew::cask]
       - recipe[test]
     attributes:
