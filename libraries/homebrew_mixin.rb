@@ -20,16 +20,20 @@
 #
 # Include the mixin from Chef 12 if its defined, when we get to the
 # #homebrew_owner method below...
-class Chef12HomebrewOwner
-  include Chef::Mixin::HomebrewOwner if defined?(Chef::Mixin::HomebrewOwner)
+class Chef12HomebrewUser
+  include Chef::Mixin::HomebrewUser if defined?(Chef::Mixin::HomebrewUser)
 end
 
 module Homebrew
   # Homebrew
   module Mixin
     def homebrew_owner
-      if defined?(Chef::Mixin::HomebrewOwner)
-        @homebrew_owner ||= Chef12HomebrewOwner.new.homebrew_owner(node)
+      if defined?(Chef::Mixin::HomebrewUser)
+        begin
+          @homebrew_owner ||= Chef12HomebrewUser.new.find_homebrew_uid
+        rescue Chef::Exceptions::CannotDetermineHomebrewOwner
+          @homebrew_owner ||= calculate_owner
+        end
       else
         @homebrew_owner ||= calculate_owner
       end
