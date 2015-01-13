@@ -33,7 +33,7 @@ end
 
 execute 'install homebrew' do
   command homebrew_go
-  user homebrew_owner
+  user node['homebrew']['owner'] || homebrew_owner
   not_if { ::File.exist? '/usr/local/bin/brew' }
 end
 
