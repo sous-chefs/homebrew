@@ -11,4 +11,10 @@ describe 'brew package for redis' do
   describe command(%Q[chef-apply -l info -e 'Chef::Log.info(Chef::Platform.find(:mac_os_x, nil)[:package])']) do
     its(:stdout) { should match('INFO: Chef::Provider::Package::Homebrew') }
   end
+
+  describe file('/opt/homebrew-cask/Caskroom/caffeine') do
+    it { should be_directory }
+    it { should be_mode 755 }
+    it { should be_owned_by 'vagrant' }
+  end
 end
