@@ -2,6 +2,16 @@ homebrew Cookbook CHANGELOG
 ===========================
 This file is used to list changes made in each version of the homebrew cookbook.
 
+v1.11.0 (2014-01-12)
+--------------------
+
+- #59 Update Homebrew Cask if auto-update attribute is true
+- #52 Manage Homebrew Cask's install directories
+- #56 Fix check for existing casks
+- #61 Fix owner class for Chef 12
+- Depend on build-essential cookbook 2.1.2+ to support OS X 10.10
+- #64, #66 add and fix ChefSpec tests for default recipe
+
 v1.10.0 (2014-12-09)
 --------------------
 

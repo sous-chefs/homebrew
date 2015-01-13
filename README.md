@@ -1,41 +1,51 @@
-Homebrew Cookbook
-=================
-This cookbook installs [Homebrew](http://mxcl.github.com/homebrew/) and replaces MacPorts as the *default package provider* for the package resource on OS X systems.
+# Homebrew Cookbook
 
-This cookbook is now maintained by Opscode. The original author, maintainer and copyright holder is Graeme Mathieson. The cookbook remains licensed under the Apache License version 2.
+This cookbook installs [Homebrew](http://mxcl.github.com/homebrew/) and under Chef 11 and earlier versions, its package provider replaces MacPorts as the *default package provider* for the package resource on OS X systems.
+
+This cookbook is maintained by CHEF. The original author, maintainer and copyright holder is Graeme Mathieson. The cookbook remains licensed under the Apache License version 2.
 
 [Original blog post by Graeme](http://woss.name/2011/01/23/converging-your-home-directory-with-chef/)
 
+# Requirements
 
-Requirements
-------------
-### Prerequisites
+Chef 12: The package provider is not necessary on Chef 12, as the default [OS X package provider](https://github.com/opscode/chef-rfc/blob/master/rfc016-homebrew-osx-package-provider.md) is homebrew.
 
-In order for this recipe to work, your userid must own `/usr/local`. This is outside the scope of the cookbook because it's anticipated that you'll run the cookbook as your own user, not root and you'd have to be root to take ownership of the directory. Easiest way to get started:
+Chef <= 11: The package provider will be set as the default provider for OS X.
+
+## Prerequisites
+
+In order for this recipe to work, your userid must own `/usr/local`. This is outside the scope of the cookbook because it's possible that you'll run the cookbook as your own user, not root and you'd have to be root to take ownership of the directory. Easiest way to get started:
 
 ```bash
 sudo chown -R `whoami`:staff /usr/local
 ```
 
-Bear in mind that this will take ownership of the entire folder and its contents, so if you've already got stuff in there (eg MySQL owned by a `mysql` user) you'll need to be a touch more careful. This is a recommendation from Homebrew.
+Bear in mind that this will take ownership of the entire folder and its contents, so if you've already got stuff in there (eg MySQL owned by a `mysql` user) you'll need to be a touch more careful. This is a recommendation from the Homebrew project.
 
-### Platform
+**Note** This cookbook *only* supports installing in `/usr/local`. While the Homebrew project itself allows for alternative installations, this cookbook doesn't.
+
+## Platform
 
 - Mac OS X (10.6+)
 
 The only platform supported by Homebrew itself at the time of this writing is Mac OS X. It should work fine on Server edition as well, and on platforms that Homebrew supports in the future.
 
+## Cookbooks
 
-Attributes
-----------
+- build-essential: homebrew itself doesn't work well if XCode is not installed.
+
+# Attributes
+
 - `node['homebrew']['owner']` - The user that will own the Homebrew installation and packages. Setting this will override the default behavior which is to use the non-privileged user that has invoked the Chef run (or the `SUDO_USER` if invoked with sudo). The default is `nil`.
 - `node['homebrew']['auto-update']` - Whether the default recipe should automatically update homebrew each run or not. The default is `true` to maintain compatibility. Set to false or nil to disable. Note that disabling this feature may cause formula to not work.
 - `node['homebrew']['formulas']` - An Array of formula that should be installed using homebrew by default, used only in the `homebrew::install_formulas` recipe.
 - `node['homebrew']['casks']` - An Array of casks that should be installed using brew cask by default, used only in the `homebrew::install_casks` recipe.
 
-Resources and Providers
------------------------
-### package / homebrew\_package
+# Resources and Providers
+
+This cookbook includes a package resource provider to use homebrew. Under Chef 12+, this is not necessary, and the code doesn't actually get used on Chef 12+. This was preserved to maintain backwards compatiblity with older versions of Chef.
+
+## package / homebrew\_package
 
 This cookbook provides a package provider called `homebrew_package` which will install/remove packages using Homebrew. This becomes the default provider for `package` if your platform is Mac OS X.
 
@@ -97,45 +107,50 @@ of Mac applications distributed as binaries. It's implemented as a homebrew
 
 You must have the homebrew-cask repository tapped.
 
-    homebrew_tap 'caskroom/cask'
+```ruby
+homebrew_tap 'caskroom/cask'
+```
 
 And then install the homebrew cask package before using this LWRP.
 
-    package "brew-cask" do
-      action :install
-    end
+```ruby
+package "brew-cask" do
+  action :install
+  end
+```
 
 You can include the `homebrew::cask` recipe to do this.
 
 ### Examples
 
-    homebrew_cask "google-chrome"
+```ruby
+homebrew_cask "google-chrome"
 
-    homebrew_cask "google-chrome" do
-      action :uncask
-    end
+homebrew_cask "google-chrome" do
+  action :uncask
+end
+```
 
 Default action is `:cask` which installs the Application binary . Use `:uncask` to
 uninstall a an Application.
 
 [View the list of available Casks](https://github.com/caskroom/homebrew-cask/tree/master/Casks)
 
+# Usage
 
-Usage
------
 We strongly recommend that you put "recipe[homebrew]" in your node's run list, to ensure that it is available on the system and that Homebrew itself gets installed. Putting an explicit dependency in the metadata will cause the cookbook to be downloaded and the library loaded, thus resulting in changing the package provider on Mac OS X, so if you have systems you want to use the default (Mac Ports), they would be changed to Homebrew.
 
-The default itself ensures that Homebrew is installed and up to date.
+The default recipe also ensures that Homebrew is installed and up to date if the auto update attribute (above) is true (default).
 
+# License and Authors
 
-License and Authors
--------------------
 - Author:: Graeme Mathieson (<mathie@woss.name>)
-- Author:: Joshua Timberman (<joshua@opscode.com>)
+- Author:: Joshua Timberman (<joshua@chef.io>)
 
 ```text
 Copyright:: 2011, Graeme Mathieson
 Copyright:: 2012, Opscode, Inc <legal@opscode.com>
+Copyright:: 2014-2015, Chef Software, Inc. <legal@chef.io>
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may
 not use this file except in compliance with the License. You may obtain
