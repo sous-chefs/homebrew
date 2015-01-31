@@ -2,7 +2,12 @@ homebrew Cookbook CHANGELOG
 ===========================
 This file is used to list changes made in each version of the homebrew cookbook.
 
-v1.11.0 (2014-01-12)
+v1.12.0 (2015-01-29)
+--------------------
+
+- #67 Add attribute and recipe for installing homebrew taps
+
+v1.11.0 (2015-01-12)
 --------------------
 
 - #59 Update Homebrew Cask if auto-update attribute is true
