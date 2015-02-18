@@ -22,7 +22,7 @@ v1.10.0 (2014-12-09)
 
 - #55 This cookbook no longer sets its `homebrew_package` as the
    `package` provider for OS X when running under Chef 12
-- List CHEF as the maintainer instead of Opscode.
+- List CHEF as the maintainer instead of Chef.
 
 v1.9.2 (2014-10-09)
 -------------------
@@ -110,12 +110,12 @@ v1.5.2
 v1.5.0
 ------
 ### Bug
-- **[COOK-3589](https://tickets.opscode.com/browse/COOK-3589)** - Add homebrew as the default package manager on OS X Server
+- **[COOK-3589](https://tickets.chef.io/browse/COOK-3589)** - Add homebrew as the default package manager on OS X Server
 
 v1.4.0
 ------
 ### Bug
-- **[COOK-3283](https://tickets.opscode.com/browse/COOK-3283)** - Support running homebrew cookbook as root user, with sudo, or a non-privileged user
+- **[COOK-3283](https://tickets.chef.io/browse/COOK-3283)** - Support running homebrew cookbook as root user, with sudo, or a non-privileged user
 
 v1.3.2
 ------
@@ -130,7 +130,7 @@ v1.3.0
 
 v1.2.0
 ------
-Opscode has taken maintenance of this cookbook as the original author has other commitments. This is the initial release with Opscode as maintainer.
+Chef Software has taken maintenance of this cookbook as the original author has other commitments. This is the initial release with Chef Software as maintainer.
 
 Changes in this release:
 

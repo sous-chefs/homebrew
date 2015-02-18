@@ -11,7 +11,7 @@ task :metadata do
   end
 end
 
-desc "Create an archive for uploading to cookbooks.opscode.com"
+desc "Create an archive for uploading to cookbooks.chef.io"
 task :archive do
   sh %{git archive --format=tar --prefix=homebrew/ HEAD |gzip -9 > homebrew.tar.gz}
 end

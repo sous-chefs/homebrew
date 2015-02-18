@@ -8,7 +8,7 @@ This cookbook is maintained by CHEF. The original author, maintainer and copyrig
 
 # Requirements
 
-Chef 12: The package provider is not necessary on Chef 12, as the default [OS X package provider](https://github.com/opscode/chef-rfc/blob/master/rfc016-homebrew-osx-package-provider.md) is homebrew.
+Chef 12: The package provider is not necessary on Chef 12, as the default [OS X package provider](https://github.com/chef/chef-rfc/blob/master/rfc016-homebrew-osx-package-provider.md) is homebrew.
 
 Chef <= 11: The package provider will be set as the default provider for OS X.
 
@@ -150,7 +150,7 @@ The default recipe also ensures that Homebrew is installed and up to date if the
 
 ```text
 Copyright:: 2011, Graeme Mathieson
-Copyright:: 2012, Opscode, Inc <legal@opscode.com>
+Copyright:: 2012, Chef Software, Inc <legal@chef.io>
 Copyright:: 2014-2015, Chef Software, Inc. <legal@chef.io>
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may

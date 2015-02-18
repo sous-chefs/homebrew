@@ -1,10 +1,10 @@
 #
-# Author:: Joshua Timberman (<jtimberman@opscode.com>)
+# Author:: Joshua Timberman (<jtimberman@chef.io>)
 # Author:: Graeme Mathieson (<mathie@woss.name>)
 # Cookbook Name:: homebrew
 # Libraries:: homebrew_package
 #
-# Copyright 2011-2013, Opscode, Inc.
+# Copyright 2011-2013, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 # present on a node. This approach should avoid creating this class if
 # the node already has Chef::Provider::Package::Homebrew, such as with
 # Chef 12.
-# https://github.com/opscode/chef-rfc/blob/master/rfc016-homebrew-osx-package-provider.md
+# https://github.com/chef/chef-rfc/blob/master/rfc016-homebrew-osx-package-provider.md
 unless defined?(Chef::Provider::Package::Homebrew) && Chef::Platform.find('mac_os_x', nil)[:package] == Chef::Provider::Package::Homebrew
   require 'chef/provider/package'
   require 'chef/resource/package'
