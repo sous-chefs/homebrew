@@ -30,7 +30,8 @@ module Homebrew
     def homebrew_owner
       if defined?(Chef::Mixin::HomebrewUser)
         begin
-          @homebrew_owner ||= Chef12HomebrewUser.new.find_homebrew_uid
+          require 'etc'
+          @homebrew_owner ||= ::Etc.getpwuid(Chef12HomebrewUser.new.find_homebrew_uid).name
         rescue Chef::Exceptions::CannotDetermineHomebrewOwner
           @homebrew_owner ||= calculate_owner
         end
