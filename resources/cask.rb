@@ -7,6 +7,9 @@ attribute :name,
 attribute :casked,
   :kind_of => [TrueClass, FalseClass]
 
+attribute :options,
+  :kind_of        => String
+
 if defined?(:default_action)
   default_action :install
 else
