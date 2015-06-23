@@ -2,6 +2,12 @@ homebrew Cookbook CHANGELOG
 ===========================
 This file is used to list changes made in each version of the homebrew cookbook.
 
+v1.13.0 (2015-06-23)
+--------------------
+
+- #72 Massage Chef12HomebrewUser.find_homebrew_uid into username
+- #69 Add options to cask
+
 v1.12.0 (2015-01-29)
 --------------------
 
