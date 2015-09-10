@@ -1,14 +1,14 @@
 actions :cask, :uncask, :install, :uninstall
 attribute :name,
-  :name_attribute => true,
-  :kind_of        => String,
-  :regex          => /^[\w-]+$/
+  name_attribute: true,
+  kind_of: String,
+  regex: /^[\w-]+$/
 
 attribute :casked,
-  :kind_of => [TrueClass, FalseClass]
+  kind_of: [TrueClass, FalseClass]
 
 attribute :options,
-  :kind_of        => String
+  kind_of: String
 
 if defined?(:default_action)
   default_action :install

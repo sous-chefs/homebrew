@@ -15,13 +15,13 @@ describe 'homebrew::default' do
 
     it 'runs homebrew installation as the default user' do
       expect(chef_run).to run_execute('install homebrew').with(
-        :user => 'vagrant'
+        user: 'vagrant'
       )
     end
 
     it 'updates homebrew from github' do
       expect(chef_run).to run_execute('update homebrew from github').with(
-        :user => 'vagrant'
+        user: 'vagrant'
       )
     end
   end
@@ -55,7 +55,7 @@ describe 'homebrew::default' do
 
     it 'installs homebrew as the alaska user' do
       expect(chef_run).to run_execute('install homebrew').with(
-        :user => 'alaska'
+        user: 'alaska'
       )
     end
   end

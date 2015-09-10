@@ -2,7 +2,7 @@ require 'rubygems'
 require 'chef'
 require 'json'
 
-desc "Generate an updated JSON metadata file"
+desc 'Generate an updated JSON metadata file'
 task :metadata do
   cook_meta = Chef::Cookbook::Metadata.new
   cook_meta.from_file('metadata.rb')
@@ -11,7 +11,7 @@ task :metadata do
   end
 end
 
-desc "Create an archive for uploading to cookbooks.chef.io"
+desc 'Create an archive for uploading to cookbooks.chef.io'
 task :archive do
-  sh %{git archive --format=tar --prefix=homebrew/ HEAD |gzip -9 > homebrew.tar.gz}
+  sh %(git archive --format=tar --prefix=homebrew/ HEAD |gzip -9 > homebrew.tar.gz)
 end

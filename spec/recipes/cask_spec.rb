@@ -12,21 +12,21 @@ describe 'homebrew::cask' do
 
     it 'updates homebrew cask as vagrant' do
       expect(chef_run).to run_execute('update homebrew cask from github').with(
-        :user => 'vagrant'
+        user: 'vagrant'
       )
     end
 
     it 'manages the homebrew-cask directory' do
       expect(chef_run).to create_directory('/opt/homebrew-cask').with(
-        :user => 'vagrant',
-        :mode => 00775
+        user: 'vagrant',
+        mode: 00775
       )
     end
 
     it 'manages the Caskroom directory' do
       expect(chef_run).to create_directory('/opt/homebrew-cask/Caskroom').with(
-        :user => 'vagrant',
-        :mode => 00775
+        user: 'vagrant',
+        mode: 00775
       )
     end
   end
@@ -40,21 +40,21 @@ describe 'homebrew::cask' do
 
     it 'updates homebrew cask as alaska' do
       expect(chef_run).to run_execute('update homebrew cask from github').with(
-        :user => 'alaska'
+        user: 'alaska'
       )
     end
 
     it 'manages the homebrew-cask directory' do
       expect(chef_run).to create_directory('/opt/homebrew-cask').with(
-        :user => 'alaska',
-        :mode => 00775
+        user: 'alaska',
+        mode: 00775
       )
     end
 
     it 'manages the Caskroom directory' do
       expect(chef_run).to create_directory('/opt/homebrew-cask/Caskroom').with(
-        :user => 'alaska',
-        :mode => 00775
+        user: 'alaska',
+        mode: 00775
       )
     end
   end
