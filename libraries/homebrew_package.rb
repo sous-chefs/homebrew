@@ -71,13 +71,13 @@ unless defined?(Chef::Provider::Package::Homebrew) && Chef::Platform.find('mac_o
           end
 
           def current_installed_version
-            pkg = get_version_from_formula
+            pkg = version_from_formula
             versions = pkg.to_hash['installed'].map { |v| v['version'] }
             versions.join(' ') unless versions.empty?
           end
 
           def candidate_version
-            pkg = get_version_from_formula
+            pkg = version_from_formula
             pkg.stable ? pkg.stable.version.to_s : pkg.version.to_s
           end
 
@@ -86,7 +86,7 @@ unless defined?(Chef::Provider::Package::Homebrew) && Chef::Platform.find('mac_o
             version.empty? ? nil : version
           end
 
-          def get_version_from_formula
+          def version_from_formula
             brew_cmd = shell_out!('brew --prefix', user: homebrew_owner)
             libpath = ::File.join(brew_cmd.stdout.chomp, 'Library', 'Homebrew')
             $LOAD_PATH.unshift(libpath)
