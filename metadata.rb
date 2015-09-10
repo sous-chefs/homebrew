@@ -8,3 +8,6 @@ recipe           'homebrew', 'Install Homebrew'
 supports         'mac_os_x'
 supports         'mac_os_x_server'
 depends          'build-essential', '>= 2.1.2'
+
+source_url 'https://github.com/chef-cookbooks/homebrew' if respond_to?(:source_url)
+issues_url 'https://github.com/chef-cookbooks/homebrew/issues' if respond_to?(:issues_url)
