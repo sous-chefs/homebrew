@@ -40,6 +40,8 @@ action :tap do
       not_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
       user homebrew_owner
     end
+
+    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -50,5 +52,7 @@ action :untap do
       only_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
       user homebrew_owner
     end
+
+    new_resource.updated_by_last_action(true)
   end
 end
