@@ -19,4 +19,16 @@ describe 'homebrew::install_formulas' do
     expect(chef_run).to install_package('pstree')
     expect(chef_run).to install_package('wget')
   end
+
+  context 'requesting a specific version' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new do |node|
+        node.set['homebrew']['formulas'] = [{ name: 'pstree', version: '9.9.9' }]
+      end.converge(described_recipe)
+    end
+
+    it 'package-installs the requested version' do
+      expect(chef_run).to install_package('pstree').with(version: '9.9.9')
+    end
+  end
 end
