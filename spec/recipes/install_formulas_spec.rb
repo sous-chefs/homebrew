@@ -31,4 +31,16 @@ describe 'homebrew::install_formulas' do
       expect(chef_run).to install_package('pstree').with(version: '9.9.9')
     end
   end
+
+  context 'requesting a HEAD version' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new do |node|
+        node.set['homebrew']['formulas'] = [{ name: 'pstree', head: true }]
+      end.converge(described_recipe)
+    end
+
+    it 'package-installs the HEAD of the formula' do
+      expect(chef_run).to install_package('pstree').with(options: '--HEAD')
+    end
+  end
 end
