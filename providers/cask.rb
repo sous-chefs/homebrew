@@ -15,20 +15,18 @@ def load_current_resource
 end
 
 action :install do
-  unless @cask.casked
-    execute "installing cask #{new_resource.name}" do
-      command "/usr/local/bin/brew cask install #{new_resource.name} #{new_resource.options}"
-      user homebrew_owner
-    end
+  execute "installing cask #{new_resource.name}" do
+    command "/usr/local/bin/brew cask install #{new_resource.name} #{new_resource.options}"
+    user homebrew_owner
+    not_if { @cask.casked }
   end
 end
 
 action :uninstall do
-  if @cask.casked
-    execute "uninstalling cask #{new_resource.name}" do
-      command "/usr/local/bin/brew cask uninstall #{new_resource.name}"
-      user homebrew_owner
-    end
+  execute "uninstalling cask #{new_resource.name}" do
+    command "/usr/local/bin/brew cask uninstall #{new_resource.name}"
+    user homebrew_owner
+    only_if { @cask.casked }
   end
 end
 

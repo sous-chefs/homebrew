@@ -34,6 +34,7 @@ describe 'homebrew::default' do
     before(:each) do
       allow(File).to receive(:exist?).and_return(true)
       stub_command('which git').and_return(true)
+      allow_any_instance_of(Chef12HomebrewUser).to receive(:find_homebrew_uid).and_return(Process.uid)
     end
 
     it 'does not run homebrew installation' do
