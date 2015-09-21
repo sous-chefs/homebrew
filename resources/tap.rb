@@ -20,6 +20,8 @@
 #
 
 actions :tap, :untap
+default_action :tap
+
 attribute :name,
           name_attribute: true,
           kind_of: String,
@@ -27,9 +29,3 @@ attribute :name,
 
 attribute :tapped,
           kind_of: [TrueClass, FalseClass]
-
-### hax for default action
-def initialize(*args)
-  super
-  @action = :tap
-end
