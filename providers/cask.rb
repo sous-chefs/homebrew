@@ -2,7 +2,7 @@ require 'chef/mixin/shell_out'
 include Chef::Mixin::ShellOut
 include ::Homebrew::Mixin
 
-use_inline_resources if defined?(:use_inline_resources)
+use_inline_resources
 
 def whyrun_supported?
   true
