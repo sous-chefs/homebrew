@@ -4,7 +4,7 @@
 # Cookbook Name:: homebrew
 # Providers:: tap
 #
-# Copyright 2011-2013, Chef Software, Inc.
+# Copyright 2011-2015, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 
 include ::Homebrew::Mixin
 
-use_inline_resources if defined?(:use_inline_resources)
+use_inline_resources
 
 def load_current_resource
   @tap = Chef::Resource::HomebrewTap.new(new_resource.name)
