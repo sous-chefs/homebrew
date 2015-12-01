@@ -5,10 +5,6 @@
 
 This cookbook installs [Homebrew](http://mxcl.github.com/homebrew/) and under Chef 11 and earlier versions, its package provider replaces MacPorts as the *default package provider* for the package resource on OS X systems.
 
-This cookbook is maintained by CHEF. The original author, maintainer and copyright holder is Graeme Mathieson. The cookbook remains licensed under the Apache License version 2.
-
-[Original blog post by Graeme](http://woss.name/2011/01/23/converging-your-home-directory-with-chef/)
-
 # Requirements
 
 Chef 12: The package provider is not necessary on Chef 12, as the default [OS X package provider](https://github.com/chef/chef-rfc/blob/master/rfc016-homebrew-osx-package-provider.md) is homebrew.
@@ -160,6 +156,10 @@ We strongly recommend that you put "recipe[homebrew]" in your node's run list, t
 The default recipe also ensures that Homebrew is installed and up to date if the auto update attribute (above) is true (default).
 
 # License and Authors
+
+This cookbook is maintained by CHEF. The original author, maintainer and copyright holder is Graeme Mathieson. The cookbook remains licensed under the Apache License version 2.
+
+[Original blog post by Graeme](http://woss.name/2011/01/23/converging-your-home-directory-with-chef/)
 
 - Author:: Graeme Mathieson (<mathie@woss.name>)
 - Author:: Joshua Timberman (<joshua@chef.io>)
