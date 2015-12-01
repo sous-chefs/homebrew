@@ -1,6 +1,21 @@
 # homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## v2.0.0 (2015-12-01)
+- Removed all Chef 10 compatibility code
+- #77 Update the tap provider to properly notify on changes
+- #73 Allow specifying versions (or HEAD) of formulas (see readme for usage)
+- Updated contributing, testing, and maintainers docs
+- Updated contents of chefignore and .gitignore files
+- Updated development dependencies in the Gemfile
+- Added Travis CI and supermarket version badges to the readme
+- Added Chef standard rubocop file and resolved all warnings
+- Added super metadata for Supermarket
+- Added testing in Travis CI
+- #75 Fix Chefspecs to properly run on Linux hosts (like Travis)
+- Add Rakefile for simplified testing
+- Resolved all foodcritic warnings
+
 ## v1.13.0 (2015-06-23)
 - #72 Massage Chef12HomebrewUser.find_homebrew_uid into username
 - #69 Add options to cask
