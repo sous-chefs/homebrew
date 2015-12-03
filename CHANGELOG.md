@@ -1,6 +1,9 @@
 # homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## v2.0.1 (2015-12-03)
+- Fixed already-installed casks breaking builds
+
 ## v2.0.0 (2015-12-01)
 - Removed all Chef 10 compatibility code
 - #77 Update the tap provider to properly notify on changes
