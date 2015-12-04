@@ -1,6 +1,9 @@
 # homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## v2.0.2 (2015-12-04)
+- Prevents casks from installing on every chef run
+
 ## v2.0.1 (2015-12-03)
 - Fixed already-installed casks breaking builds
 
