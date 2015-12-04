@@ -27,17 +27,11 @@ def whyrun_supported?
   true
 end
 
-def load_current_resource
-  @cask = Chef::Resource::HomebrewCask.new(new_resource.name)
-  Chef::Log.debug("Checking whether #{new_resource.name} is installed")
-  @cask.casked shell_out("/usr/local/bin/brew cask list | grep #{new_resource.name}").exitstatus == 0
-end
-
 action :install do
   execute "installing cask #{new_resource.name}" do
     command "/usr/local/bin/brew cask install #{new_resource.name} #{new_resource.options}"
     user homebrew_owner
-    not_if { new_resource.casked }
+    not_if { new_resource.casked? }
   end
 end
 
@@ -45,7 +39,7 @@ action :uninstall do
   execute "uninstalling cask #{new_resource.name}" do
     command "/usr/local/bin/brew cask uninstall #{new_resource.name}"
     user homebrew_owner
-    only_if { new_resource.casked }
+    only_if { new_resource.casked? }
   end
 end
 
