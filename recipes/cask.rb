@@ -29,11 +29,11 @@ execute 'update homebrew cask from github' do
 end
 
 directory '/opt/homebrew-cask' do
-  owner node['homebrew']['owner'] || homebrew_owner
+  owner homebrew_owner
   mode 00775
 end
 
 directory '/opt/homebrew-cask/Caskroom' do
-  owner node['homebrew']['owner'] || homebrew_owner
+  owner homebrew_owner
   mode 00775
 end
