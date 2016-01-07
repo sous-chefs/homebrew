@@ -11,11 +11,7 @@ describe 'homebrew::cask' do
     end
 
     it 'manages the Cask Cache directory' do
-      allow(Dir).to receive(:exist?)
-        .and_call_original
-      allow(Dir).to receive(:exist?)
-        .with('/Library/Caches/Homebrew/Casks')
-        .and_return(true)
+      allow(Dir).to receive(:exist?).with('/Library/Caches/Homebrew').and_return(true)
       expect(chef_run).to create_directory('/Library/Caches/Homebrew/Casks').with(
         user: 'vagrant',
         mode: 00775
@@ -45,11 +41,7 @@ describe 'homebrew::cask' do
     end
 
     it 'manages the Cask Cache directory' do
-      allow(Dir).to receive(:exist?)
-        .and_call_original
-      allow(Dir).to receive(:exist?)
-        .with('/Library/Caches/Homebrew/Casks')
-        .and_return(true)
+      allow(Dir).to receive(:exist?).with('/Library/Caches/Homebrew').and_return(true)
       expect(chef_run).to create_directory('/Library/Caches/Homebrew/Casks').with(
         user: 'alaska',
         mode: 00775
