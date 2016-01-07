@@ -10,9 +10,10 @@ describe 'homebrew::cask' do
       allow_any_instance_of(Chef::Resource).to receive(:homebrew_owner).and_return('vagrant')
     end
 
-    it 'updates homebrew cask as vagrant' do
-      expect(chef_run).to run_execute('update homebrew cask from github').with(
-        user: 'vagrant'
+    it 'manages the Cask Cache directory' do
+      expect(chef_run).to create_directory('/Library/Caches/Homebrew/Casks').with(
+        user: 'vagrant',
+        mode: 00775
       )
     end
 
@@ -38,9 +39,10 @@ describe 'homebrew::cask' do
       end.converge(described_recipe)
     end
 
-    it 'updates homebrew cask as alaska' do
-      expect(chef_run).to run_execute('update homebrew cask from github').with(
-        user: 'alaska'
+    it 'manages the Cask Cache directory' do
+      expect(chef_run).to create_directory('/Library/Caches/Homebrew/Casks').with(
+        user: 'alaska',
+        mode: 00775
       )
     end
 

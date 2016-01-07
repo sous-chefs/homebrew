@@ -39,7 +39,7 @@ action :tap do
   unless @tap.tapped
     execute "tapping #{new_resource.name}" do
       command "/usr/local/bin/brew tap #{new_resource.name}"
-      environment ({ 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner })
+      environment lazy { ({ 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner }) }
       not_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
       user homebrew_owner
     end
@@ -50,7 +50,7 @@ action :untap do
   if @tap.tapped
     execute "untapping #{new_resource.name}" do
       command "/usr/local/bin/brew untap #{new_resource.name}"
-      environment ({ 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner })
+      environment lazy { ({ 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner }) }
       only_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
       user homebrew_owner
     end
