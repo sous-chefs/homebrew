@@ -23,6 +23,7 @@ Chef::Resource.send(:include, Homebrew::Mixin)
 Chef::Recipe.send(:include, Homebrew::Mixin)
 
 homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
+userenv = { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner }
 
 Chef::Log.debug("Homebrew owner is '#{homebrew_owner}'")
 
@@ -33,6 +34,7 @@ end
 
 execute 'install homebrew' do
   command homebrew_go
+  environment (userenv)
   user homebrew_owner
   not_if { ::File.exist? '/usr/local/bin/brew' }
 end
@@ -43,6 +45,7 @@ if node['homebrew']['auto-update']
   end
 
   execute 'update homebrew from github' do
+    environment (userenv)
     user homebrew_owner
     command '/usr/local/bin/brew update || true'
   end
