@@ -1,6 +1,10 @@
 # homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## v2.0.4 (2016-01-20)
+- Use the officially supported method of querying homebrew data vs. unsupported internal APIs
+- Fixed environmental variables in the homebrew command execution
+
 ## v2.0.3 (2015-12-09)
 - Fixed poor name matching in determining if a cask had been installed already, which prevented some casks from installing
 
