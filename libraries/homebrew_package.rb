@@ -71,30 +71,17 @@ unless defined?(Chef::Provider::Package::Homebrew) && Chef::Platform.find('mac_o
           end
 
           def current_installed_version
-            pkg = version_from_formula
-            versions = pkg.to_hash['installed'].map { |v| v['version'] }
+            versions = package_info['installed'].map { |v| v['version'] }
             versions.join(' ') unless versions.empty?
           end
 
           def candidate_version
-            pkg = version_from_formula
-            pkg.stable ? pkg.stable.version.to_s : pkg.version.to_s
+            package_info['versions']['stable'] ? package_info['versions']['stable'].to_s : package_info['versions'].find { |_k, v| v if v.is_a?(String) }
           end
 
-          def get_version_from_command(command)
-            version = get_response_from_command(command).chomp
-            version.empty? ? nil : version
-          end
-
-          def version_from_formula
-            brew_cmd = shell_out!('brew --prefix', user: homebrew_owner)
-            libpath = ::File.join(brew_cmd.stdout.chomp, 'Library', 'Homebrew')
-            $LOAD_PATH.unshift(libpath)
-
-            require 'global'
-            require 'cmd/info'
-
-            Formula[new_resource.package_name]
+          def package_info
+            require 'json'
+            JSON.parse(brew('info', @new_resource.package_name, '--json=v1'))[0]
           end
 
           def get_response_from_command(command)
@@ -102,7 +89,7 @@ unless defined?(Chef::Provider::Package::Homebrew) && Chef::Platform.find('mac_o
             home_dir = Etc.getpwnam(homebrew_owner).dir
 
             Chef::Log.debug "Executing '#{command}' as #{homebrew_owner}"
-            output = shell_out!(command, user: homebrew_owner, environment: { 'HOME' => home_dir, 'RUBYOPT' => nil })
+            output = shell_out!(command, user: homebrew_owner, environment: { 'USER' => homebrew_owner, 'HOME' => home_dir, 'RUBYOPT' => nil })
             output.stdout
           end
         end
