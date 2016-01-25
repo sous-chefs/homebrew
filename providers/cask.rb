@@ -29,7 +29,7 @@ action :install do
   execute "installing cask #{new_resource.name}" do
     command "/usr/local/bin/brew cask install #{new_resource.name} #{new_resource.options}"
     user homebrew_owner
-    environment lazy { ({ 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner }) }
+    environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
     not_if { new_resource.casked? }
   end
 end
@@ -38,7 +38,7 @@ action :uninstall do
   execute "uninstalling cask #{new_resource.name}" do
     command "/usr/local/bin/brew cask uninstall #{new_resource.name}"
     user homebrew_owner
-    environment lazy { ({ 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner }) }
+    environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
     only_if { new_resource.casked? }
   end
 end
