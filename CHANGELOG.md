@@ -1,6 +1,13 @@
 # homebrew Cookbook CHANGELOG
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## v2.0.5 (2016-01-25)
+- Updated execute resources to pass in the HOME/USER environmental variables so homebrew commands are properly executed
+- Removed redundant code from recipes and providers
+- Removed brew-cask installation and the upgade execute that are no longer necessary
+- Added directory creation of /Library/Caches/Homebrew/Casks in case it's not present
+- Updated creation of /opt/homebrew-cask to be recursive in case /opt hasn't been created yet
+
 ## v2.0.4 (2016-01-20)
 - Use the officially supported method of querying homebrew data vs. unsupported internal APIs
 - Fixed environmental variables in the homebrew command execution
