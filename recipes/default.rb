@@ -33,7 +33,8 @@ end
 
 execute 'install homebrew' do
   command homebrew_go
-  user node['homebrew']['owner'] || homebrew_owner
+  environment lazy { ({ 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner }) }
+  user homebrew_owner
   not_if { ::File.exist? '/usr/local/bin/brew' }
 end
 
@@ -43,6 +44,7 @@ if node['homebrew']['auto-update']
   end
 
   execute 'update homebrew from github' do
+    environment lazy { ({ 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner }) }
     user homebrew_owner
     command '/usr/local/bin/brew update || true'
   end
