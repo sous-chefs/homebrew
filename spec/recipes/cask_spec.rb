@@ -51,7 +51,8 @@ describe 'homebrew::cask' do
     it 'manages the homebrew-cask directory' do
       expect(chef_run).to create_directory('/opt/homebrew-cask').with(
         user: 'alaska',
-        mode: 00775
+        mode: 00775,
+        recursive: true,
       )
     end
 

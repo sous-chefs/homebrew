@@ -29,6 +29,7 @@ end
 directory '/opt/homebrew-cask' do
   owner homebrew_owner
   mode 00775
+  recursive true
 end
 
 directory '/opt/homebrew-cask/Caskroom' do
