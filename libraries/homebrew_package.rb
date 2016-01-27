@@ -80,8 +80,11 @@ unless defined?(Chef::Provider::Package::Homebrew) && Chef::Platform.find('mac_o
           end
 
           def package_info
-            require 'json'
-            JSON.parse(brew('info', @new_resource.package_name, '--json=v1'))[0]
+            @package_info ||= begin
+              Chef::Log.debug "Getting package info for #{@new_resource.package_name}"
+              require 'json'
+              JSON.parse(brew('info', @new_resource.package_name, '--json=v1'))[0]
+            end
           end
 
           def get_response_from_command(command)
