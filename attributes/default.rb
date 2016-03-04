@@ -24,3 +24,5 @@ default['homebrew']['auto-update'] = true
 default['homebrew']['casks'] = []
 default['homebrew']['formulas'] = node['homebrew']['formula'] || []
 default['homebrew']['taps'] = []
+default['homebrew']['installer']['url'] = 'https://raw.githubusercontent.com/Homebrew/install/master/install'
+default['homebrew']['installer']['checksum'] = nil
