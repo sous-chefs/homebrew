@@ -27,7 +27,8 @@ homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
 Chef::Log.debug("Homebrew owner is '#{homebrew_owner}'")
 
 remote_file homebrew_go do
-  source 'https://raw.githubusercontent.com/Homebrew/install/master/install'
+  source node['homebrew']['installer']['url']
+  checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
   mode 00755
 end
 
