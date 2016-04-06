@@ -21,8 +21,10 @@ include_recipe 'homebrew'
 
 node['homebrew']['formulas'].each do |formula|
   if formula.class == Chef::Node::ImmutableMash
+    formula_options = formula.fetch(:options, '')
+    formula_options += ' --HEAD' if formula.fetch(:head, false)
     package formula.fetch(:name) do
-      options '--HEAD' if formula.fetch(:head, false)
+      options formula_options.strip
       version formula['version'] if formula.fetch(:version, false)
     end
   else
