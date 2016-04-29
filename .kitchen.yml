@@ -1,18 +1,18 @@
----
 driver:
   name: vagrant
-  customize:
-    memory: 1024
 
 provisioner:
   name: chef_zero
 
 platforms:
-  # To run test-kitchen for OS X, create a box for 10.9, and add it to vagrant. See for example,
-  # https://github.com/timsutton/osx-vm-templates
-  # https://github.com/opscode/bento/blob/master/packer/macosx-10.9.json
-  - name: macosx-10.9
   - name: macosx-10.10
+    driver:
+      box: chef/macosx-10.10 # private box in Chef's Atlas account
+      provider: vmware_fusion
+  - name: macosx-10.11
+    driver:
+      box: chef/macosx-10.11 # private box in Chef's Atlas account
+      provider: vmware_fusion
 
 suites:
   - name: default
