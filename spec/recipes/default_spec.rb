@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 describe 'homebrew::default' do
   context 'default user' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new.converge(described_recipe)
+      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1').converge(described_recipe)
     end
 
     before(:each) do
@@ -28,7 +28,7 @@ describe 'homebrew::default' do
 
   context '/usr/local/bin/brew exists' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new.converge(described_recipe)
+      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1').converge(described_recipe)
     end
 
     before(:each) do
@@ -44,7 +44,7 @@ describe 'homebrew::default' do
 
   context 'non-default, specified by attribute user' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new do |node|
+      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1') do |node|
         node.set['homebrew']['owner'] = 'alaska'
       end.converge(described_recipe)
     end
@@ -63,7 +63,7 @@ describe 'homebrew::default' do
 
   context 'do not auto-update brew' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new do |node|
+      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1') do |node|
         node.set['homebrew']['auto-update'] = false
       end.converge(described_recipe)
     end
@@ -83,7 +83,7 @@ describe 'homebrew::default' do
 
   context 'conditionally manage git package' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new.converge(described_recipe)
+      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1').converge(described_recipe)
     end
 
     context 'git is installed' do

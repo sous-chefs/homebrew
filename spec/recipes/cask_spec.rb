@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 describe 'homebrew::cask' do
   context 'default user' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new.converge(described_recipe)
+      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1').converge(described_recipe)
     end
 
     before(:each) do
@@ -35,7 +35,7 @@ describe 'homebrew::cask' do
 
   context 'non-default, specified by attribute user' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new do |node|
+      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1') do |node|
         node.set['homebrew']['owner'] = 'alaska'
       end.converge(described_recipe)
     end
