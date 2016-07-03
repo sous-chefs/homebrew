@@ -30,6 +30,7 @@ directory '/opt/homebrew-cask' do
   owner homebrew_owner
   mode 00775
   recursive true
+  only_if { ::Dir.exist?('/opt/homebrew-cask') }
 end
 
 directory '/opt/homebrew-cask/Caskroom' do
