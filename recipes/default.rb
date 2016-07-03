@@ -29,7 +29,7 @@ Chef::Log.debug("Homebrew owner is '#{homebrew_owner}'")
 remote_file homebrew_go do
   source node['homebrew']['installer']['url']
   checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
-  mode 00755
+  mode 0o0755
 end
 
 execute 'install homebrew' do

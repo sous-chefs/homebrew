@@ -14,21 +14,21 @@ describe 'homebrew::cask' do
       allow(Dir).to receive(:exist?).with('/Library/Caches/Homebrew').and_return(true)
       expect(chef_run).to create_directory('/Library/Caches/Homebrew/Casks').with(
         user: 'vagrant',
-        mode: 00775
+        mode: 0o0775
       )
     end
 
     it 'manages the homebrew-cask directory' do
       expect(chef_run).to create_directory('/opt/homebrew-cask').with(
         user: 'vagrant',
-        mode: 00775
+        mode: 0o0775
       )
     end
 
     it 'manages the Caskroom directory' do
       expect(chef_run).to create_directory('/opt/homebrew-cask/Caskroom').with(
         user: 'vagrant',
-        mode: 00775
+        mode: 0o0775
       )
     end
   end
@@ -44,14 +44,14 @@ describe 'homebrew::cask' do
       allow(Dir).to receive(:exist?).with('/Library/Caches/Homebrew').and_return(true)
       expect(chef_run).to create_directory('/Library/Caches/Homebrew/Casks').with(
         user: 'alaska',
-        mode: 00775
+        mode: 0o0775
       )
     end
 
     it 'manages the homebrew-cask directory' do
       expect(chef_run).to create_directory('/opt/homebrew-cask').with(
         user: 'alaska',
-        mode: 00775,
+        mode: 0o0775,
         recursive: true
       )
     end
@@ -59,7 +59,7 @@ describe 'homebrew::cask' do
     it 'manages the Caskroom directory' do
       expect(chef_run).to create_directory('/opt/homebrew-cask/Caskroom').with(
         user: 'alaska',
-        mode: 00775
+        mode: 0o0775
       )
     end
   end
