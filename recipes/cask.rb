@@ -25,14 +25,3 @@ directory '/Library/Caches/Homebrew/Casks' do
   mode 00775
   only_if { ::Dir.exist?('/Library/Caches/Homebrew') }
 end
-
-directory '/opt/homebrew-cask' do
-  owner homebrew_owner
-  mode 00775
-  recursive true
-end
-
-directory '/opt/homebrew-cask/Caskroom' do
-  owner homebrew_owner
-  mode 00775
-end
