@@ -45,7 +45,7 @@ describe 'homebrew::default' do
   context 'non-default, specified by attribute user' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1') do |node|
-        node.set['homebrew']['owner'] = 'alaska'
+        node.normal['homebrew']['owner'] = 'alaska'
       end.converge(described_recipe)
     end
 
@@ -64,7 +64,7 @@ describe 'homebrew::default' do
   context 'do not auto-update brew' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1') do |node|
-        node.set['homebrew']['auto-update'] = false
+        node.normal['homebrew']['auto-update'] = false
       end.converge(described_recipe)
     end
 
