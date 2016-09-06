@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 2.1.1 (2016-09-06)
+
+- Run chefspecs as OS X
+- Update cask recipe to not create /opt/homebrew-cask and /opt/homebrew-cask/Caskroom
+- Update tests
+
 ## v2.1.0 (2016-03-29)
 
 - Make homebrew install script url configurable
