@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 2.1.2 (2016-09-07)
+
+- Allow passing custom options to brew packages
+
 ## 2.1.1 (2016-09-06)
 
 - Run chefspecs as OS X
