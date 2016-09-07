@@ -1,13 +1,15 @@
-# Use Travis's cointainer based infrastructure
-sudo: false
+sudo: required
+dist: trusty
+
+# install the pre-release chef-dk.  Use chef-stable-trusty to install the stable release
 addons:
   apt:
     sources:
-      - chef-current-precise
+      - chef-current-trusty
     packages:
       - chefdk
 
-# Don't `bundle install`
+# Don't `bundle install` which takes about 1.5 mins
 install: echo "skip bundle install"
 
 branches:
@@ -22,4 +24,4 @@ script:
   - /opt/chefdk/embedded/bin/chef --version
   - /opt/chefdk/embedded/bin/cookstyle --version
   - /opt/chefdk/embedded/bin/foodcritic --version
-  - /opt/chefdk/embedded/bin/rake
+  - /opt/chefdk/bin/chef exec rake
