@@ -42,25 +42,6 @@ describe 'homebrew::default' do
     end
   end
 
-  context 'non-default, specified by attribute user' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1') do |node|
-        node.normal['homebrew']['owner'] = 'alaska'
-      end.converge(described_recipe)
-    end
-
-    before(:each) do
-      allow(File).to receive(:exist?).and_return(false)
-      stub_command('which git').and_return(true)
-    end
-
-    it 'installs homebrew as the alaska user' do
-      expect(chef_run).to run_execute('install homebrew').with(
-        user: 'alaska'
-      )
-    end
-  end
-
   context 'do not auto-update brew' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1') do |node|

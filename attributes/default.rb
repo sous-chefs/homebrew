@@ -18,8 +18,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-default['homebrew']['owner'] = nil
+# only used if auto detection fails
+default['homebrew']['owner'] = nil # only used if auto detection fails
 default['homebrew']['auto-update'] = true
 default['homebrew']['casks'] = []
 default['homebrew']['formulas'] = node['homebrew']['formula'] || []
