@@ -1,21 +1,5 @@
 if defined?(ChefSpec)
 
-  def install_homebrew_package(pkg)
-    ChefSpec::Matchers::ResourceMatcher.new(:homebrew_package, :install, pkg)
-  end
-
-  def upgrade_homebrew_package(pkg)
-    ChefSpec::Matchers::ResourceMatcher.new(:homebrew_package, :upgrade, pkg)
-  end
-
-  def remove_homebrew_package(pkg)
-    ChefSpec::Matchers::ResourceMatcher.new(:homebrew_package, :remove, pkg)
-  end
-
-  def purge_homebrew_package(pkg)
-    ChefSpec::Matchers::ResourceMatcher.new(:homebrew_package, :purge, pkg)
-  end
-
   def tap_homebrew_tap(tap)
     ChefSpec::Matchers::ResourceMatcher.new(:homebrew_tap, :tap, tap)
   end
