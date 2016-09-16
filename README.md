@@ -4,7 +4,9 @@
 
 This cookbook installs [Homebrew](http://mxcl.github.com/homebrew/) and under Chef 11 and earlier versions, its package provider replaces MacPorts as the _default package provider_ for the package resource on OS X systems.
 
-## Prerequisites
+## Requirements
+
+### Prerequisites
 
 In order for this recipe to work, your userid must own `/usr/local`. This is outside the scope of the cookbook because it's possible that you'll run the cookbook as your own user, not root and you'd have to be root to take ownership of the directory. Easiest way to get started:
 
@@ -16,11 +18,15 @@ Bear in mind that this will take ownership of the entire folder and its contents
 
 **Note** This cookbook _only_ supports installing in `/usr/local`. While the Homebrew project itself allows for alternative installations, this cookbook doesn't.
 
-## Platform
+### Platform
 
 - Mac OS X (10.6+)
 
-## Cookbooks
+### Chef
+
+- Chef 12.1+
+
+### Cookbooks
 
 - build-essential: homebrew itself doesn't work well if XCode is not installed.
 
@@ -56,9 +62,9 @@ Bear in mind that this will take ownership of the entire folder and its contents
 
 - `node['homebrew']['taps']` - An Array of taps that should be installed using brew tap by default, used only in the `homebrew::install_taps` recipe.
 
-# Resources and Providers
+## Resources and Providers
 
-## homebrew_tap
+### homebrew_tap
 
 LWRP for `brew tap`, a Homebrew command used to add additional formula repositories. From the `brew` man page:
 
@@ -71,7 +77,7 @@ tap [tap]
 
 Default action is `:tap` which enables the repository. Use `:untap` to disable a tapped repository.
 
-### Examples
+#### Examples
 
 ```ruby
 homebrew_tap 'homebrew/dupes'
@@ -81,13 +87,13 @@ homebrew_tap 'homebrew/dupes' do
 end
 ```
 
-## homebrew_cask
+### homebrew_cask
 
 LWRP for `brew cask`, a Homebrew-style CLI workflow for the administration of Mac applications distributed as binaries. It's implemented as a homebrew "external command" called cask.
 
 [homebrew-cask on GitHub](https://github.com/caskroom/homebrew-cask)
 
-### Prerequisites
+#### Prerequisites
 
 You must have the homebrew-cask repository tapped.
 
@@ -105,7 +111,7 @@ package "brew-cask" do
 
 You can include the `homebrew::cask` recipe to do this.
 
-### Examples
+#### Examples
 
 ```ruby
 homebrew_cask "google-chrome"
@@ -119,13 +125,13 @@ Default action is `:cask` which installs the Application binary . Use `:uncask` 
 
 [View the list of available Casks](https://github.com/caskroom/homebrew-cask/tree/master/Casks)
 
-# Usage
+## Usage
 
 We strongly recommend that you put "recipe[homebrew]" in your node's run list, to ensure that it is available on the system and that Homebrew itself gets installed.
 
 The default recipe also ensures that Homebrew is installed and up to date if the auto update attribute (above) is true (default).
 
-# License and Authors
+## License and Authors
 
 This cookbook is maintained by CHEF. The original author, maintainer and copyright holder is Graeme Mathieson. The cookbook remains licensed under the Apache License version 2.
 
