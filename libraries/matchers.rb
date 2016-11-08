@@ -1,4 +1,5 @@
 if defined?(ChefSpec)
+  ChefSpec.define_matcher :homebrew_package
 
   def install_homebrew_package(pkg)
     ChefSpec::Matchers::ResourceMatcher.new(:homebrew_package, :install, pkg)
