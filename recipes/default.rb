@@ -30,6 +30,7 @@ remote_file homebrew_go do
   source node['homebrew']['installer']['url']
   checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
   mode 00755
+  not_if { ::File.exist? '/usr/local/bin/brew' }
 end
 
 execute 'install homebrew' do
