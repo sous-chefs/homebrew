@@ -1,10 +1,10 @@
 #
 # Author:: Joshua Timberman (<jtimberman@chef.io>)
 # Author:: Graeme Mathieson (<mathie@woss.name>)
-# Cookbook Name:: homebrew
+# Cookbook:: homebrew
 # Recipe:: default
 #
-# Copyright 2011-2016, Chef Software, Inc.
+# Copyright:: 2011-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ Chef::Log.debug("Homebrew owner is '#{homebrew_owner}'")
 remote_file homebrew_go do
   source node['homebrew']['installer']['url']
   checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
-  mode 00755
+  mode "755"
   not_if { ::File.exist? '/usr/local/bin/brew' }
 end
 
