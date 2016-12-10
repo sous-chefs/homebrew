@@ -29,7 +29,7 @@ Chef::Log.debug("Homebrew owner is '#{homebrew_owner}'")
 remote_file homebrew_go do
   source node['homebrew']['installer']['url']
   checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
-  mode "755"
+  mode '755'
   not_if { ::File.exist? '/usr/local/bin/brew' }
 end
 
@@ -43,7 +43,8 @@ end
 execute 'set analytics' do
   environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
   user homebrew_owner
-  command "/usr/local/bin/brew analytics #{node['homebrew']['enable-analytics'] ? 'on' : 'off' }"
+  command "/usr/local/bin/brew analytics #{node['homebrew']['enable-analytics'] ? 'on' : 'off'}"
+  only_if { shell_out('/usr/local/bin/brew analytics state', user: homebrew_owner).stdout.include?('enabled') != node['homebrew']['enable-analytics'] }
 end
 
 if node['homebrew']['auto-update']
