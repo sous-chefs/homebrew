@@ -2,13 +2,13 @@ name             'homebrew'
 maintainer       'Chef Software, Inc.'
 maintainer_email 'cookbooks@chef.io'
 license          'Apache 2.0'
-description      'Install Homebrew, and use it as the OS X package provider on Chef versions =< 11'
+description      'Install Homebrew and includes resources for working with taps and casks'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '2.1.2'
 recipe           'homebrew', 'Install Homebrew'
 supports         'mac_os_x'
 depends          'build-essential', '>= 2.1.2'
 
-source_url 'https://github.com/chef-cookbooks/homebrew' if respond_to?(:source_url)
-issues_url 'https://github.com/chef-cookbooks/homebrew/issues' if respond_to?(:issues_url)
-chef_version '>= 11' if respond_to?(:chef_version)
+source_url 'https://github.com/chef-cookbooks/homebrew'
+issues_url 'https://github.com/chef-cookbooks/homebrew/issues'
+chef_version '>= 12.1'
