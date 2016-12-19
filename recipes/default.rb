@@ -19,9 +19,6 @@
 # limitations under the License.
 #
 
-Chef::Resource.send(:include, Homebrew::Mixin)
-Chef::Recipe.send(:include, Homebrew::Mixin)
-
 homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
 
 Chef::Log.debug("Homebrew owner is '#{homebrew_owner}'")

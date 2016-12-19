@@ -16,7 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-Chef::Resource.send(:include, Homebrew::Mixin)
 
 homebrew_tap 'caskroom/cask'
 

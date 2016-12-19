@@ -58,3 +58,6 @@ module Homebrew
     end
   end
 end
+
+Chef::Resource.send(:include, Homebrew::Mixin)
+Chef::Recipe.send(:include, Homebrew::Mixin)
