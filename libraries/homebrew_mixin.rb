@@ -18,26 +18,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Include the mixin from Chef 12 if its defined, when we get to the
-# #homebrew_owner method below...
+
 class Chef12HomebrewUser
-  include Chef::Mixin::HomebrewUser if defined?(Chef::Mixin::HomebrewUser)
+  include Chef::Mixin::HomebrewUser
 end
 
 module Homebrew
   # Homebrew
   module Mixin
     def homebrew_owner
-      if defined?(Chef::Mixin::HomebrewUser)
-        begin
-          require 'etc'
-          @homebrew_owner ||= ::Etc.getpwuid(Chef12HomebrewUser.new.find_homebrew_uid).name
-        rescue Chef::Exceptions::CannotDetermineHomebrewOwner
-          @homebrew_owner ||= calculate_owner
-        end
-      else
-        @homebrew_owner ||= calculate_owner
-      end
+      require 'etc'
+      @homebrew_owner ||= ::Etc.getpwuid(Chef12HomebrewUser.new.find_homebrew_uid).name
+    rescue Chef::Exceptions::CannotDetermineHomebrewOwner
+      @homebrew_owner ||= calculate_owner
     end
 
     private
