@@ -62,6 +62,22 @@ describe 'homebrew::default' do
     end
   end
 
+  context 'disables brew analytics' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10') do |node|
+        node.normal['homebrew']['enable-analytics'] = false
+      end.converge(described_recipe)
+    end
+
+    before(:each) do
+      stub_command('which git').and_return(true)
+    end
+
+    it 'turns off analytics' do
+      expect(chef_run).to_not run_execute('set analytics')
+    end
+  end
+
   context 'conditionally manage git package' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10').converge(described_recipe)

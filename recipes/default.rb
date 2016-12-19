@@ -40,6 +40,13 @@ execute 'install homebrew' do
   not_if { ::File.exist? '/usr/local/bin/brew' }
 end
 
+execute 'set analytics' do
+  environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
+  user homebrew_owner
+  command "/usr/local/bin/brew analytics #{node['homebrew']['enable-analytics'] ? 'on' : 'off'}"
+  only_if { shell_out('/usr/local/bin/brew analytics state', user: homebrew_owner).stdout.include?('enabled') != node['homebrew']['enable-analytics'] }
+end
+
 if node['homebrew']['auto-update']
   package 'git' do
     not_if 'which git'

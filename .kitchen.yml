@@ -1,5 +1,6 @@
 driver:
   name: vagrant
+  provider: vmware_fusion
 
 provisioner:
   name: chef_zero
@@ -8,11 +9,9 @@ platforms:
   - name: macosx-10.10
     driver:
       box: chef/macosx-10.10 # private box in Chef's Atlas account
-      provider: vmware_fusion
   - name: macosx-10.11
     driver:
       box: chef/macosx-10.11 # private box in Chef's Atlas account
-      provider: vmware_fusion
 
 suites:
   - name: default
@@ -31,3 +30,4 @@ suites:
           - caffeine
         taps:
           - homebrew/homebrew-games
+        enable-analytics: false
