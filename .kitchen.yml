@@ -18,19 +18,4 @@ platforms:
 
 suites:
   - name: default
-    run_list:
-      - recipe[build-essential]
-      - recipe[homebrew::default]
-      - recipe[homebrew::cask]
-      - recipe[homebrew::install_formulas]
-      - recipe[homebrew::install_casks]
-      - recipe[homebrew::install_taps]
-    attributes:
-      homebrew:
-        formulas:
-          - redis
-        casks:
-          - caffeine
-        taps:
-          - homebrew/homebrew-games
-        enable-analytics: false
+    run_list: test::default
