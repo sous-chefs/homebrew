@@ -2,6 +2,16 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 3.0.0 (2016-12-19)
+
+- The homebrew package provider has been removed from this cookbook. It ships with Chef 12.0+. This cookbook now requires a minimum of Chef 12.1 or later.
+- This cookbook no longer depends on build-essential as it wasn't using it directly
+- Properly define the chefspec matchers
+- Add chef_version metadata and remove OS X server which isn't an actual platform from ohai
+- Don't grab homebrew_go script if homebrew is already installed.
+- Add ability to disable sending analytics data via a new attribute
+- Move testing to a test cookbook to make it easier to expand in the future. Also convert integration tests to InSpec from ServerSpec
+
 ## 2.1.2 (2016-09-07)
 
 - Allow passing custom options to brew packages
