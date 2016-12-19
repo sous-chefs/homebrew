@@ -16,7 +16,7 @@ This cookbook installs [Homebrew](http://brew.sh/) and provides resources for wo
 
 ### Cookbooks
 
-- build-essential
+- none
 
 ## Attributes
 

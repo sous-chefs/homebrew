@@ -7,7 +7,6 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '2.1.2'
 recipe           'homebrew', 'Install Homebrew'
 supports         'mac_os_x'
-depends          'build-essential', '>= 2.1.2'
 
 source_url 'https://github.com/chef-cookbooks/homebrew'
 issues_url 'https://github.com/chef-cookbooks/homebrew/issues'
