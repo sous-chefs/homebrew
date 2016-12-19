@@ -5,6 +5,9 @@ driver:
 provisioner:
   name: chef_zero
 
+verifier:
+  name: inspec
+
 platforms:
   - name: macosx-10.10
     driver:
