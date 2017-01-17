@@ -2,7 +2,7 @@
 # Author:: Joshua Timberman (<jtimberman@chef.io>)
 # Author:: Graeme Mathieson (<mathie@woss.name>)
 # Cookbook:: homebrew
-# Libraries:: homebrew_mixin
+# Library:: homebrew_mixin
 #
 # Copyright:: 2011-2016, Chef Software, Inc.
 #
