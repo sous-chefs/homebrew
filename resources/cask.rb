@@ -10,5 +10,5 @@ attribute :options,
   kind_of: String
 
 def casked?
-  shell_out('/usr/local/bin/brew cask list 2>/dev/null').stdout.split.include?(name)
+  shell_out('/usr/local/bin/brew cask list 2>/dev/null', user: homebrew_owner).stdout.split.include?(name)
 end
