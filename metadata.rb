@@ -1,7 +1,7 @@
 name             'homebrew'
 maintainer       'Chef Software, Inc.'
 maintainer_email 'cookbooks@chef.io'
-license          'Apache 2.0'
+license          'Apache-2.0'
 description      'Install Homebrew and includes resources for working with taps and casks'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '3.0.0'
