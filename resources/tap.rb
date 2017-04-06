@@ -19,13 +19,49 @@
 # limitations under the License.
 #
 
-actions :tap, :untap
-default_action :tap
-
-attribute :name,
-          name_attribute: true,
-          kind_of: String,
+property :name,
+          name_property: true,
+          String,
           regex: %r{^[\w-]+(?:\/[\w-]+)+$}
 
-attribute :tapped,
-          kind_of: [TrueClass, FalseClass]
+property :tapped,
+          [true, false]
+
+
+          include ::Homebrew::Mixin
+
+          use_inline_resources
+
+          def load_current_resource
+            @tap = Chef::Resource::HomebrewTap.new(new_resource.name)
+            tap_dir = @tap.name.gsub('/', '/homebrew-')
+
+            Chef::Log.debug("Checking whether we've already tapped #{new_resource.name}")
+            if ::File.directory?("/usr/local/Library/Taps/#{tap_dir}")
+              @tap.tapped true
+            else
+              @tap.tapped false
+            end
+          end
+
+          action :tap do
+            unless @tap.tapped
+              execute "tapping #{new_resource.name}" do
+                command "/usr/local/bin/brew tap #{new_resource.name}"
+                environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
+                not_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
+                user homebrew_owner
+              end
+            end
+          end
+
+          action :untap do
+            if @tap.tapped
+              execute "untapping #{new_resource.name}" do
+                command "/usr/local/bin/brew untap #{new_resource.name}"
+                environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
+                only_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
+                user homebrew_owner
+              end
+            end
+          end
