@@ -2,7 +2,7 @@ require_relative '../spec_helper'
 
 describe 'homebrew::install_formulas' do
   let(:chef_run) do
-    ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.12') do |node|
+    ChefSpec::ServerRunner.new do |node|
       node.normal['homebrew']['formulas'] = %w(pstree wget)
     end.converge(described_recipe)
   end
