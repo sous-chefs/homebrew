@@ -27,3 +27,6 @@ default['homebrew']['taps'] = []
 default['homebrew']['installer']['url'] = 'https://raw.githubusercontent.com/Homebrew/install/master/install'
 default['homebrew']['installer']['checksum'] = nil
 default['homebrew']['enable-analytics'] = true
+default['homebrew']['sudo']['commands'] =
+  %w( /bin/chmod /usr/sbin/chown /bin/mkdir /usr/bin/chgrp /usr/bin/touch
+      /usr/sbin/softwareupdate /bin/rm /usr/bin/xcode-select )

@@ -13,3 +13,7 @@ include_recipe 'build-essential::default'
 include_recipe 'homebrew::install_formulas'
 include_recipe 'homebrew::install_casks'
 include_recipe 'homebrew::install_taps'
+
+package 'cmake' do
+  action :install
+end
