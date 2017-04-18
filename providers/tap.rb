@@ -24,7 +24,7 @@ include ::Homebrew::Mixin
 use_inline_resources
 
 def load_current_resource
-  @tap = Chef::Resource::HomebrewTap.new(new_resource.name)
+  @tap = new_resource
   tap_dir = @tap.name.gsub('/', '/homebrew-')
 
   Chef::Log.debug("Checking whether we've already tapped #{new_resource.name}")
