@@ -25,23 +25,8 @@ property :name,
          identity: true,
          regex: %r{^[\w-]+(?:\/[\w-]+)+$}
 
-property :tapped,
-          [true, false],
-          desired_state: false
-
-load_current_value do |desired|
-  tap_dir = desired.name.gsub('/', '/homebrew-')
-
-  Chef::Log.debug("Checking whether we've already tapped #{desired.name}")
-  if ::File.directory?("/usr/local/Library/Taps/#{tap_dir}")
-    tapped true
-  else
-    tapped false
-  end
-end
-
 action :tap do
-  unless new_resource.tapped
+  unless tapped?(new_resource.name)
     execute "tapping #{new_resource.name}" do
       command "/usr/local/bin/brew tap #{new_resource.name}"
       environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
@@ -52,12 +37,19 @@ action :tap do
 end
 
 action :untap do
-  if @tap.tapped
+  if tapped?(new_resource.name)
     execute "untapping #{new_resource.name}" do
       command "/usr/local/bin/brew untap #{new_resource.name}"
       environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
       only_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
       user Homebrew.owner
     end
+  end
+end
+
+action_class.class_eval do
+  def tapped?(name)
+    tap_dir = name.gsub('/', '/homebrew-')
+    ::File.directory?("/usr/local/Library/Taps/#{tap_dir}")
   end
 end
