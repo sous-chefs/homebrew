@@ -42,7 +42,7 @@ describe 'homebrew::install_formulas' do
     end
 
     it 'package-installs the HEAD of the formula' do
-      expect(chef_run).to install_package('pstree').with(options: eq('--HEAD').or(eq(%w{--HEAD})))
+      expect(chef_run).to install_package('pstree').with(options: eq('--HEAD').or(eq(%w(--HEAD))))
     end
   end
 end

@@ -24,7 +24,7 @@ class Chef12HomebrewUser
 end
 
 module Homebrew
-  extend self
+  module_function
 
   def exist?
     Chef::Log.debug('Checking to see if the homebrew binary exists')
@@ -66,4 +66,3 @@ module Homebrew
     ENV['USER']
   end
 end unless defined?(Homebrew)
-
