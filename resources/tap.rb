@@ -22,27 +22,28 @@
 property :name,
          String,
          name_property: true,
+         identity: true,
          regex: %r{^[\w-]+(?:\/[\w-]+)+$}
 
 property :tapped,
-          [true, false]
+          [true, false],
+          desired_state: false
 
 include ::Homebrew::Mixin
 
-def load_current_resource
-  @tap = new_resource
-  tap_dir = @tap.name.gsub('/', '/homebrew-')
+load_current_value do |desired|
+  tap_dir = desired.name.gsub('/', '/homebrew-')
 
-  Chef::Log.debug("Checking whether we've already tapped #{new_resource.name}")
+  Chef::Log.debug("Checking whether we've already tapped #{desired.name}")
   if ::File.directory?("/usr/local/Library/Taps/#{tap_dir}")
-    @tap.tapped true
+    tapped true
   else
-    @tap.tapped false
+    tapped false
   end
 end
 
 action :tap do
-  unless @tap.tapped
+  unless new_resource.tapped
     execute "tapping #{new_resource.name}" do
       command "/usr/local/bin/brew tap #{new_resource.name}"
       environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
