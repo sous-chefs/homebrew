@@ -25,5 +25,6 @@ action_class.class_eval do
 
   def casked?
     shell_out('/usr/local/bin/brew cask list 2>/dev/null').stdout.split.include?(name)
+    shell_out('/usr/local/bin/brew cask list 2>/dev/null', user: Homebrew.owner).stdout.split.include?(name)
   end
 end
