@@ -20,48 +20,45 @@
 #
 
 property :name,
-          name_property: true,
-          String,
-          regex: %r{^[\w-]+(?:\/[\w-]+)+$}
+         String,
+         name_property: true,
+         regex: %r{^[\w-]+(?:\/[\w-]+)+$}
 
 property :tapped,
           [true, false]
 
+include ::Homebrew::Mixin
 
-          include ::Homebrew::Mixin
+def load_current_resource
+  @tap = new_resource
+  tap_dir = @tap.name.gsub('/', '/homebrew-')
 
-          use_inline_resources
+  Chef::Log.debug("Checking whether we've already tapped #{new_resource.name}")
+  if ::File.directory?("/usr/local/Library/Taps/#{tap_dir}")
+    @tap.tapped true
+  else
+    @tap.tapped false
+  end
+end
 
-          def load_current_resource
-            @tap = Chef::Resource::HomebrewTap.new(new_resource.name)
-            tap_dir = @tap.name.gsub('/', '/homebrew-')
+action :tap do
+  unless @tap.tapped
+    execute "tapping #{new_resource.name}" do
+      command "/usr/local/bin/brew tap #{new_resource.name}"
+      environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
+      not_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
+      user homebrew_owner
+    end
+  end
+end
 
-            Chef::Log.debug("Checking whether we've already tapped #{new_resource.name}")
-            if ::File.directory?("/usr/local/Library/Taps/#{tap_dir}")
-              @tap.tapped true
-            else
-              @tap.tapped false
-            end
-          end
-
-          action :tap do
-            unless @tap.tapped
-              execute "tapping #{new_resource.name}" do
-                command "/usr/local/bin/brew tap #{new_resource.name}"
-                environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
-                not_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
-                user homebrew_owner
-              end
-            end
-          end
-
-          action :untap do
-            if @tap.tapped
-              execute "untapping #{new_resource.name}" do
-                command "/usr/local/bin/brew untap #{new_resource.name}"
-                environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
-                only_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
-                user homebrew_owner
-              end
-            end
-          end
+action :untap do
+  if @tap.tapped
+    execute "untapping #{new_resource.name}" do
+      command "/usr/local/bin/brew untap #{new_resource.name}"
+      environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
+      only_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
+      user homebrew_owner
+    end
+  end
+end
