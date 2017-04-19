@@ -29,8 +29,6 @@ property :tapped,
           [true, false],
           desired_state: false
 
-include ::Homebrew::Mixin
-
 load_current_value do |desired|
   tap_dir = desired.name.gsub('/', '/homebrew-')
 
@@ -46,9 +44,9 @@ action :tap do
   unless new_resource.tapped
     execute "tapping #{new_resource.name}" do
       command "/usr/local/bin/brew tap #{new_resource.name}"
-      environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
+      environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
       not_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
-      user homebrew_owner
+      user Homebrew.owner
     end
   end
 end
@@ -57,9 +55,9 @@ action :untap do
   if @tap.tapped
     execute "untapping #{new_resource.name}" do
       command "/usr/local/bin/brew untap #{new_resource.name}"
-      environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
+      environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
       only_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
-      user homebrew_owner
+      user Homebrew.owner
     end
   end
 end

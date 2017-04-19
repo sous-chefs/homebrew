@@ -19,7 +19,7 @@
 # limitations under the License.
 #
 
-unless homebrew_exists?
+unless Homebrew.exist?
   homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
 
   remote_file homebrew_go do
@@ -30,16 +30,16 @@ unless homebrew_exists?
 
   execute 'install homebrew' do
     command homebrew_go
-    environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
-    user homebrew_owner
+    environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
+    user Homebrew.owner
   end
 end
 
 execute 'set analytics' do
-  environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
-  user homebrew_owner
+  environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
+  user Homebrew.owner
   command "/usr/local/bin/brew analytics #{node['homebrew']['enable-analytics'] ? 'on' : 'off'}"
-  only_if { shell_out('/usr/local/bin/brew analytics state', user: homebrew_owner).stdout.include?('enabled') != node['homebrew']['enable-analytics'] }
+  only_if { shell_out('/usr/local/bin/brew analytics state', user: Homebrew.owner).stdout.include?('enabled') != node['homebrew']['enable-analytics'] }
 end
 
 if node['homebrew']['auto-update']
@@ -48,8 +48,8 @@ if node['homebrew']['auto-update']
   end
 
   execute 'update homebrew from github' do
-    environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
-    user homebrew_owner
+    environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
+    user Homebrew.owner
     command '/usr/local/bin/brew update || true'
   end
 end

@@ -1,4 +1,4 @@
-require_relative '../spec_helper'
+require 'spec_helper'
 
 describe 'homebrew::install_formulas' do
   cached(:chef_run) do
@@ -9,8 +9,8 @@ describe 'homebrew::install_formulas' do
 
   before do
     stub_command('which git').and_return('/usr/local/bin/git')
-    allow_any_instance_of(Chef::Resource).to receive(:homebrew_owner).and_return('vagrant')
-    allow_any_instance_of(Chef::Resource).to receive(:homebrew_exists?).and_return(true)
+    allow(Homebrew).to receive(:owner).and_return('vagrant')
+    allow(Homebrew).to receive(:exist?).and_return(true)
   end
 
   it 'installs homebrew' do
@@ -42,7 +42,7 @@ describe 'homebrew::install_formulas' do
     end
 
     it 'package-installs the HEAD of the formula' do
-      expect(chef_run).to install_package('pstree').with(options: '--HEAD')
+      expect(chef_run).to install_package('pstree').with(options: eq('--HEAD').or(eq(%w(--HEAD))))
     end
   end
 end

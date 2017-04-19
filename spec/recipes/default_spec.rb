@@ -1,9 +1,9 @@
-require_relative '../spec_helper'
+require 'spec_helper'
 
 describe 'homebrew::default' do
-  before(:each) do
-    allow_any_instance_of(Chef::Recipe).to receive(:homebrew_exists?).and_return(true)
-    allow_any_instance_of(Chef::Resource).to receive(:homebrew_owner).and_return('vagrant')
+  before do
+    allow(Homebrew).to receive(:exist?).and_return(true)
+    allow(Homebrew).to receive(:owner).and_return('vagrant')
     stub_command('which git').and_return(true)
   end
 
@@ -12,8 +12,8 @@ describe 'homebrew::default' do
       ChefSpec::SoloRunner.new.converge(described_recipe)
     end
 
-    before(:each) do
-      allow_any_instance_of(Chef::Recipe).to receive(:homebrew_exists?).and_return(false)
+    before do
+      allow(Homebrew).to receive(:exist?).and_return(false)
     end
 
     it 'runs homebrew installation as the default user' do
@@ -32,6 +32,10 @@ describe 'homebrew::default' do
   context '/usr/local/bin/brew exists' do
     cached(:chef_run) do
       ChefSpec::SoloRunner.new.converge(described_recipe)
+    end
+
+    before do
+      allow_any_instance_of(Chef12HomebrewUser).to receive(:find_homebrew_uid).and_return(Process.uid)
     end
 
     it 'does not run homebrew installation' do
