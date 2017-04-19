@@ -1,14 +1,18 @@
 require_relative '../spec_helper'
 
 describe 'homebrew::install_formulas' do
-  let(:chef_run) do
-    ChefSpec::ServerRunner.new do |node|
+  cached(:chef_run) do
+    ChefSpec::SoloRunner.new do |node|
       node.normal['homebrew']['formulas'] = %w(pstree wget)
     end.converge(described_recipe)
   end
 
   before do
     stub_command('which git').and_return('/usr/local/bin/git')
+    allow_any_instance_of(Chef::Resource).to receive(:homebrew_owner).and_return('vagrant')
+    allow_any_instance_of(Chef::Recipe).to receive(:homebrew_owner).and_return('vagrant')
+    allow_any_instance_of(Chef::Resource).to receive(:homebrew_exist?).and_return(true)
+    allow_any_instance_of(Chef::Recipe).to receive(:homebrew_exist?).and_return(true)
   end
 
   it 'installs homebrew' do
@@ -21,7 +25,7 @@ describe 'homebrew::install_formulas' do
   end
 
   context 'requesting a specific version' do
-    let(:chef_run) do
+    cached(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
         node.normal['homebrew']['formulas'] = [{ name: 'pstree', version: '9.9.9' }]
       end.converge(described_recipe)
@@ -33,7 +37,7 @@ describe 'homebrew::install_formulas' do
   end
 
   context 'requesting a HEAD version' do
-    let(:chef_run) do
+    cached(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
         node.normal['homebrew']['formulas'] = [{ name: 'pstree', head: true }]
       end.converge(described_recipe)

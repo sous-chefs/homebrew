@@ -27,14 +27,14 @@ remote_file homebrew_go do
   source node['homebrew']['installer']['url']
   checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
   mode '755'
-  not_if { ::File.exist? '/usr/local/bin/brew' }
+  not_if { homebrew_exists? }
 end
 
 execute 'install homebrew' do
   command homebrew_go
   environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
   user homebrew_owner
-  not_if { ::File.exist? '/usr/local/bin/brew' }
+  not_if { homebrew_exists? }
 end
 
 execute 'set analytics' do

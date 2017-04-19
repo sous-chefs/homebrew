@@ -9,7 +9,7 @@ describe 'homebrew::default' do
     before(:each) do
       allow_any_instance_of(Chef::Resource).to receive(:homebrew_owner).and_return('vagrant')
       allow_any_instance_of(Chef::Recipe).to receive(:homebrew_owner).and_return('vagrant')
-      allow(File).to receive(:exist?).and_return(false)
+      allow(File).to receive(:exist?).with('/usr/local/bin/brew').and_return(false)
       stub_command('which git').and_return(true)
     end
 
@@ -32,7 +32,7 @@ describe 'homebrew::default' do
     end
 
     before(:each) do
-      allow(File).to receive(:exist?).and_return(true)
+      allow(File).to receive(:exist?).with('/usr/local/bin/brew').and_return(true)
       stub_command('which git').and_return(true)
       allow_any_instance_of(Chef12HomebrewUser).to receive(:find_homebrew_uid).and_return(Process.uid)
     end

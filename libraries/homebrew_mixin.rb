@@ -26,6 +26,10 @@ end
 module Homebrew
   # Homebrew
   module Mixin
+    def homebrew_exists?
+      ::File.exist?('/usr/local/bin/brew')
+    end
+
     def homebrew_owner
       require 'etc'
       @homebrew_owner ||= ::Etc.getpwuid(Chef12HomebrewUser.new.find_homebrew_uid).name
