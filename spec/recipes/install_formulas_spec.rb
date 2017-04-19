@@ -10,9 +10,7 @@ describe 'homebrew::install_formulas' do
   before do
     stub_command('which git').and_return('/usr/local/bin/git')
     allow_any_instance_of(Chef::Resource).to receive(:homebrew_owner).and_return('vagrant')
-    allow_any_instance_of(Chef::Recipe).to receive(:homebrew_owner).and_return('vagrant')
-    allow_any_instance_of(Chef::Resource).to receive(:homebrew_exist?).and_return(true)
-    allow_any_instance_of(Chef::Recipe).to receive(:homebrew_exist?).and_return(true)
+    allow_any_instance_of(Chef::Resource).to receive(:homebrew_exists?).and_return(true)
   end
 
   it 'installs homebrew' do

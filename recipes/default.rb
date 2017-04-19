@@ -19,9 +19,9 @@
 # limitations under the License.
 #
 
-homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
-
 unless homebrew_exists?
+  homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
+
   remote_file homebrew_go do
     source node['homebrew']['installer']['url']
     checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
