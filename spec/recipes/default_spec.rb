@@ -1,16 +1,19 @@
-require_relative '../spec_helper'
+require 'spec_helper'
 
 describe 'homebrew::default' do
+  before do
+    allow(Homebrew).to receive(:exist?).and_return(true)
+    allow(Homebrew).to receive(:owner).and_return('vagrant')
+    stub_command('which git').and_return(true)
+  end
+
   context 'default user' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10').converge(described_recipe)
+    cached(:chef_run) do
+      ChefSpec::SoloRunner.new.converge(described_recipe)
     end
 
-    before(:each) do
-      allow_any_instance_of(Chef::Resource).to receive(:homebrew_owner).and_return('vagrant')
-      allow_any_instance_of(Chef::Recipe).to receive(:homebrew_owner).and_return('vagrant')
-      allow(File).to receive(:exist?).and_return(false)
-      stub_command('which git').and_return(true)
+    before do
+      allow(Homebrew).to receive(:exist?).and_return(false)
     end
 
     it 'runs homebrew installation as the default user' do
@@ -27,13 +30,11 @@ describe 'homebrew::default' do
   end
 
   context '/usr/local/bin/brew exists' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10').converge(described_recipe)
+    cached(:chef_run) do
+      ChefSpec::SoloRunner.new.converge(described_recipe)
     end
 
-    before(:each) do
-      allow(File).to receive(:exist?).and_return(true)
-      stub_command('which git').and_return(true)
+    before do
       allow_any_instance_of(Chef12HomebrewUser).to receive(:find_homebrew_uid).and_return(Process.uid)
     end
 
@@ -43,14 +44,10 @@ describe 'homebrew::default' do
   end
 
   context 'do not auto-update brew' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10') do |node|
+    cached(:chef_run) do
+      ChefSpec::SoloRunner.new do |node|
         node.normal['homebrew']['auto-update'] = false
       end.converge(described_recipe)
-    end
-
-    before(:each) do
-      stub_command('which git').and_return(true)
     end
 
     it 'does not manage the git package' do
@@ -64,13 +61,9 @@ describe 'homebrew::default' do
 
   context 'disables brew analytics' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10') do |node|
+      ChefSpec::SoloRunner.new do |node|
         node.normal['homebrew']['enable-analytics'] = false
       end.converge(described_recipe)
-    end
-
-    before(:each) do
-      stub_command('which git').and_return(true)
     end
 
     it 'turns off analytics' do
@@ -80,14 +73,10 @@ describe 'homebrew::default' do
 
   context 'conditionally manage git package' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10').converge(described_recipe)
+      ChefSpec::SoloRunner.new.converge(described_recipe)
     end
 
     context 'git is installed' do
-      before(:each) do
-        stub_command('which git').and_return(true)
-      end
-
       it 'does not install git' do
         expect(chef_run).to_not install_package('git')
       end

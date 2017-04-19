@@ -2,7 +2,7 @@
 # Cookbook:: test
 # Recipe:: default
 #
-# Copyright:: 2016, Chef Software, Inc.
+# Copyright:: 2016-2017, Chef Software, Inc.
 
 node.default['homebrew']['formulas'] = %w(redis)
 node.default['homebrew']['casks'] = %w(caffeine)

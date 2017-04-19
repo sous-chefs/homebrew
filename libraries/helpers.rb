@@ -4,7 +4,7 @@
 # Cookbook:: homebrew
 # Library:: homebrew_mixin
 #
-# Copyright:: 2011-2016, Chef Software, Inc.
+# Copyright:: 2011-2017, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,40 +24,45 @@ class Chef12HomebrewUser
 end
 
 module Homebrew
-  # Homebrew
-  module Mixin
-    def homebrew_owner
+  module_function
+
+  def exist?
+    Chef::Log.debug('Checking to see if the homebrew binary exists')
+    ::File.exist?('/usr/local/bin/brew')
+  end
+
+  def owner
+    @owner ||= begin
       require 'etc'
-      @homebrew_owner ||= ::Etc.getpwuid(Chef12HomebrewUser.new.find_homebrew_uid).name
+      ::Etc.getpwuid(Chef12HomebrewUser.new.find_homebrew_uid).name
     rescue Chef::Exceptions::CannotDetermineHomebrewOwner
-      @homebrew_owner ||= calculate_owner
-    end
-
-    private
-
-    def calculate_owner
-      owner = homebrew_owner_attr || sudo_user || current_user
-      if owner == 'root'
-        raise Chef::Exceptions::User,
-             "Homebrew owner is 'root' which is not supported. " \
-             "To set an explicit owner, please set node['homebrew']['owner']."
-      end
-      owner
-    end
-
-    def homebrew_owner_attr
-      node['homebrew']['owner']
-    end
-
-    def sudo_user
-      ENV['SUDO_USER']
-    end
-
-    def current_user
-      ENV['USER']
+      calculate_owner
+    end.tap do |owner|
+      Chef::Log.debug("Homebrew owner is #{owner}")
     end
   end
-end
 
-Chef::Resource.send(:include, Homebrew::Mixin)
-Chef::Recipe.send(:include, Homebrew::Mixin)
+  private
+
+  def calculate_owner
+    owner = homebrew_owner_attr || sudo_user || current_user
+    if owner == 'root'
+      raise Chef::Exceptions::User,
+           "Homebrew owner is 'root' which is not supported. " \
+           "To set an explicit owner, please set node['homebrew']['owner']."
+    end
+    owner
+  end
+
+  def homebrew_owner_attr
+    node['homebrew']['owner']
+  end
+
+  def sudo_user
+    ENV['SUDO_USER']
+  end
+
+  def current_user
+    ENV['USER']
+  end
+end unless defined?(Homebrew)

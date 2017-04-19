@@ -2,7 +2,7 @@
 # Cookbook:: homebrew
 # Recipes:: cask
 #
-# Copyright:: 2014-2016, Chef Software, Inc <legal@chef.io>
+# Copyright:: 2014-2017, Chef Software, Inc <legal@chef.io>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 homebrew_tap 'caskroom/cask'
 
 directory '/Library/Caches/Homebrew/Casks' do
-  owner homebrew_owner
+  owner Homebrew.owner
   mode '775'
   only_if { ::Dir.exist?('/Library/Caches/Homebrew') }
 end

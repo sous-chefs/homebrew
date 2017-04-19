@@ -1,14 +1,16 @@
-require_relative '../spec_helper'
+require 'spec_helper'
 
 describe 'homebrew::install_formulas' do
-  let(:chef_run) do
-    ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10') do |node|
+  cached(:chef_run) do
+    ChefSpec::SoloRunner.new do |node|
       node.normal['homebrew']['formulas'] = %w(pstree wget)
     end.converge(described_recipe)
   end
 
   before do
     stub_command('which git').and_return('/usr/local/bin/git')
+    allow(Homebrew).to receive(:owner).and_return('vagrant')
+    allow(Homebrew).to receive(:exist?).and_return(true)
   end
 
   it 'installs homebrew' do
@@ -21,8 +23,8 @@ describe 'homebrew::install_formulas' do
   end
 
   context 'requesting a specific version' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10') do |node|
+    cached(:chef_run) do
+      ChefSpec::SoloRunner.new do |node|
         node.normal['homebrew']['formulas'] = [{ name: 'pstree', version: '9.9.9' }]
       end.converge(described_recipe)
     end
@@ -33,14 +35,14 @@ describe 'homebrew::install_formulas' do
   end
 
   context 'requesting a HEAD version' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10') do |node|
+    cached(:chef_run) do
+      ChefSpec::SoloRunner.new do |node|
         node.normal['homebrew']['formulas'] = [{ name: 'pstree', head: true }]
       end.converge(described_recipe)
     end
 
     it 'package-installs the HEAD of the formula' do
-      expect(chef_run).to install_package('pstree').with(options: '--HEAD')
+      expect(chef_run).to install_package('pstree').with(options: eq('--HEAD').or(eq(%w(--HEAD))))
     end
   end
 end

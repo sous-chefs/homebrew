@@ -4,7 +4,7 @@
 # Cookbook:: homebrew
 # Resources:: tap
 #
-# Copyright:: 2011-2016, Chef Software, Inc.
+# Copyright:: 2011-2017, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,45 @@
 # limitations under the License.
 #
 
-actions :tap, :untap
-default_action :tap
+property :name,
+         String,
+         name_property: true,
+         identity: true,
+         regex: %r{^[\w-]+(?:\/[\w-]+)+$}
 
-attribute :name,
-          name_attribute: true,
-          kind_of: String,
-          regex: %r{^[\w-]+(?:\/[\w-]+)+$}
+property :tapped,
+          [true, false],
+          desired_state: false
 
-attribute :tapped,
-          kind_of: [TrueClass, FalseClass]
+load_current_value do |desired|
+  tap_dir = desired.name.gsub('/', '/homebrew-')
+
+  Chef::Log.debug("Checking whether we've already tapped #{desired.name}")
+  if ::File.directory?("/usr/local/Library/Taps/#{tap_dir}")
+    tapped true
+  else
+    tapped false
+  end
+end
+
+action :tap do
+  unless new_resource.tapped
+    execute "tapping #{new_resource.name}" do
+      command "/usr/local/bin/brew tap #{new_resource.name}"
+      environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
+      not_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
+      user Homebrew.owner
+    end
+  end
+end
+
+action :untap do
+  if @tap.tapped
+    execute "untapping #{new_resource.name}" do
+      command "/usr/local/bin/brew untap #{new_resource.name}"
+      environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
+      only_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
+      user Homebrew.owner
+    end
+  end
+end
