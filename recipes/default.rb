@@ -21,18 +21,18 @@
 
 homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
 
-remote_file homebrew_go do
-  source node['homebrew']['installer']['url']
-  checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
-  mode '755'
-  not_if { homebrew_exists? }
-end
+unless homebrew_exists?
+  remote_file homebrew_go do
+    source node['homebrew']['installer']['url']
+    checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
+    mode '755'
+  end
 
-execute 'install homebrew' do
-  command homebrew_go
-  environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
-  user homebrew_owner
-  not_if { homebrew_exists? }
+  execute 'install homebrew' do
+    command homebrew_go
+    environment lazy { { 'HOME' => ::Dir.home(homebrew_owner), 'USER' => homebrew_owner } }
+    user homebrew_owner
+  end
 end
 
 execute 'set analytics' do
