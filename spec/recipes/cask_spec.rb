@@ -1,4 +1,4 @@
-require_relative '../spec_helper'
+require 'spec_helper'
 
 describe 'homebrew::cask' do
   context 'default user' do
@@ -7,7 +7,7 @@ describe 'homebrew::cask' do
     end
 
     before(:each) do
-      allow_any_instance_of(Chef::Resource).to receive(:homebrew_owner).and_return('vagrant')
+      allow(Homebrew).to receive(:owner).and_return('vagrant')
     end
 
     it 'manages the Cask Cache directory' do

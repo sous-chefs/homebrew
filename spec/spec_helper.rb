@@ -1,6 +1,8 @@
 require 'chefspec'
 require 'chefspec/berkshelf'
 
+require_relative '../libraries/helpers'
+
 RSpec.configure do |config|
   config.color = true               # Use color in STDOUT
   config.formatter = :documentation # Use the specified formatter
