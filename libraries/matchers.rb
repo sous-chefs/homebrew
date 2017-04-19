@@ -1,5 +1,6 @@
 if defined?(ChefSpec)
-  ChefSpec.define_matcher :homebrew_package
+  ChefSpec.define_matcher :homebrew_tap
+  ChefSpec.define_matcher :homebrew_cask
 
   def tap_homebrew_tap(tap)
     ChefSpec::Matchers::ResourceMatcher.new(:homebrew_tap, :tap, tap)

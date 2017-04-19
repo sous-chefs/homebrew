@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 describe 'homebrew::cask' do
   context 'default user' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new.converge(described_recipe)
+      ChefSpec::SoloRunner.new.converge(described_recipe)
     end
 
     before(:each) do

@@ -4,7 +4,7 @@
 # Cookbook:: homebrew
 # Library:: homebrew_mixin
 #
-# Copyright:: 2011-2016, Chef Software, Inc.
+# Copyright:: 2011-2017, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,13 +24,21 @@ class Chef12HomebrewUser
 end
 
 module Homebrew
-  # Homebrew
   module Mixin
+    def homebrew_exists?
+      Chef::Log.debug('Checking to see if the homebrew binary exists')
+      ::File.exist?('/usr/local/bin/brew')
+    end
+
     def homebrew_owner
-      require 'etc'
-      @homebrew_owner ||= ::Etc.getpwuid(Chef12HomebrewUser.new.find_homebrew_uid).name
-    rescue Chef::Exceptions::CannotDetermineHomebrewOwner
-      @homebrew_owner ||= calculate_owner
+      begin
+        require 'etc'
+        @homebrew_owner ||= ::Etc.getpwuid(Chef12HomebrewUser.new.find_homebrew_uid).name
+      rescue Chef::Exceptions::CannotDetermineHomebrewOwner
+        @homebrew_owner ||= calculate_owner
+      end
+      Chef::Log.debug("Homebrew owner is #{@homebrew_owner}")
+      @homebrew_owner
     end
 
     private
