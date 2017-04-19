@@ -24,7 +24,6 @@ class Chef12HomebrewUser
 end
 
 module Homebrew
-  # Homebrew
   module Mixin
     def homebrew_exists?
       Chef::Log.debug('Checking to see if the homebrew binary exists')
