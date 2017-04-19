@@ -2,8 +2,8 @@ require_relative '../spec_helper'
 
 describe 'homebrew::default' do
   context 'default user' do
-    let(:chef_run) do
-      ChefSpec::ServerRunner.new.converge(described_recipe)
+    cached(:chef_run) do
+      ChefSpec::SoloRunner.new.converge(described_recipe)
     end
 
     before(:each) do
