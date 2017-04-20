@@ -22,7 +22,6 @@
 property :name,
          String,
          name_property: true,
-         identity: true,
          regex: %r{^[\w-]+(?:\/[\w-]+)+$}
 
 action :tap do
@@ -50,6 +49,6 @@ end
 action_class.class_eval do
   def tapped?(name)
     tap_dir = name.gsub('/', '/homebrew-')
-    ::File.directory?("/usr/local/Library/Taps/#{tap_dir}")
+    ::File.directory?("/usr/local/Homebrew/Library/Taps/#{tap_dir}")
   end
 end

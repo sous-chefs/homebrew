@@ -6,7 +6,7 @@
 
 node.default['homebrew']['formulas'] = %w(redis)
 node.default['homebrew']['casks'] = %w(caffeine)
-node.default['homebrew']['taps'] = %w(homebrew/homebrew-games)
+node.default['homebrew']['taps'] = %w(homebrew/nginx)
 node.default['homebrew']['enable-analytics'] = false
 
 include_recipe 'build-essential::default'
