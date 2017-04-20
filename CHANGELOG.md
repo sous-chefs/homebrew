@@ -2,6 +2,17 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 4.0.0 (2017-04-19)
+
+- Convert the tap and cash resources from LWRPs to custom resources which simplifies the code and fixes an incompatibility with Chef 13
+- Uses the homebrew_owner as the user to check if a cask has been casked
+- Fixed the location of the tap dir to properly prevent trying to install a tap twice
+- Refactor the mixin to be a simpler helper that is easier to test
+- Resolved failures in the Chefspecs on Travis
+- Test with Local Delivery and not Rake
+- Use standardize Apache 2 license string
+- Only check if homebrew exists once in the default recipe
+
 ## 3.0.0 (2016-12-19)
 
 - The homebrew package provider has been removed from this cookbook. It ships with Chef 12.0+. This cookbook now requires a minimum of Chef 12.1 or later.
