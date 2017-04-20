@@ -24,7 +24,7 @@ class Chef12HomebrewUser
 end
 
 module Homebrew
-  module_function
+  extend self # rubocop:disable ModuleFunction
 
   def exist?
     Chef::Log.debug('Checking to see if the homebrew binary exists')
@@ -55,7 +55,7 @@ module Homebrew
   end
 
   def homebrew_owner_attr
-    node['homebrew']['owner']
+    Chef.node['homebrew']['owner']
   end
 
   def sudo_user
