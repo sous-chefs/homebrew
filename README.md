@@ -48,7 +48,14 @@ This cookbook installs [Homebrew](http://brew.sh/) and provides resources for wo
 
 - `node['homebrew']['casks']` - An Array of casks that should be installed using brew cask by default, used only in the `homebrew::install_casks` recipe.
 
-- `node['homebrew']['taps']` - An Array of taps that should be installed using brew tap by default, used only in the `homebrew::install_taps` recipe.
+- `node['homebrew']['taps']` - An Array of taps that should be installed using brew tap by default, used only in the `homebrew::install_taps` recipe. For example:<br>
+  ```ruby
+  [
+    'homebrew/science',
+    # 'tap' is the only required key for the Hash
+    { 'tap' => 'homebrew/dupes', 'url' => 'https://github.com', 'full' => true }
+  ]
+  ```
 
 ## Resources (provider)
 
@@ -57,10 +64,22 @@ This cookbook installs [Homebrew](http://brew.sh/) and provides resources for wo
 LWRP for `brew tap`, a Homebrew command used to add additional formula repositories. From the `brew` man page:
 
 ```text
-tap [tap]
-       Tap a new formula repository from GitHub, or list existing taps.
+brew tap [--full] user/repo [URL]
+    Tap a formula repository.
 
-       tap is of the form user/repo, e.g. brew tap homebrew/dupes.
+    With URL unspecified, taps a formula repository from GitHub using HTTPS.
+    Since so many taps are hosted on GitHub, this command is a shortcut for
+    tap user/repo https://github.com/user/homebrew-repo.
+
+    With URL specified, taps a formula repository from anywhere, using
+    any transport protocol that git handles. The one-argument form of tap
+    simplifies but also limits. This two-argument command makes no
+    assumptions, so taps can be cloned from places other than GitHub and
+    using protocols other than HTTPS, e.g., SSH, GIT, HTTP, FTP(S), RSYNC.
+
+    By default, the repository is cloned as a shallow copy (--depth=1), but
+    if --full is passed, a full clone will be used. To convert a shallow copy
+    to a full copy, you can retap passing --full without first untapping.
 ```
 
 Default action is `:tap` which enables the repository. Use `:untap` to disable a tapped repository.
@@ -72,6 +91,11 @@ homebrew_tap 'homebrew/dupes'
 
 homebrew_tap 'homebrew/dupes' do
   action :untap
+end
+
+homebrew_tap 'homebrew/dupes' do
+  url 'https://github.com/homebrew/homebrew-dupes.git'
+  full true
 end
 ```
 
@@ -94,7 +118,7 @@ And then install the homebrew cask package before using this LWRP.
 ```ruby
 package "brew-cask" do
   action :install
-  end
+end
 ```
 
 You can include the `homebrew::cask` recipe to do this.
