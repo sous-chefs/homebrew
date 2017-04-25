@@ -4,7 +4,7 @@ This file is used to list changes made in each version of the homebrew cookbook.
 
 ## 4.0.0 (2017-04-19)
 
-- Convert the tap and cash resources from LWRPs to custom resources which simplifies the code and fixes an incompatibility with Chef 13
+- Convert the tap and cask resources from LWRPs to custom resources which simplifies the code and fixes an incompatibility with Chef 13
 - Uses the homebrew_owner as the user to check if a cask has been casked
 - Fixed the location of the tap dir to properly prevent trying to install a tap twice
 - Refactor the mixin to be a simpler helper that is easier to test
