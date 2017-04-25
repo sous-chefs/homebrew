@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 4.1.0 (2017-04-25)
+
+- Extend the tap resource to use the --full option. See the readme for details and examples
+
 ## 4.0.0 (2017-04-19)
 
 - Convert the tap and cask resources from LWRPs to custom resources which simplifies the code and fixes an incompatibility with Chef 13
