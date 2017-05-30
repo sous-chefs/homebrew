@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 4.2.0 (2017-05-30)
+
+- Remove class_eval and require Chef 12.7+
+
 ## 4.1.0 (2017-04-25)
 
 - Extend the tap resource to use the --full option. See the readme for details and examples
