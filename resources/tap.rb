@@ -48,7 +48,7 @@ action :untap do
   end
 end
 
-action_class.class_eval do
+action_class do
   def tapped?(name)
     tap_dir = name.gsub('/', '/homebrew-')
     ::File.directory?("/usr/local/Homebrew/Library/Taps/#{tap_dir}")

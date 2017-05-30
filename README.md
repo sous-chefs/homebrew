@@ -12,7 +12,7 @@ This cookbook installs [Homebrew](http://brew.sh/) and provides resources for wo
 
 ### Chef
 
-- Chef 12.5+
+- Chef 12.7+
 
 ### Cookbooks
 
