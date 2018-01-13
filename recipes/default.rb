@@ -25,7 +25,7 @@ unless Homebrew.exist?
   remote_file homebrew_go do
     source node['homebrew']['installer']['url']
     checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
-    mode '755'
+    mode '0755'
   end
 
   execute 'install homebrew' do

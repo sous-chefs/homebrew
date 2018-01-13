@@ -21,6 +21,6 @@ homebrew_tap 'caskroom/cask'
 
 directory '/Library/Caches/Homebrew/Casks' do
   owner Homebrew.owner
-  mode '775'
+  mode '0775'
   only_if { ::Dir.exist?('/Library/Caches/Homebrew') }
 end
