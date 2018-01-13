@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 4.2.1 (2018-01-13)
+
+- Remove double shellout from a bad merge
+- Test on modern macOS releases
+- Use full file modes throughout the recipes
+- Add 2 retries for downloading the homebrew script in case it fails
+
 ## 4.2.0 (2017-05-30)
 
 - Remove class_eval and require Chef 12.7+
