@@ -24,6 +24,6 @@ action_class do
   alias_method :action_uncask, :action_uninstall
 
   def casked?
-    shell_out('/usr/local/bin/brew cask list 2>/dev/null', user: homebrew_owner).stdout.split.include?(name)
+    shell_out('/usr/local/bin/brew cask list 2>/dev/null', user: Homebrew.owner).stdout.split.include?(name)
   end
 end
