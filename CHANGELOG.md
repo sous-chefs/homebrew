@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 4.2.2 (2018-01-13)
+
+- Fix failures in the cask resource
+- Improve inspec output for file mode test
+
 ## 4.2.1 (2018-01-13)
 
 - Remove double shellout from a bad merge
