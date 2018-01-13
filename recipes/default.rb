@@ -26,6 +26,7 @@ unless Homebrew.exist?
     source node['homebrew']['installer']['url']
     checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
     mode '0755'
+    retries 2
   end
 
   execute 'install homebrew' do
