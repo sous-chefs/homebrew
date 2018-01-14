@@ -49,6 +49,7 @@ This cookbook installs [Homebrew](http://brew.sh/) and provides resources for wo
 - `node['homebrew']['casks']` - An Array of casks that should be installed using brew cask by default, used only in the `homebrew::install_casks` recipe.
 
 - `node['homebrew']['taps']` - An Array of taps that should be installed using brew tap by default, used only in the `homebrew::install_taps` recipe. For example:<br>
+
   ```ruby
   [
     'homebrew/science',
@@ -104,24 +105,6 @@ end
 Resource for `brew cask`, a Homebrew-style CLI workflow for the administration of Mac applications distributed as binaries. It's implemented as a homebrew "external command" called cask.
 
 [homebrew-cask on GitHub](https://github.com/caskroom/homebrew-cask)
-
-#### Prerequisites
-
-You must have the homebrew-cask repository tapped.
-
-```ruby
-homebrew_tap 'caskroom/cask'
-```
-
-And then install the homebrew cask package before using this resource.
-
-```ruby
-package "brew-cask" do
-  action :install
-end
-```
-
-You can include the `homebrew::cask` recipe to do this.
 
 ### Examples
 

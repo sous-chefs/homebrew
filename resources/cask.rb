@@ -20,8 +20,11 @@
 #
 property :name, String, regex: %r(^[\w/-]+$), name_property: true # ~FC108
 property :options, String
+property :install_cask, [true, false], default: true
 
 action :install do
+  homebrew_tap 'caskroom/cask' if new_resource.install_cask
+
   execute "installing cask #{new_resource.name}" do
     command "/usr/local/bin/brew cask install #{new_resource.name} #{new_resource.options}"
     user Homebrew.owner
@@ -31,6 +34,8 @@ action :install do
 end
 
 action :uninstall do
+  homebrew_tap 'caskroom/cask' if new_resource.install_cask
+
   execute "uninstalling cask #{new_resource.name}" do
     command "/usr/local/bin/brew cask uninstall #{new_resource.name}"
     user Homebrew.owner
