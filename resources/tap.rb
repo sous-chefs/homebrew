@@ -19,10 +19,7 @@
 # limitations under the License.
 #
 
-property :name,
-         String,
-         name_property: true,
-         regex: %r{^[\w-]+(?:\/[\w-]+)+$}
+property :name, String, name_property: true, regex: %r{^[\w-]+(?:\/[\w-]+)+$} # ~FC108
 property :url, String
 property :full, [TrueClass, FalseClass], default: false
 
