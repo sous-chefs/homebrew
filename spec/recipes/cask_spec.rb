@@ -14,7 +14,7 @@ describe 'homebrew::cask' do
       allow(Dir).to receive(:exist?).with('/Library/Caches/Homebrew').and_return(true)
       expect(chef_run).to create_directory('/Library/Caches/Homebrew/Casks').with(
         user: 'vagrant',
-        mode: '775'
+        mode: '0775'
       )
     end
   end
