@@ -57,11 +57,11 @@ This cookbook installs [Homebrew](http://brew.sh/) and provides resources for wo
   ]
   ```
 
-## Resources (provider)
+## Resources
 
 ### homebrew_tap
 
-LWRP for `brew tap`, a Homebrew command used to add additional formula repositories. From the `brew` man page:
+Resource for `brew tap`, a Homebrew command used to add additional formula repositories. From the `brew` man page:
 
 ```text
 brew tap [--full] user/repo [URL]
@@ -101,7 +101,7 @@ end
 
 ### homebrew_cask
 
-LWRP for `brew cask`, a Homebrew-style CLI workflow for the administration of Mac applications distributed as binaries. It's implemented as a homebrew "external command" called cask.
+Resource for `brew cask`, a Homebrew-style CLI workflow for the administration of Mac applications distributed as binaries. It's implemented as a homebrew "external command" called cask.
 
 [homebrew-cask on GitHub](https://github.com/caskroom/homebrew-cask)
 
@@ -113,7 +113,7 @@ You must have the homebrew-cask repository tapped.
 homebrew_tap 'caskroom/cask'
 ```
 
-And then install the homebrew cask package before using this LWRP.
+And then install the homebrew cask package before using this resource.
 
 ```ruby
 package "brew-cask" do
