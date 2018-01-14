@@ -49,7 +49,7 @@ action_class do
   alias_method :action_uncask, :action_uninstall
 
   def casked?
-    unscoped_name = name.split('/').last
+    unscoped_name = new_resource.name.split('/').last
     shell_out('/usr/local/bin/brew cask list 2>/dev/null', user: Homebrew.owner).stdout.split.include?(unscoped_name)
   end
 end
