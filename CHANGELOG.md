@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 4.3.0 (2018-01-13)
+
+- Allow Cask name to be scoped to tap
+- Disable Foodcrtiic's FC108 since it doesn't apply here
+- Automatically install caskroom/cask in the cask resource. This eliminates the need for the cask recipe.
+- Resolve Chef 14 deprecation warnings
+
 ## 4.2.2 (2018-01-13)
 
 - Fix failures in the cask resource
