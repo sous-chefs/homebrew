@@ -27,22 +27,24 @@ property :owner, String, default: Homebrew.owner
 action :install do
   homebrew_tap 'caskroom/cask' if new_resource.install_cask
 
-  execute "installing cask #{new_resource.name}" do
-    command "#{new_resource.homebrew_path} cask install #{new_resource.name} #{new_resource.options}"
-    user new_resource.owner
-    environment lazy { { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner } }
-    not_if { casked? }
+  if casked?
+    converge_by("install cask #{new_resource.name} #{new_resource.options}") do
+      shell_out!("#{new_resource.homebrew_path} cask install #{new_resource.name} #{new_resource.options}",
+          user: new_resource.owner,
+          cwd: ::Dir.home(new_resource.owner))
+    end
   end
 end
 
 action :uninstall do
   homebrew_tap 'caskroom/cask' if new_resource.install_cask
 
-  execute "uninstalling cask #{new_resource.name}" do
-    command "#{new_resource.homebrew_path} cask uninstall #{new_resource.name}"
-    user new_resource.owner
-    environment lazy { { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner } }
-    only_if { casked? }
+  if casked?
+    converge_by("uninstall cask #{new_resource.name}") do
+      shell_out!("#{new_resource.homebrew_path} cask uninstall #{new_resource.name}",
+          user: new_resource.owner,
+          cwd: ::Dir.home(new_resource.owner))
+    end
   end
 end
 

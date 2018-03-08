@@ -27,29 +27,25 @@ property :owner, String, default: Homebrew.owner
 
 action :tap do
   unless tapped?(new_resource.name)
-    execute "tapping #{new_resource.name}" do
-      command "#{new_resource.homebrew_path} tap #{new_resource.full ? '--full' : ''} #{new_resource.name} #{new_resource.url || ''}"
-      environment lazy { { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner } }
-      not_if "#{new_resource.homebrew_path} tap | grep #{new_resource.name}"
-      user new_resource.owner
+    converge_by("tap #{new_resource.name}") do
+      shell_out!("#{new_resource.homebrew_path} tap #{new_resource.full ? '--full' : ''} #{new_resource.name} #{new_resource.url || ''}",
+          user: new_resource.owner,
+          cwd: ::Dir.home(new_resource.owner))
     end
   end
 end
 
 action :untap do
   if tapped?(new_resource.name)
-    execute "untapping #{new_resource.name}" do
-      command "#{new_resource.homebrew_path} untap #{new_resource.name}"
-      environment lazy { { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner } }
-      only_if "#{new_resource.homebrew_path} tap | grep #{new_resource.name}"
-      user new_resource.owner
+    converge_by("untap #{new_resource.name}") do
+      shell_out!("#{new_resource.homebrew_path} untap #{new_resource.name}",
+          user: new_resource.owner,
+          cwd: ::Dir.home(new_resource.owner))
     end
   end
 end
 
-action_class do
-  def tapped?(name)
-    tap_dir = name.gsub('/', '/homebrew-')
-    ::File.directory?("/usr/local/Homebrew/Library/Taps/#{tap_dir}")
-  end
+def tapped?(name)
+  tap_dir = name.gsub('/', '/homebrew-')
+  ::File.directory?("/usr/local/Homebrew/Library/Taps/#{tap_dir}")
 end
