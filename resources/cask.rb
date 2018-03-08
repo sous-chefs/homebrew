@@ -37,7 +37,7 @@ action :install do
   end
 end
 
-action :uninstall do
+action :remove do
   homebrew_tap 'caskroom/cask' if new_resource.install_cask
 
   if casked?
@@ -52,7 +52,8 @@ end
 
 action_class do
   alias_method :action_cask, :action_install
-  alias_method :action_uncask, :action_uninstall
+  alias_method :action_uncask, :action_remove
+  alias_method :action_uninstall, :action_remove
 
   def casked?
     unscoped_name = new_resource.name.split('/').last
