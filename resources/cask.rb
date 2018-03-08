@@ -4,7 +4,7 @@
 # Cookbook:: homebrew
 # Resources:: cask
 #
-# Copyright:: 2011-2017, Chef Software, Inc.
+# Copyright:: 2011-2018, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,12 +21,13 @@
 property :name, String, regex: %r{^[\w/-]+$}, name_property: true # ~FC108
 property :options, String
 property :install_cask, [true, false], default: true
+property :homebrew_path, String, default: '/usr/local/bin/brew'
 
 action :install do
   homebrew_tap 'caskroom/cask' if new_resource.install_cask
 
   execute "installing cask #{new_resource.name}" do
-    command "/usr/local/bin/brew cask install #{new_resource.name} #{new_resource.options}"
+    command "#{new_resource.homebrew_path} cask install #{new_resource.name} #{new_resource.options}"
     user Homebrew.owner
     environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
     not_if { casked? }
@@ -37,7 +38,7 @@ action :uninstall do
   homebrew_tap 'caskroom/cask' if new_resource.install_cask
 
   execute "uninstalling cask #{new_resource.name}" do
-    command "/usr/local/bin/brew cask uninstall #{new_resource.name}"
+    command "#{new_resource.homebrew_path} cask uninstall #{new_resource.name}"
     user Homebrew.owner
     environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
     only_if { casked? }
@@ -50,6 +51,6 @@ action_class do
 
   def casked?
     unscoped_name = new_resource.name.split('/').last
-    shell_out('/usr/local/bin/brew cask list 2>/dev/null', user: Homebrew.owner).stdout.split.include?(unscoped_name)
+    shell_out('#{new_resource.homebrew_path} cask list 2>/dev/null', user: Homebrew.owner).stdout.split.include?(unscoped_name)
   end
 end

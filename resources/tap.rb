@@ -4,7 +4,7 @@
 # Cookbook:: homebrew
 # Resources:: tap
 #
-# Copyright:: 2011-2017, Chef Software, Inc.
+# Copyright:: 2011-2018, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@
 property :name, String, name_property: true, regex: %r{^[\w-]+(?:\/[\w-]+)+$} # ~FC108
 property :url, String
 property :full, [TrueClass, FalseClass], default: false
+property :homebrew_path, String, default: '/usr/local/bin/brew'
 
 action :tap do
   unless tapped?(new_resource.name)
     execute "tapping #{new_resource.name}" do
-      command "/usr/local/bin/brew tap #{new_resource.full ? '--full' : ''} #{new_resource.name} #{new_resource.url || ''}"
+      command "#{new_resource.homebrew_path} tap #{new_resource.full ? '--full' : ''} #{new_resource.name} #{new_resource.url || ''}"
       environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
-      not_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
+      not_if "#{new_resource.homebrew_path} tap | grep #{new_resource.name}"
       user Homebrew.owner
     end
   end
@@ -37,9 +38,9 @@ end
 action :untap do
   if tapped?(new_resource.name)
     execute "untapping #{new_resource.name}" do
-      command "/usr/local/bin/brew untap #{new_resource.name}"
+      command "#{new_resource.homebrew_path} untap #{new_resource.name}"
       environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
-      only_if "/usr/local/bin/brew tap | grep #{new_resource.name}"
+      only_if "#{new_resource.homebrew_path} tap | grep #{new_resource.name}"
       user Homebrew.owner
     end
   end
