@@ -32,7 +32,7 @@ ssh_known_hosts_entry 'github.com' do
   group 'wheel'
 end
 
-include_recipe 'build-essential::default'
+build_essential 'Install compilation tools'
 include_recipe 'homebrew::install_formulas'
 include_recipe 'homebrew::install_casks'
 include_recipe 'homebrew::install_taps'
