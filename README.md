@@ -52,6 +52,7 @@ Default action is `:tap` which enables the repository. Use `:untap` to disable a
 
 #### Properties
 
+- `:tap_name` - Optional name property to override the resource name value
 - `:url` - Optional URL to the tap
 - `:full` - Perform a full clone rather than a shallow clone on the tap (default: false)
 - `:homebrew_path` - the path to the homebrew binary (default: '/usr/local/bin/brew')
@@ -66,7 +67,8 @@ homebrew_tap 'homebrew/dupes' do
   action :untap
 end
 
-homebrew_tap 'homebrew/dupes' do
+homebrew_tap "Let's install homebrew/dupes" do
+  tap_name 'homebrew/dupes'
   url 'https://github.com/homebrew/homebrew-dupes.git'
   full true
 end
@@ -85,6 +87,7 @@ Resource for `brew cask`, a Homebrew-style CLI workflow for the administration o
 
 #### Properties
 
+- `:cask_name` - Optional name property to override the resource name value
 - `:options` - options to pass to the brew CLI during installation
 - `:install_cask` - auto install cask tap if necessary (default: true)
 - `:homebrew_path` - the path to the homebrew binary (default: '/usr/local/bin/brew')
@@ -93,9 +96,10 @@ Resource for `brew cask`, a Homebrew-style CLI workflow for the administration o
 #### Examples
 
 ```ruby
-homebrew_cask "google-chrome"
+homebrew_cask 'google-chrome'
 
-homebrew_cask "google-chrome" do
+homebrew_cask "Let's remove google-chrome" do
+  cask_name 'google-chrome'
   install_cask false
   action :remove
 end
