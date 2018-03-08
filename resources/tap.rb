@@ -23,14 +23,15 @@ property :name, String, name_property: true, regex: %r{^[\w-]+(?:\/[\w-]+)+$} # 
 property :url, String
 property :full, [TrueClass, FalseClass], default: false
 property :homebrew_path, String, default: '/usr/local/bin/brew'
+property :owner, String, default: Homebrew.owner
 
 action :tap do
   unless tapped?(new_resource.name)
     execute "tapping #{new_resource.name}" do
       command "#{new_resource.homebrew_path} tap #{new_resource.full ? '--full' : ''} #{new_resource.name} #{new_resource.url || ''}"
-      environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
+      environment lazy { { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner } }
       not_if "#{new_resource.homebrew_path} tap | grep #{new_resource.name}"
-      user Homebrew.owner
+      user new_resource.owner
     end
   end
 end
@@ -39,9 +40,9 @@ action :untap do
   if tapped?(new_resource.name)
     execute "untapping #{new_resource.name}" do
       command "#{new_resource.homebrew_path} untap #{new_resource.name}"
-      environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
+      environment lazy { { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner } }
       only_if "#{new_resource.homebrew_path} tap | grep #{new_resource.name}"
-      user Homebrew.owner
+      user new_resource.owner
     end
   end
 end

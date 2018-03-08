@@ -22,14 +22,15 @@ property :name, String, regex: %r{^[\w/-]+$}, name_property: true # ~FC108
 property :options, String
 property :install_cask, [true, false], default: true
 property :homebrew_path, String, default: '/usr/local/bin/brew'
+property :owner, String, default: Homebrew.owner
 
 action :install do
   homebrew_tap 'caskroom/cask' if new_resource.install_cask
 
   execute "installing cask #{new_resource.name}" do
     command "#{new_resource.homebrew_path} cask install #{new_resource.name} #{new_resource.options}"
-    user Homebrew.owner
-    environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
+    user new_resource.owner
+    environment lazy { { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner } }
     not_if { casked? }
   end
 end
@@ -39,8 +40,8 @@ action :uninstall do
 
   execute "uninstalling cask #{new_resource.name}" do
     command "#{new_resource.homebrew_path} cask uninstall #{new_resource.name}"
-    user Homebrew.owner
-    environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
+    user new_resource.owner
+    environment lazy { { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner } }
     only_if { casked? }
   end
 end
@@ -51,6 +52,6 @@ action_class do
 
   def casked?
     unscoped_name = new_resource.name.split('/').last
-    shell_out('#{new_resource.homebrew_path} cask list 2>/dev/null', user: Homebrew.owner).stdout.split.include?(unscoped_name)
+    shell_out('#{new_resource.homebrew_path} cask list 2>/dev/null', user: new_resource.owner).stdout.split.include?(unscoped_name)
   end
 end
