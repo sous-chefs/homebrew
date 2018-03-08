@@ -30,6 +30,7 @@ action :tap do
     converge_by("tap #{new_resource.name}") do
       shell_out!("#{new_resource.homebrew_path} tap #{new_resource.full ? '--full' : ''} #{new_resource.name} #{new_resource.url || ''}",
           user: new_resource.owner,
+          env:  { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
           cwd: ::Dir.home(new_resource.owner))
     end
   end
@@ -40,6 +41,7 @@ action :untap do
     converge_by("untap #{new_resource.name}") do
       shell_out!("#{new_resource.homebrew_path} untap #{new_resource.name}",
           user: new_resource.owner,
+          env:  { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
           cwd: ::Dir.home(new_resource.owner))
     end
   end
