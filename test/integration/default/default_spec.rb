@@ -11,7 +11,7 @@ describe file('/usr/local/Caskroom/caffeine') do
   it { should be_owned_by 'vagrant' }
 end
 
-describe file('/usr/local/Homebrew/Library/Taps/homebrew/homebrew-nginx/.git') do
+describe file('/usr/local/Homebrew/Library/Taps/homebrew/homebrew-php/.git') do
   it { should be_directory }
   it { should be_owned_by 'vagrant' }
 end
