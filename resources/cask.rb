@@ -18,7 +18,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-property :name, String, regex: %r{^[\w/-]+$}, name_property: true # ~FC108
+property :cask_name, String, regex: %r{^[\w/-]+$}, name_property: true
 property :options, String
 property :install_cask, [true, false], default: true
 property :homebrew_path, String, default: '/usr/local/bin/brew'
