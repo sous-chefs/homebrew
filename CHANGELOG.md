@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 5.0.3 (2018-03-09)
+
+- Resolve method missing errors in the library
+
 ## 5.0.2 (2018-03-09)
 
 - Remove some legacy logic around the Chef Homebrew user module

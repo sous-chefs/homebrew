@@ -4,7 +4,7 @@ maintainer_email 'cookbooks@chef.io'
 license          'Apache-2.0'
 description      'Install Homebrew and includes resources for working with taps and casks'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '5.0.2'
+version          '5.0.3'
 recipe           'homebrew', 'Install Homebrew'
 supports         'mac_os_x'
 
