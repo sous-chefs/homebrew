@@ -19,10 +19,13 @@
 # limitations under the License.
 #
 
+class HomebrewUserWrapper
+  require 'chef/mixin/homebrew_user'
+  include Chef::Mixin::HomebrewUser
+end
+
 module Homebrew
   extend self # rubocop:disable ModuleFunction
-
-  include Chef::Mixin::HomebrewUser
 
   def exist?
     Chef::Log.debug('Checking to see if the homebrew binary exists')
@@ -33,7 +36,7 @@ module Homebrew
     @owner ||= begin
       # once we only support 14.0 we can switch this to find_homebrew_username
       require 'etc'
-      ::Etc.getpwuid(Chef::Mixin::HomebrewUser.find_homebrew_uid).name
+      ::Etc.getpwuid(HomebrewUserWrapper.new.find_homebrew_uid).name
     rescue Chef::Exceptions::CannotDetermineHomebrewOwner
       calculate_owner
     end.tap do |owner|
