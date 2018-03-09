@@ -56,7 +56,7 @@ Default action is `:tap` which enables the repository. Use `:untap` to disable a
 - `:url` - Optional URL to the tap
 - `:full` - Perform a full clone rather than a shallow clone on the tap (default: false)
 - `:homebrew_path` - the path to the homebrew binary (default: '/usr/local/bin/brew')
-- `:owner` - the owner of the homebrew files (default: calculated based on existing files)
+- `:owner` - the owner of the homebrew installation (default: calculated based on existing files)
 
 #### Examples
 
@@ -91,7 +91,7 @@ Resource for `brew cask`, a Homebrew-style CLI workflow for the administration o
 - `:options` - options to pass to the brew CLI during installation
 - `:install_cask` - auto install cask tap if necessary (default: true)
 - `:homebrew_path` - the path to the homebrew binary (default: '/usr/local/bin/brew')
-- `:owner` - the owner of the homebrew files (default: calculated based on existing files)
+- `:owner` - the owner of the homebrew installation (default: calculated based on existing files)
 
 #### Examples
 

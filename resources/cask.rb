@@ -22,7 +22,7 @@ property :cask_name, String, regex: %r{^[\w/-]+$}, name_property: true
 property :options, String
 property :install_cask, [true, false], default: true
 property :homebrew_path, String, default: '/usr/local/bin/brew'
-property :owner, String, default: Homebrew.owner
+property :owner, String, default: lazy { Homebrew.owner } # lazy to prevent breaking compilation on non-macOS platforms
 
 action :install do
   homebrew_tap 'caskroom/cask' if new_resource.install_cask
