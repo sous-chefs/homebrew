@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 5.0.2 (2018-03-09)
+
+- Remove some legacy logic around the Chef Homebrew user module
+- Use lazy to prevent compilation failures on non-macOS platforms
+
 ## 5.0.1 (2018-03-08)
 
 - Added a cask_name and tap_name property to the cask/tap resources. These are name_properties which allow you to set the tap/cask name to something other than the resources name. Handy for avoiding resource cloning.
