@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 5.0.4 (2018-03-16)
+
+- Fix backwards logic in the cask install action
+
 ## 5.0.3 (2018-03-09)
 
 - Resolve method missing errors in the library
