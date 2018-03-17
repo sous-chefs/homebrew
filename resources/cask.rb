@@ -27,7 +27,7 @@ property :owner, String, default: lazy { Homebrew.owner } # lazy to prevent brea
 action :install do
   homebrew_tap 'caskroom/cask' if new_resource.install_cask
 
-  if casked?
+  unless casked?
     converge_by("install cask #{new_resource.name} #{new_resource.options}") do
       shell_out!("#{new_resource.homebrew_path} cask install #{new_resource.name} #{new_resource.options}",
           user: new_resource.owner,
