@@ -9,7 +9,7 @@ verifier:
   name: inspec
 
 platforms:
-  - name: macosx-10.12
+  - name: macos-10.12
     driver:
       box: chef/macos-10.12 # private box in Chef's Atlas account
 
