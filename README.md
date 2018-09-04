@@ -4,6 +4,8 @@
 
 This cookbook installs [Homebrew](http://brew.sh/) and provides resources for working with taps and casks
 
+Note: The homebrew_tap and homebrew_cask resources shipped in Chef 14.0. When Chef 15.0 is released in April 2019 these resources will be removed from this cookbook as all users should be on 14.0 or later.
+
 ## Requirements
 
 ### Platforms
