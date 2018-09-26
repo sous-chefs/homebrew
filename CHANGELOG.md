@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 5.0.6 (2018-09-26)
+
+- Avoid CHEF-25 Deprecation warnings by making the tap/cask resources no-ops on modern chef-client releases
+
 ## 5.0.5 (2018-09-04)
 
 - Update name of macos in kitchen config
