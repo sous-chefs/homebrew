@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-homebrew_tap 'caskroom/cask'
+homebrew_tap 'homebrew/cask'
 
 directory '/Library/Caches/Homebrew/Casks' do
   owner Homebrew.owner

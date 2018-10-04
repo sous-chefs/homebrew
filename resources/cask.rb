@@ -29,7 +29,7 @@ property :homebrew_path, String, default: '/usr/local/bin/brew'
 property :owner, String, default: lazy { Homebrew.owner } # lazy to prevent breaking compilation on non-macOS platforms
 
 action :install do
-  homebrew_tap 'caskroom/cask' if new_resource.install_cask
+  homebrew_tap 'homebrew/cask' if new_resource.install_cask
 
   unless casked?
     converge_by("install cask #{new_resource.name} #{new_resource.options}") do
@@ -42,7 +42,7 @@ action :install do
 end
 
 action :remove do
-  homebrew_tap 'caskroom/cask' if new_resource.install_cask
+  homebrew_tap 'homebrew/cask' if new_resource.install_cask
 
   if casked?
     converge_by("uninstall cask #{new_resource.name}") do
