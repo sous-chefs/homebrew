@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 5.0.8 (2018-10-04)
+
+- Updates homebrew cask tap to homebrew/cask
+- Updates URLs to the homebrew cask repository
+
 ## 5.0.7 (2018-09-26)
 
 - Fix cask resource running each chef-client run
