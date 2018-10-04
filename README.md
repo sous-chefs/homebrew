@@ -80,7 +80,7 @@ end
 
 Resource for `brew cask`, a Homebrew-style CLI workflow for the administration of Mac applications distributed as binaries. It's implemented as a homebrew "external command" called cask.
 
-[homebrew-cask on GitHub](https://github.com/caskroom/homebrew-cask)
+[homebrew-cask on GitHub](https://github.com/Homebrew/homebrew-cask)
 
 #### Actions
 
@@ -107,7 +107,7 @@ homebrew_cask "Let's remove google-chrome" do
 end
 ```
 
-[View the list of available Casks](https://github.com/caskroom/homebrew-cask/tree/master/Casks)
+[View the list of available Casks](https://github.com/Homebrew/homebrew-cask/tree/master/Casks)
 
 ## Attributes
 
