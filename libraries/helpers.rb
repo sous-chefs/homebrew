@@ -25,7 +25,7 @@ class HomebrewUserWrapper
 end
 
 module Homebrew
-  extend self # rubocop:disable ModuleFunction
+  extend self
 
   def exist?
     Chef::Log.debug('Checking to see if the homebrew binary exists')
@@ -37,8 +37,8 @@ module Homebrew
       # once we only support 14.0 we can switch this to find_homebrew_username
       require 'etc'
       ::Etc.getpwuid(HomebrewUserWrapper.new.find_homebrew_uid).name
-    rescue Chef::Exceptions::CannotDetermineHomebrewOwner
-      calculate_owner
+               rescue Chef::Exceptions::CannotDetermineHomebrewOwner
+                 calculate_owner
     end.tap do |owner|
       Chef::Log.debug("Homebrew owner is #{owner}")
     end

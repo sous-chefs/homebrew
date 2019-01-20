@@ -35,7 +35,7 @@ action :install do
     converge_by("install cask #{new_resource.name} #{new_resource.options}") do
       shell_out!("#{new_resource.homebrew_path} cask install #{new_resource.name} #{new_resource.options}",
           user: new_resource.owner,
-          env:  { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
+          env: { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
           cwd: ::Dir.home(new_resource.owner))
     end
   end
@@ -48,7 +48,7 @@ action :remove do
     converge_by("uninstall cask #{new_resource.name}") do
       shell_out!("#{new_resource.homebrew_path} cask uninstall #{new_resource.name}",
           user: new_resource.owner,
-          env:  { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
+          env: { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
           cwd: ::Dir.home(new_resource.owner))
     end
   end
@@ -63,7 +63,7 @@ action_class do
     unscoped_name = new_resource.name.split('/').last
     shell_out!("#{new_resource.homebrew_path} cask list 2>/dev/null",
       user: new_resource.owner,
-      env:  { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
+      env: { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
       cwd: ::Dir.home(new_resource.owner)).stdout.split.include?(unscoped_name)
   end
 end
