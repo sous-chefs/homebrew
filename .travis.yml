@@ -21,6 +21,4 @@ before_script:
 
 script:
   - chef --version
-  - cookstyle --version
-  - foodcritic --version
   - chef exec delivery local all
