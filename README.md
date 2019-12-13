@@ -151,7 +151,7 @@ end
 
 # Usage
 
-We strongly recommend that you put "recipe[homebrew]" in your node's run list, to ensure that it is available on the system and that Homebrew itself gets installed. Putting an explicit dependency in the metadata will cause the cookbook to be downloaded and the library loaded, thus resulting in changing the package provider on Mac OS X, so if you have systems you want to use the default (Mac Ports), they would be changed to Homebrew.
+We strongly recommend that you put "recipe[homebrew]" in your node's run list, to ensure that it is available on the system and that Homebrew itself gets installed. Putting an explicit dependency in the metadata will cause the cookbook to be downloaded and the library loaded, thus resulting in changing the package provider on macOS, so if you have systems you want to use the default (Mac Ports), they would be changed to Homebrew.
 
 The default recipe also ensures that Homebrew is installed and up to date if the auto update attribute (above) is true (default).
 
