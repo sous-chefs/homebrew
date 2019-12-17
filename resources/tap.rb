@@ -24,7 +24,7 @@ resource_name :homebrew_tap
 
 property :tap_name, String, name_property: true, regex: %r{^[\w-]+(?:\/[\w-]+)+$}
 property :url, String
-property :full, [TrueClass, FalseClass], default: false
+property :full, [true, false], default: false
 property :homebrew_path, String, default: '/usr/local/bin/brew'
 property :owner, String, default: lazy { Homebrew.owner } # lazy to prevent breaking compilation on non-macOS platforms
 
