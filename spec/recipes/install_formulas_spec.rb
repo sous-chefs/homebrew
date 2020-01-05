@@ -8,6 +8,9 @@ describe 'homebrew::install_formulas' do
   end
 
   before do
+    stubs_for_resource('execute[set analytics]') do |resource|
+      allow(resource).to receive_shell_out('/usr/local/bin/brew analytics state', user: 'vagrant')
+    end
     stub_command('which git').and_return('/usr/local/bin/git')
     allow(Homebrew).to receive(:owner).and_return('vagrant')
     allow(Homebrew).to receive(:exist?).and_return(true)

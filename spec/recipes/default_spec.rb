@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe 'homebrew::default' do
   before do
+    stubs_for_resource('execute[set analytics]') do |resource|
+      allow(resource).to receive_shell_out('/usr/local/bin/brew analytics state', user: 'vagrant')
+    end
+
     allow(Homebrew).to receive(:exist?).and_return(true)
     allow(Homebrew).to receive(:owner).and_return('vagrant')
     stub_command('which git').and_return(true)
