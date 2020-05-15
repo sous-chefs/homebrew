@@ -2,6 +2,15 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## 5.1.0 (2020-05-15)
+
+- Rename the kitchen config - [@tas50](https://github.com/tas50)
+- Cookstyle fixes - [@tas50](https://github.com/tas50)
+- OS X -> macOS in the readme - [@tas50](https://github.com/tas50)
+- Require Chef 12.15+ - [@tas50](https://github.com/tas50)
+- Update default install script from ruby to bash - [@bbros-dev](https://github.com/bbros-dev)
+- Resole chefspec failures - [@tas50](https://github.com/tas50)
+
 ## 5.0.8 (2018-10-04)
 
 - Updates homebrew cask tap to homebrew/cask
