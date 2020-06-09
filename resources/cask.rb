@@ -20,7 +20,6 @@
 #
 
 chef_version_for_provides '< 14.0' if respond_to?(:chef_version_for_provides)
-resource_name :homebrew_cask
 
 property :cask_name, String, regex: %r{^[\w/-]+$}, name_property: true
 property :options, String
