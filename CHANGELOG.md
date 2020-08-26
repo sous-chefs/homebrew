@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## Unreleased
+
+- resolved cookstyle error: resources/cask.rb:23:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+- resolved cookstyle error: resources/tap.rb:23:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+
 ## 5.1.0 (2020-05-15)
 
 - Rename the kitchen config - [@tas50](https://github.com/tas50)

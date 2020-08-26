@@ -20,7 +20,6 @@
 #
 
 chef_version_for_provides '< 14.0' if respond_to?(:chef_version_for_provides)
-resource_name :homebrew_tap
 
 property :tap_name, String, name_property: true, regex: %r{^[\w-]+(?:\/[\w-]+)+$}
 property :url, String
