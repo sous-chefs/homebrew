@@ -6,6 +6,7 @@ This file is used to list changes made in each version of the homebrew cookbook.
 
 - resolved cookstyle error: resources/cask.rb:23:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
 - resolved cookstyle error: resources/tap.rb:23:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+- resolved issues #145 - "brew cask list" no longer supported 
 
 ## 5.1.0 (2020-05-15)
 
