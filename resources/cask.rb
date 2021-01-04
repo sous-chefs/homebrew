@@ -32,7 +32,7 @@ action :install do
 
   unless casked?
     converge_by("install cask #{new_resource.name} #{new_resource.options}") do
-      shell_out!("#{new_resource.homebrew_path} cask install #{new_resource.name} #{new_resource.options}",
+      shell_out!("#{new_resource.homebrew_path} install --cask #{new_resource.name} #{new_resource.options}",
           user: new_resource.owner,
           env: { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
           cwd: ::Dir.home(new_resource.owner))
@@ -45,7 +45,7 @@ action :remove do
 
   if casked?
     converge_by("uninstall cask #{new_resource.name}") do
-      shell_out!("#{new_resource.homebrew_path} cask uninstall #{new_resource.name}",
+      shell_out!("#{new_resource.homebrew_path} uninstall --cask #{new_resource.name}",
           user: new_resource.owner,
           env: { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
           cwd: ::Dir.home(new_resource.owner))
@@ -60,7 +60,7 @@ action_class do
 
   def casked?
     unscoped_name = new_resource.name.split('/').last
-    shell_out!("#{new_resource.homebrew_path} cask list 2>/dev/null",
+    shell_out!("#{new_resource.homebrew_path} list --cask 2>/dev/null",
       user: new_resource.owner,
       env: { 'HOME' => ::Dir.home(new_resource.owner), 'USER' => new_resource.owner },
       cwd: ::Dir.home(new_resource.owner)).stdout.split.include?(unscoped_name)
