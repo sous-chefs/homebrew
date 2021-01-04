@@ -1,6 +1,6 @@
 # Homebrew Cookbook
 
-[![Build Status](https://travis-ci.org/chef-cookbooks/homebrew.svg?branch=master)](http://travis-ci.org/chef-cookbooks/homebrew) [![Cookbook Version](https://img.shields.io/cookbook/v/homebrew.svg)](https://supermarket.chef.io/cookbooks/homebrew)
+![delivery](https://github.com/chef-cookbooks/homebrew/workflows/delivery/badge.svg) [![Cookbook Version](https://img.shields.io/cookbook/v/homebrew.svg)](https://supermarket.chef.io/cookbooks/homebrew)
 
 This cookbook installs [Homebrew](http://brew.sh/) and provides resources for working with taps and casks
 
@@ -153,7 +153,7 @@ end
 
 We strongly recommend that you put "recipe[homebrew]" in your node's run list, to ensure that it is available on the system and that Homebrew itself gets installed. Putting an explicit dependency in the metadata will cause the cookbook to be downloaded and the library loaded, thus resulting in changing the package provider on macOS, so if you have systems you want to use the default (Mac Ports), they would be changed to Homebrew.
 
-The default recipe also ensures that Homebrew is installed and up to date if the auto update attribute (above) is true (default).
+The default recipe also ensures that Homebrew is installed and up to date if the auto-update attribute (above) is true (default).
 
 ## License and Authors
 
@@ -167,7 +167,7 @@ Author:: Joshua Timberman ([joshua@chef.io](mailto:joshua@chef.io))
 
 ```text
 Copyright:: 2011, Graeme Mathieson
-Copyright:: 2012-2016, Chef Software, Inc. <legal@chef.io>
+Copyright:: 2012-2021, Chef Software, Inc. <legal@chef.io>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
