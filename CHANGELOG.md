@@ -2,8 +2,9 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
-## Unreleased
+## 5.1.1 (2021-01-04)
 
+- Update to use --cask instead of cask command for compatibility with newer homebrew releases- [@tas50](https://github.com/tas50)
 - resolved cookstyle error: resources/cask.rb:23:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
 - resolved cookstyle error: resources/tap.rb:23:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
 
