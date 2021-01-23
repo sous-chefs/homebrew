@@ -11,7 +11,7 @@ verifier:
 platforms:
   - name: macos-10.12
     driver:
-      box: chef/macos-10.12 # private box in Chef's Atlas account
+      box: chef/macos-10.12  # private box in Chef's Atlas account
 
 suites:
   - name: default
