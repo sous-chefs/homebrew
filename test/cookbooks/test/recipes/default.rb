@@ -4,7 +4,7 @@
 #
 # Copyright:: 2016-2019, Chef Software, Inc.
 
-node.default['homebrew']['formulas'] = %w(redis)
+node.default['homebrew']['formulas'] = %w(redis jq)
 node.default['homebrew']['casks'] = %w(caffeine)
 node.default['homebrew']['taps'] = [
   {
@@ -15,10 +15,6 @@ node.default['homebrew']['taps'] = [
     'tap' => 'homebrew/services',
     'url' => 'https://github.com/homebrew/homebrew-services.git',
     'full' => true,
-  },
-  { 'tap' => 'homebrew/php',
-    'url' => 'https://github.com/homebrew/homebrew-php.git',
-    'full' => false,
   },
 ]
 node.default['homebrew']['enable-analytics'] = false

@@ -1,10 +1,18 @@
 # Homebrew Cookbook
 
-![delivery](https://github.com/chef-cookbooks/homebrew/workflows/delivery/badge.svg) [![Cookbook Version](https://img.shields.io/cookbook/v/homebrew.svg)](https://supermarket.chef.io/cookbooks/homebrew)
+[![Cookbook Version](https://img.shields.io/cookbook/v/homebrew.svg)](https://supermarket.chef.io/cookbooks/homebrew)
+[![CI State](https://github.com/sous-chefs/homebrew/workflows/ci/badge.svg)](https://github.com/sous-chefs/homebrew/actions?query=workflow%3Aci)
+[![OpenCollective](https://opencollective.com/sous-chefs/backers/badge.svg)](#backers)
+[![OpenCollective](https://opencollective.com/sous-chefs/sponsors/badge.svg)](#sponsors)
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This cookbook installs [Homebrew](http://brew.sh/) and provides resources for working with taps and casks
 
-Note: The homebrew_tap and homebrew_cask resources shipped in Chef 14.0. When Chef 15.0 is released in April 2019 these resources will be removed from this cookbook as all users should be on 14.0 or later.
+Note: The `homebrew_tap` and `homebrew_cask` resources shipped in Chef 14.0. When Chef 15.0 is released in April 2019 these resources will be removed from this cookbook as all users should be on 14.0 or later.
+
+## Maintainers
+
+This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of Chef cookbook maintainers working together to maintain important cookbooks. If you’d like to know more please visit [sous-chefs.org](https://sous-chefs.org/) or come chat with us on the Chef Community Slack in [#sous-chefs](https://chefcommunity.slack.com/messages/C2V7B88SF).
 
 ## Requirements
 
@@ -139,7 +147,7 @@ end
 
 - `node['homebrew']['casks']` - An Array of casks that should be installed using brew cask by default, used only in the `homebrew::install_casks` recipe.
 
-- `node['homebrew']['taps']` - An Array of taps that should be installed using brew tap by default, used only in the `homebrew::install_taps` recipe. For example:<br>
+- `node['homebrew']['taps']` - An Array of taps that should be installed using brew tap by default, used only in the `homebrew::install_taps` recipe. For example:
 
   ```ruby
   [
@@ -155,29 +163,27 @@ We strongly recommend that you put "recipe[homebrew]" in your node's run list, t
 
 The default recipe also ensures that Homebrew is installed and up to date if the auto-update attribute (above) is true (default).
 
-## License and Authors
+## Contributors
 
-This cookbook is maintained by CHEF. The original author, maintainer and copyright holder is Graeme Mathieson. The cookbook remains licensed under the Apache License version 2.
+This project exists thanks to all the people who [contribute.](https://opencollective.com/sous-chefs/contributors.svg?width=890&button=false)
 
-[Original blog post by Graeme](https://woss.name/articles/converging-your-home-directory-with-chef/)
+### Backers
 
-Author:: Graeme Mathieson ([mathie@woss.name](mailto:mathie@woss.name))
+Thank you to all our backers!
 
-Author:: Joshua Timberman ([joshua@chef.io](mailto:joshua@chef.io))
+![https://opencollective.com/sous-chefs#backers](https://opencollective.com/sous-chefs/backers.svg?width=600&avatarHeight=40)
 
-```text
-Copyright:: 2011, Graeme Mathieson
-Copyright:: 2012-2021, Chef Software, Inc. <legal@chef.io>
+### Sponsors
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
+![https://opencollective.com/sous-chefs/sponsor/0/website](https://opencollective.com/sous-chefs/sponsor/0/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/1/website](https://opencollective.com/sous-chefs/sponsor/1/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/2/website](https://opencollective.com/sous-chefs/sponsor/2/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/3/website](https://opencollective.com/sous-chefs/sponsor/3/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/4/website](https://opencollective.com/sous-chefs/sponsor/4/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/5/website](https://opencollective.com/sous-chefs/sponsor/5/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/6/website](https://opencollective.com/sous-chefs/sponsor/6/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/7/website](https://opencollective.com/sous-chefs/sponsor/7/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/8/website](https://opencollective.com/sous-chefs/sponsor/8/avatar.svg?avatarHeight=100)
+![https://opencollective.com/sous-chefs/sponsor/9/website](https://opencollective.com/sous-chefs/sponsor/9/avatar.svg?avatarHeight=100)

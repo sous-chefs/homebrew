@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## Unreleased
+
+- Sous Chefs Adoption
+- Standardise files with files in sous-chefs/repo-management
+
 ## 5.1.1 (2021-01-04)
 
 - Update to use --cask instead of cask command for compatibility with newer homebrew releases- [@tas50](https://github.com/tas50)
