@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
-## Unreleased
+## 5.2.1 - *2021-06-01*
 
 ## 5.2.0 - *2021-01-24*
 
