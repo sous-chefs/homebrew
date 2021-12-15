@@ -27,6 +27,18 @@ end
 module Homebrew
   extend self
 
+  require 'mixlib/shellout'
+  include Chef::Mixin::ShellOut
+
+  def install_path
+    arm64_test = shell_out('sysctl -n hw.optional.arm64')
+    if arm64_test.stdout.chomp == '1'
+      return '/opt/homebrew'
+    else
+      return '/usr/local'
+    end
+  end
+
   def exist?
     Chef::Log.debug('Checking to see if the homebrew binary exists')
     ::File.exist?('/usr/local/bin/brew')
