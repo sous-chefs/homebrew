@@ -45,7 +45,7 @@ module Homebrew
 
   def exist?
     Chef::Log.debug('Checking to see if the homebrew binary exists')
-    ::File.exist?('/usr/local/bin/brew')
+    ::File.exist?("#{HomebrewWrapper.new.install_path}/bin/brew")
   end
 
   def owner
