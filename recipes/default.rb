@@ -51,6 +51,6 @@ if node['homebrew']['auto-update']
   execute 'update homebrew from github' do
     environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
     user Homebrew.owner
-    command '/usr/local/bin/brew update || true'
+    command lazy { "#{ HomebrewWrapper.new.install_path }/bin/brew update || true" }
   end
 end

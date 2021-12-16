@@ -30,6 +30,10 @@ module Homebrew
   require 'mixlib/shellout'
   include Chef::Mixin::ShellOut
 
+  def self.included(base)
+    base.extend(Homebrew)
+  end
+
   def install_path
     arm64_test = shell_out('sysctl -n hw.optional.arm64')
     if arm64_test.stdout.chomp == '1'
@@ -80,3 +84,7 @@ module Homebrew
     ENV['USER']
   end
 end unless defined?(Homebrew)
+
+class HomebrewWrapper
+  include Homebrew
+end
