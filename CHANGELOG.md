@@ -4,6 +4,16 @@ This file is used to list changes made in each version of the homebrew cookbook.
 
 ## Unreleased
 
+ - Update to support Apple M1 silicon (arm64) Homebrew install location (`/opt/homebrew`)
+   - Add HomebrewWrapper.repository_path() for homebrew_tap resource idempotency on Apple M1 silicon (arm64)
+   - Add HomebrewWrapper.repository_path() helper for Apple M1 silicon (arm64)
+   - Remove deprecated `--full` option for Homebrew (Breaking upstream CLI change!)
+   - Add chefspec tests for Apple M1 silicon Homebrew path helper
+   - Add InSpec tests for macOS M1 / arm64 and x86_64
+   - Set `use_sudo: false` for InSpec tests to work properly
+   - Convert hardcoded /usr/local to use install_path() for M1 /opt/homebrew support
+   - Add Homebrew.install_path() helper for Apple M1 silicon (arm64)
+
 ## 5.2.2 - *2021-08-30*
 
 - Standardise files with files in sous-chefs/repo-management
