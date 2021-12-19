@@ -51,5 +51,5 @@ end
 
 def tapped?(name)
   tap_dir = name.gsub('/', '/homebrew-')
-  ::File.directory?("#{ HomebrewWrapper.new.install_path }/Homebrew/Library/Taps/#{tap_dir}")
+  ::File.directory?("#{ HomebrewWrapper.new.repository_path }/Library/Taps/#{tap_dir}")
 end
