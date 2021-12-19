@@ -37,18 +37,18 @@ module Homebrew
   def install_path
     arm64_test = shell_out('sysctl -n hw.optional.arm64')
     if arm64_test.stdout.chomp == '1'
-      return '/opt/homebrew'
+      '/opt/homebrew'
     else
-      return '/usr/local'
+      '/usr/local'
     end
   end
 
   def repository_path
     arm64_test = shell_out('sysctl -n hw.optional.arm64')
     if arm64_test.stdout.chomp == '1'
-      return '/opt/homebrew'
+      '/opt/homebrew'
     else
-      return '/usr/local/Homebrew'
+      '/usr/local/Homebrew'
     end
   end
 
