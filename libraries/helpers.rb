@@ -43,6 +43,15 @@ module Homebrew
     end
   end
 
+  def repository_path
+    arm64_test = shell_out('sysctl -n hw.optional.arm64')
+    if arm64_test.stdout.chomp == '1'
+      return '/opt/homebrew'
+    else
+      return '/usr/local/Homebrew'
+    end
+  end
+
   def exist?
     Chef::Log.debug('Checking to see if the homebrew binary exists')
     ::File.exist?("#{HomebrewWrapper.new.install_path}/bin/brew")
