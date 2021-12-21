@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
-## Unreleased
+## 5.3.0 - *2021-12-21*
 
 - Update to support Apple M1 silicon (arm64) Homebrew install location (`/opt/homebrew`)
   - Add HomebrewWrapper.repository_path() for homebrew_tap resource idempotency
