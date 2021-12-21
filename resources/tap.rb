@@ -24,7 +24,7 @@ chef_version_for_provides '< 14.0' if respond_to?(:chef_version_for_provides)
 property :tap_name, String, name_property: true, regex: %r{^[\w-]+(?:\/[\w-]+)+$}
 property :url, String
 property :full, [true, false], default: false
-property :homebrew_path, String, default: '/usr/local/bin/brew'
+property :homebrew_path, String, default: lazy { "#{HomebrewWrapper.new.install_path}/bin/brew" }
 property :owner, String, default: lazy { Homebrew.owner } # lazy to prevent breaking compilation on non-macOS platforms
 
 action :tap do
@@ -51,5 +51,5 @@ end
 
 def tapped?(name)
   tap_dir = name.gsub('/', '/homebrew-')
-  ::File.directory?("/usr/local/Homebrew/Library/Taps/#{tap_dir}")
+  ::File.directory?("#{HomebrewWrapper.new.repository_path}/Library/Taps/#{tap_dir}")
 end

@@ -26,7 +26,6 @@ node['homebrew']['taps'].each do |tap|
     raise unless tap.key?('tap')
     homebrew_tap tap['tap'] do
       url tap['url'] if tap.key?('url')
-      full tap['full'] if tap.key?('full')
     end
   else
     raise

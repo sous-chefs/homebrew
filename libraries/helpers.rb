@@ -27,9 +27,34 @@ end
 module Homebrew
   extend self
 
+  require 'mixlib/shellout'
+  include Chef::Mixin::ShellOut
+
+  def self.included(base)
+    base.extend(Homebrew)
+  end
+
+  def install_path
+    arm64_test = shell_out('sysctl -n hw.optional.arm64')
+    if arm64_test.stdout.chomp == '1'
+      '/opt/homebrew'
+    else
+      '/usr/local'
+    end
+  end
+
+  def repository_path
+    arm64_test = shell_out('sysctl -n hw.optional.arm64')
+    if arm64_test.stdout.chomp == '1'
+      '/opt/homebrew'
+    else
+      '/usr/local/Homebrew'
+    end
+  end
+
   def exist?
     Chef::Log.debug('Checking to see if the homebrew binary exists')
-    ::File.exist?('/usr/local/bin/brew')
+    ::File.exist?("#{HomebrewWrapper.new.install_path}/bin/brew")
   end
 
   def owner
@@ -68,3 +93,7 @@ module Homebrew
     ENV['USER']
   end
 end unless defined?(Homebrew)
+
+class HomebrewWrapper
+  include Homebrew
+end
