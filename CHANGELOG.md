@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the homebrew cookbook.
 
 ## Unreleased
 
+Standardise files with files in sous-chefs/repo-management
+
 ## 5.3.0 - *2021-12-21*
 
 - Update to support Apple M1 silicon (arm64) Homebrew install location (`/opt/homebrew`)
