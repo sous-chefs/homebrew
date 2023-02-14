@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the homebrew cookbook.
 
 ## Unreleased
 
+Standardise files with files in sous-chefs/repo-management
+
 ## 5.3.2 - *2022-12-15*
 
 - Standardise files with files in sous-chefs/repo-management
