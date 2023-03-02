@@ -9,7 +9,7 @@ name: ci
 
 jobs:
   lint-unit:
-    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@0.0.3
+    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@2.0.1
     permissions:
       actions: write
       checks: write
@@ -22,12 +22,9 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        os:
-          - macos-latest
-        suite:
-          - "default"
+        os: [macos-latest]
+        suite: ["default"]
       fail-fast: false
-
     steps:
       - name: Check out code
         uses: actions/checkout@v3
