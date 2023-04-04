@@ -6,6 +6,9 @@ This file is used to list changes made in each version of the homebrew cookbook.
 
 - Sous Chefs adoption
 - Update lint-unit workflow to 2.0.2
+- Set unified_mode for all resources
+  - Require Chef 15.3+ for unified_mode
+- Standardise files with files in sous-chefs/repo-management
 
 ## 5.3.6 - *2023-04-01*
 
@@ -292,7 +295,7 @@ Bug Fixes:
 
 ## v1.7.0 (2014-06-26)
 
-# 38 - Add homebrew::cask recipe
+- Add homebrew::cask recipe (#38)
 
 ## v1.6.6 (2014-05-29)
 
@@ -327,13 +330,13 @@ Bug Fixes:
 
 ### Bug
 
-- **[COOK-3589](https://tickets.chef.io/browse/COOK-3589)** - Add homebrew as the default package manager on OS X Server
+- [COOK-3589] - Add homebrew as the default package manager on OS X Server
 
 ## v1.4.0
 
 ### Bug
 
-- **[COOK-3283](https://tickets.chef.io/browse/COOK-3283)** - Support running homebrew cookbook as root user, with sudo, or a non-privileged user
+- [COOK-3283] - Support running homebrew cookbook as root user, with sudo, or a non-privileged user
 
 ## v1.3.2
 
