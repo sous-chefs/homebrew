@@ -4,15 +4,15 @@ This file is used to list changes made in each version of the homebrew cookbook.
 
 ## Unreleased
 
+- Update lint-unit workflow to 2.0.2
+
 ## 5.3.4 - *2023-02-20*
 
-Standardise files with files in sous-chefs/repo-management
-
-Standardise files with files in sous-chefs/repo-management
+- Standardise files with files in sous-chefs/repo-management
 
 ## 5.3.3 - *2023-02-14*
 
-Standardise files with files in sous-chefs/repo-management
+- Standardise files with files in sous-chefs/repo-management
 
 ## 5.3.2 - *2022-12-15*
 
