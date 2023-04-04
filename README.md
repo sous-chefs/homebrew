@@ -65,7 +65,7 @@ Default action is `:tap` which enables the repository. Use `:untap` to disable a
 - `:tap_name` - Optional name property to override the resource name value
 - `:url` - Optional URL to the tap
 - `:full` - Perform a full clone rather than a shallow clone on the tap (default: false)
-- `:homebrew_path` - the path to the homebrew binary (default: '/usr/local/bin/brew')
+- `:homebrew_path` - the path to the homebrew binary (default: '/opt/homebrew/bin/brew')
 - `:owner` - the owner of the homebrew installation (default: calculated based on existing files)
 
 #### Examples
@@ -100,7 +100,7 @@ Resource for `brew cask`, a Homebrew-style CLI workflow for the administration o
 - `:cask_name` - Optional name property to override the resource name value
 - `:options` - options to pass to the brew CLI during installation
 - `:install_cask` - auto install cask tap if necessary (default: true)
-- `:homebrew_path` - the path to the homebrew binary (default: '/usr/local/bin/brew')
+- `:homebrew_path` - the path to the homebrew binary (default: '/opt/homebrew/bin/brew')
 - `:owner` - the owner of the homebrew installation (default: calculated based on existing files)
 
 #### Examples
@@ -126,21 +126,21 @@ end
    - To install the most recent version, include just the recipe name: `- simple_formula`
    - To install a specific version, specify both its name and version:
 
-     ```
+     ```yaml
      - name: special-version-formula
        version: 1.2.3
      ```
 
    - To install the HEAD of a formula, specify both its name and `head: true`:
 
-     ```
+     ```yaml
      - name: head-tracking-formula
        head: true
      ```
 
    - To provide other options, specify both its name and options
 
-     ```
+     ```yaml
      - name: formula-with-options
        options: --with-option-1 --with-other-option
      ```
@@ -157,7 +157,7 @@ end
   ]
   ```
 
-# Usage
+## Usage
 
 We strongly recommend that you put "recipe[homebrew]" in your node's run list, to ensure that it is available on the system and that Homebrew itself gets installed. Putting an explicit dependency in the metadata will cause the cookbook to be downloaded and the library loaded, thus resulting in changing the package provider on macOS, so if you have systems you want to use the default (Mac Ports), they would be changed to Homebrew.
 

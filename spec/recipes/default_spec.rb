@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'homebrew::default' do
   before do
     stubs_for_resource('execute[set analytics]') do |resource|
-      allow(resource).to receive_shell_out('/usr/local/bin/brew analytics state', user: 'vagrant')
+      allow(resource).to receive_shell_out('/opt/homebrew/bin/brew analytics state', user: 'vagrant')
       allow(resource).to receive_shell_out('/opt/homebrew/bin/brew analytics state', user: 'vagrant')
     end
 
