@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## Unreleased
+
 ## 5.3.7 - *2023-04-04*
 
 - Sous Chefs adoption
