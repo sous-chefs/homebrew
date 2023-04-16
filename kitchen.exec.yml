@@ -1,13 +1,7 @@
 ---
-driver:
-  name: exec
-
-transport:
-  name: exec
-
-provisioner:
-  name: chef_zero
-  deprecations_as_errors: true
+driver: { name: exec }
+transport: { name: exec }
 
 platforms:
   - name: macos-latest
+  - name: windows-latest
