@@ -22,6 +22,28 @@
 unless Homebrew.exist?
   homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
 
+  # Grant Homebrew install script permission to execute
+  # without passing a sudo password. Deletes itself at
+  # the end of a successful run.
+  sudo 'nopasswd_homebrew_installer' do
+    user Homebrew.owner
+    commands [
+      homebrew_go,
+      '/bin/chmod',
+      '/bin/mkdir',
+      '/bin/rm',
+      '/usr/bin/chgrp',
+      '/usr/bin/install',
+      '/usr/bin/touch',
+      '/usr/bin/xcode-select',
+      '/usr/sbin/chown',
+      '/usr/sbin/softwareupdate',
+    ]
+    nopasswd true
+    action :create
+    notifies :delete, 'sudo[nopasswd_homebrew_installer]', :delayed
+  end
+
   remote_file homebrew_go do
     source node['homebrew']['installer']['url']
     checksum node['homebrew']['installer']['checksum'] unless node['homebrew']['installer']['checksum'].nil?
@@ -31,7 +53,7 @@ unless Homebrew.exist?
 
   execute 'install homebrew' do
     command homebrew_go
-    environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner } }
+    environment lazy { { 'HOME' => ::Dir.home(Homebrew.owner), 'USER' => Homebrew.owner, 'NONINTERACTIVE' => '1' } }
     user Homebrew.owner
   end
 end
