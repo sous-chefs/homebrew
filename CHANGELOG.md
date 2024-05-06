@@ -6,7 +6,6 @@ This file is used to list changes made in each version of the homebrew cookbook.
 
 - Explicitly include `Which` module from `Chef` which fixes runs on 18.x clients.
 
-
 ## 5.4.5 - *2023-11-01*
 
 Standardise files with files in sous-chefs/repo-management
