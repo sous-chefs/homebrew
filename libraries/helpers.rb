@@ -22,6 +22,7 @@
 class HomebrewUserWrapper
   require 'chef/mixin/homebrew_user'
   include Chef::Mixin::HomebrewUser
+  include Chef::Mixin::Which
 end
 
 module Homebrew
