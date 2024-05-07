@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
+## Unreleased
+
 ## 5.4.8 - *2024-05-07*
 
 ## 5.4.7 - *2024-05-06*
