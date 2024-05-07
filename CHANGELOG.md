@@ -2,9 +2,13 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
-## 5.4.6 - *2024-05-06*
+## Unreleased
+
+## 5.4.7 - *2024-05-06*
 
 - Explicitly include `Which` module from `Chef` which fixes runs on 18.x clients.
+
+## 5.4.6 - *2024-05-06*
 
 ## 5.4.5 - *2023-11-01*
 
