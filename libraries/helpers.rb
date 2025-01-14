@@ -20,8 +20,8 @@
 #
 
 class HomebrewUserWrapper
-  require 'chef/mixin/homebrew_user'
-  include Chef::Mixin::HomebrewUser
+  require Chef::VERSION >= Chef::Version.new('18.6.2') ? 'chef/mixin/homebrew' : 'chef/mixin/homebrew_user'
+  include Chef::VERSION >= Chef::Version.new('18.6.2') ? Chef::Mixin::Homebrew : Chef::Mixin::HomebrewUser
   include Chef::Mixin::Which
 end
 
@@ -60,9 +60,7 @@ module Homebrew
 
   def owner
     @owner ||= begin
-      # once we only support 14.0 we can switch this to find_homebrew_username
-      require 'etc'
-      ::Etc.getpwuid(HomebrewUserWrapper.new.find_homebrew_uid).name
+                 find_homebrew_username
                rescue Chef::Exceptions::CannotDetermineHomebrewOwner
                  calculate_owner
     end.tap do |owner|

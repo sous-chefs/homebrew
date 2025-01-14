@@ -40,7 +40,7 @@ describe 'homebrew::default' do
     end
 
     before do
-      allow_any_instance_of(Chef::Mixin::HomebrewUser).to receive(:find_homebrew_uid).and_return(Process.uid)
+      allow_any_instance_of(Chef::Mixin::Homebrew).to receive(:find_homebrew_uid).and_return(Process.uid)
     end
 
     it 'does not run homebrew installation' do
