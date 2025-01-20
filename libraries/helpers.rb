@@ -63,9 +63,9 @@ module Homebrew
                  find_homebrew_username
                rescue Chef::Exceptions::CannotDetermineHomebrewOwner
                  calculate_owner
-    end.tap do |owner|
-      Chef::Log.debug("Homebrew owner is #{owner}")
-    end
+               end.tap do |owner|
+                 Chef::Log.debug("Homebrew owner is #{owner}")
+               end
   end
 
   private
