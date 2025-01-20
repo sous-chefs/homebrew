@@ -19,6 +19,7 @@
 # limitations under the License.
 #
 
+unified_mode true
 chef_version_for_provides '< 14.0' if respond_to?(:chef_version_for_provides)
 
 property :tap_name, String, name_property: true, regex: %r{^[\w-]+(?:\/[\w-]+)+$}
