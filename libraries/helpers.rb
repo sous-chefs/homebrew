@@ -19,16 +19,16 @@
 # limitations under the License.
 #
 
-# class HomebrewUserWrapper
-#   require Chef::VERSION >= Chef::Version.new('18.6.2') ? 'chef/mixin/homebrew' : 'chef/mixin/homebrew_user'
-#   include Chef::VERSION >= Chef::Version.new('18.6.2') ? Chef::Mixin::Homebrew : Chef::Mixin::HomebrewUser
-#   include Chef::Mixin::Which
-# end
-
-module HomebrewHelper
-  require Chef::VERSION >= Chef::Version.new('18.6.2') ? 'chef/mixin/homebrew' : 'chef/mixin/homebrew_user'
-  include Chef::VERSION >= Chef::Version.new('18.6.2') ? Chef::Mixin::Homebrew : Chef::Mixin::HomebrewUser
+class HomebrewUserWrapper
+  require 'chef/mixin/homebrew'
+  include Chef::Mixin::Homebrew
+  # require Chef::VERSION >= Chef::Version.new('18.6.2') ? 'chef/mixin/homebrew' : 'chef/mixin/homebrew_user'
+  # include Chef::VERSION >= Chef::Version.new('18.6.2') ? Chef::Mixin::Homebrew : Chef::Mixin::HomebrewUser
   include Chef::Mixin::Which
+end
+
+module Homebrew
+  extend self
 
   require 'mixlib/shellout'
   include Chef::Mixin::ShellOut
@@ -93,8 +93,8 @@ module HomebrewHelper
   def current_user
     ENV['USER']
   end
-end # unless defined?(Homebrew)
+end unless defined?(Homebrew)
 
 class HomebrewWrapper
-  include HomebrewHelper
+  include Homebrew
 end
