@@ -35,7 +35,7 @@ module Homebrew
   include Chef::Mixin::ShellOut
 
   def self.included(base)
-    base.extend(HomebrewHelper)
+    base.extend(Homebrew)
   end
 
   def install_path
