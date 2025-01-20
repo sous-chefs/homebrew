@@ -96,5 +96,5 @@ module Homebrew
 end unless defined?(Homebrew)
 
 class HomebrewWrapper
-  include HomebrewHelper
+  include Homebrew
 end

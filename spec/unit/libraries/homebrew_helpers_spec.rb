@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'chef/mixin/shell_out'
 
-describe HomebrewHelper do
+describe Homebrew do
   let(:opt_homebrew_path) { '/opt/homebrew' }
   let(:usr_local_homebrew_path) { '/usr/local' }
   let(:usr_local_repository_path) { '/usr/local/Homebrew' }
