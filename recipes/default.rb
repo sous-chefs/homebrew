@@ -19,7 +19,7 @@
 # limitations under the License.
 #
 
-unless Homebrew.exist?
+unless HomebrewHelper.exist?
   homebrew_go = "#{Chef::Config[:file_cache_path]}/homebrew_go"
 
   # Grant Homebrew install script permission to execute
