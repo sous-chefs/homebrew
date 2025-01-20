@@ -27,7 +27,7 @@
 #   include Chef::Mixin::Which
 # end
 
-module Homebrew
+module HomebrewHelper
   require 'chef/mixin/homebrew'
   include Chef::Mixin::Homebrew
 
@@ -35,7 +35,7 @@ module Homebrew
   include Chef::Mixin::ShellOut
 
   def self.included(base)
-    base.extend(Homebrew)
+    base.extend(HomebrewHelper)
   end
 
   def install_path
@@ -71,8 +71,6 @@ module Homebrew
                end
   end
 
-  extend self
-
   private
 
   def calculate_owner
@@ -98,6 +96,6 @@ module Homebrew
   end
 end # unless defined?(Homebrew)
 
-# class HomebrewWrapper
-#   include Homebrew
-# end
+class HomebrewWrapper
+  include HomebrewHelper
+end
