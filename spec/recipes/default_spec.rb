@@ -8,7 +8,7 @@ describe 'homebrew::default' do
     end
 
     allow(Homebrew).to receive(:exist?).and_return(true)
-    allow(Homebrew).to receive(:owner).and_return('vagrant')
+    allow_any_instance_of(HomebrewUserWrapper).to receive(:find_homebrew_username).and_return('vagrant')
     stub_command('which git').and_return(true)
   end
 

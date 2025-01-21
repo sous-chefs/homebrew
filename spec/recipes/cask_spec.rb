@@ -7,7 +7,7 @@ describe 'homebrew::cask' do
     end
 
     before(:each) do
-      allow(Homebrew).to receive(:owner).and_return('vagrant')
+      allow_any_instance_of(HomebrewUserWrapper).to receive(:find_homebrew_username).and_return('vagrant')
     end
 
     it 'manages the Cask Cache directory' do
