@@ -8,4 +8,4 @@ supports         'mac_os_x'
 
 source_url 'https://github.com/sous-chefs/homebrew'
 issues_url 'https://github.com/sous-chefs/homebrew/issues'
-chef_version '>= 15.3'
+chef_version '>= 18.6.2'

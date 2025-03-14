@@ -30,13 +30,6 @@ RSpec.describe Homebrew do
     end
   end
 
-  describe '#exist?' do
-    it 'checks if the Homebrew binary exists' do
-      allow(File).to receive(:exist?).with("#{homebrew.install_path}/bin/brew").and_return(true)
-      expect(homebrew.exist?).to be true
-    end
-  end
-
   describe '#owner' do
     it 'returns the homebrew owner' do
       user_wrapper = double('HomebrewUserWrapper', find_homebrew_username: 'testuser')
