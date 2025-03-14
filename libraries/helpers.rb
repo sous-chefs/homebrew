@@ -67,30 +67,6 @@ module Homebrew
                  Chef::Log.debug("Homebrew owner is #{owner}")
                end
   end
-
-  # private
-  #
-  # def calculate_owner
-  #   owner = homebrew_owner_attr || sudo_user || current_user
-  #   if owner == 'root'
-  #     raise Chef::Exceptions::User,
-  #          "Homebrew owner is 'root' which is not supported. " \
-  #          "To set an explicit owner, please set node['homebrew']['owner']."
-  #   end
-  #   owner
-  # end
-  #
-  # def homebrew_owner_attr
-  #   Chef.node['homebrew']['owner']
-  # end
-  #
-  # def sudo_user
-  #   ENV['SUDO_USER']
-  # end
-  #
-  # def current_user
-  #   ENV['USER']
-  # end
 end unless defined?(Homebrew)
 
 class HomebrewWrapper
