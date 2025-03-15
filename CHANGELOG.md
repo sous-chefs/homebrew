@@ -4,7 +4,7 @@ This file is used to list changes made in each version of the homebrew cookbook.
 
 ## Unreleased
 
-- Updated library call for new homebrew class name
+- Updated library call for new homebrew class name found in chef-client 18.6.2+ releases
 
 ## 5.4.9 - *2024-11-18*
 
