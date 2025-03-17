@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
-## Unreleased
+## 6.0.0 - *2025-03-17*
 
 - Updated library call for new homebrew class name found in chef-client 18.6.2+ releases
 
