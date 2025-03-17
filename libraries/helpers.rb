@@ -20,8 +20,8 @@
 #
 
 class HomebrewUserWrapper
-  require 'chef/mixin/homebrew_user'
-  include Chef::Mixin::HomebrewUser
+  require 'chef/mixin/homebrew'
+  include Chef::Mixin::Homebrew
   include Chef::Mixin::Which
 end
 
@@ -60,41 +60,17 @@ module Homebrew
 
   def owner
     @owner ||= begin
-      # once we only support 14.0 we can switch this to find_homebrew_username
-      require 'etc'
-      ::Etc.getpwuid(HomebrewUserWrapper.new.find_homebrew_uid).name
-               rescue Chef::Exceptions::CannotDetermineHomebrewOwner
-                 calculate_owner
-    end.tap do |owner|
-      Chef::Log.debug("Homebrew owner is #{owner}")
-    end
-  end
-
-  private
-
-  def calculate_owner
-    owner = homebrew_owner_attr || sudo_user || current_user
-    if owner == 'root'
-      raise Chef::Exceptions::User,
-           "Homebrew owner is 'root' which is not supported. " \
-           "To set an explicit owner, please set node['homebrew']['owner']."
-    end
-    owner
-  end
-
-  def homebrew_owner_attr
-    Chef.node['homebrew']['owner']
-  end
-
-  def sudo_user
-    ENV['SUDO_USER']
-  end
-
-  def current_user
-    ENV['USER']
+                 HomebrewUserWrapper.new.find_homebrew_username
+               rescue
+                 Chef::Exceptions::CannotDetermineHomebrewPath
+               end.tap do |owner|
+                 Chef::Log.debug("Homebrew owner is #{owner}")
+               end
   end
 end unless defined?(Homebrew)
 
 class HomebrewWrapper
   include Homebrew
 end
+
+Chef::Mixin::Homebrew.include(Homebrew)
