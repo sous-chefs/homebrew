@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the homebrew cookbook.
 
-## Unreleased
+## 6.0.2 - *2025-09-04*
 
 Standardise files with files in sous-chefs/repo-management
 
