@@ -5,6 +5,13 @@ This file is used to list changes made in each version of the homebrew cookbook.
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [6.0.3](https://github.com/sous-chefs/homebrew/compare/6.0.2...v6.0.3) (2025-10-16)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#204](https://github.com/sous-chefs/homebrew/issues/204)) ([a5142fc](https://github.com/sous-chefs/homebrew/commit/a5142fc44a421736ca08a5316a9a42b494491b3b))
+
 ## 6.0.2 - *2025-09-04*
 
 Standardise files with files in sous-chefs/repo-management
