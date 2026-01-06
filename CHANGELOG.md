@@ -5,6 +5,11 @@ This file is used to list changes made in each version of the homebrew cookbook.
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## Unreleased
+
+Standardise files with files in sous-chefs/repo-management
+
+
 ## [6.0.3](https://github.com/sous-chefs/homebrew/compare/6.0.2...v6.0.3) (2025-10-16)
 
 
