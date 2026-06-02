@@ -13,8 +13,6 @@ end
 homebrew_formula 'redis'
 homebrew_formula 'jq'
 
-homebrew_tap_repo 'homebrew/bundle'
-
 homebrew_tap_repo 'homebrew/services' do
   url 'https://github.com/homebrew/homebrew-services.git'
 end
