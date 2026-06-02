@@ -5,6 +5,22 @@ This file is used to list changes made in each version of the homebrew cookbook.
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [7.0.0](https://github.com/sous-chefs/homebrew/compare/v6.0.3...v7.0.0) (2026-06-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate homebrew to resources ([#210](https://github.com/sous-chefs/homebrew/issues/210))
+
+### Features
+
+* migrate homebrew to resources ([#210](https://github.com/sous-chefs/homebrew/issues/210)) ([e80f4a2](https://github.com/sous-chefs/homebrew/commit/e80f4a26088c386772a0f7e567756a3573aa823e))
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#204](https://github.com/sous-chefs/homebrew/issues/204)) ([a5142fc](https://github.com/sous-chefs/homebrew/commit/a5142fc44a421736ca08a5316a9a42b494491b3b))
+
 ## [6.0.3](https://github.com/sous-chefs/homebrew/compare/6.0.2...v6.0.3) (2025-10-16)
 
 
