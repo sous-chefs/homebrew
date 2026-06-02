@@ -1,10 +1,12 @@
-name             'homebrew'
-maintainer       'Sous Chefs'
-maintainer_email 'help@sous-chefs.org'
-license          'Apache-2.0'
-description      'Install Homebrew and includes resources for working with taps and casks'
-version          '6.0.3'
-supports         'mac_os_x'
+# frozen_string_literal: true
+
+name              'homebrew'
+maintainer        'Sous Chefs'
+maintainer_email  'help@sous-chefs.org'
+license           'Apache-2.0'
+description       'Install Homebrew and provide resources for formulas, taps, and casks'
+version           '6.0.3'
+supports          'mac_os_x', '>= 14.0'
 
 source_url 'https://github.com/sous-chefs/homebrew'
 issues_url 'https://github.com/sous-chefs/homebrew/issues'

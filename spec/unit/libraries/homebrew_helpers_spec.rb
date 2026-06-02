@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'chef/mixin/shell_out'
 
-RSpec.describe Homebrew do
+RSpec.describe HomebrewCookbook::Helpers do
   let(:homebrew) { HomebrewWrapper.new }
 
   describe '#install_path' do
@@ -35,6 +35,22 @@ RSpec.describe Homebrew do
       user_wrapper = double('HomebrewUserWrapper', find_homebrew_username: 'testuser')
       allow(HomebrewUserWrapper).to receive(:new).and_return(user_wrapper)
       expect(homebrew.owner).to eq('testuser')
+    end
+  end
+
+  describe '#homebrew_user_environment' do
+    it 'returns the HOME and USER environment' do
+      allow(Dir).to receive(:home).with('testuser').and_return('/Users/testuser')
+      expect(homebrew.homebrew_user_environment('testuser')).to eq(
+        'HOME' => '/Users/testuser',
+        'USER' => 'testuser'
+      )
+    end
+  end
+
+  describe '#tap_directory' do
+    it 'returns the Homebrew tap directory fragment' do
+      expect(homebrew.tap_directory('homebrew/services')).to eq('homebrew/homebrew-services')
     end
   end
 end
