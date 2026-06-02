@@ -48,7 +48,6 @@ action_class do
     [
       new_resource.homebrew_path,
       'tap',
-      (new_resource.full ? '--full' : nil),
       new_resource.tap_name,
       new_resource.url,
     ].compact.reject(&:empty?).join(' ')

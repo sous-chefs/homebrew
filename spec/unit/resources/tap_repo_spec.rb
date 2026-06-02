@@ -24,7 +24,7 @@ describe 'homebrew_tap_repo' do
     it { is_expected.to run_execute('tap homebrew/services').with(command: '/opt/homebrew/bin/brew tap homebrew/services') }
   end
 
-  context 'with full clone and URL' do
+  context 'with legacy full property and URL' do
     recipe do
       homebrew_tap_repo 'homebrew/services' do
         full true
@@ -34,7 +34,7 @@ describe 'homebrew_tap_repo' do
 
     it do
       is_expected.to run_execute('tap homebrew/services').with(
-        command: '/opt/homebrew/bin/brew tap --full homebrew/services https://github.com/homebrew/homebrew-services.git'
+        command: '/opt/homebrew/bin/brew tap homebrew/services https://github.com/homebrew/homebrew-services.git'
       )
     end
   end

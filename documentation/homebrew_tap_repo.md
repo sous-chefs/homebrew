@@ -19,7 +19,7 @@ with Chef Infra's built-in `homebrew_tap` resource.
 | --- | --- | --- | --- |
 | `tap_name` | String | name property | Tap name, such as `homebrew/services`. |
 | `url` | String | unset | Optional Git URL for the tap. |
-| `full` | true, false | `false` | Performs a full clone instead of a shallow clone. |
+| `full` | true, false | `false` | Legacy compatibility property. Current Homebrew no longer supports full-clone taps, so this property is accepted but ignored. |
 | `homebrew_path` | String | calculated | Path to the `brew` executable. |
 | `owner` | String | calculated | User that owns the Homebrew installation. |
 
@@ -31,12 +31,11 @@ with Chef Infra's built-in `homebrew_tap` resource.
 homebrew_tap_repo 'homebrew/services'
 ```
 
-### Full clone from a URL
+### Tap from a URL
 
 ```ruby
 homebrew_tap_repo 'homebrew/services' do
   url 'https://github.com/homebrew/homebrew-services.git'
-  full true
 end
 ```
 

@@ -40,7 +40,6 @@ homebrew_formula 'jq'
 
 homebrew_tap_repo 'homebrew/services' do
   url 'https://github.com/homebrew/homebrew-services.git'
-  full true
 end
 
 homebrew_cask_app 'caffeine'

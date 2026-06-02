@@ -34,7 +34,7 @@ node.default['homebrew']['enable-analytics'] = false
 node.default['homebrew']['formulas'] = %w(redis jq)
 node.default['homebrew']['casks'] = %w(caffeine)
 node.default['homebrew']['taps'] = [
-  { 'tap' => 'homebrew/services', 'url' => 'https://github.com/homebrew/homebrew-services.git', 'full' => true },
+  { 'tap' => 'homebrew/services', 'url' => 'https://github.com/homebrew/homebrew-services.git' },
 ]
 
 include_recipe 'homebrew::install_formulas'
@@ -54,11 +54,13 @@ homebrew_formula 'jq'
 
 homebrew_tap_repo 'homebrew/services' do
   url 'https://github.com/homebrew/homebrew-services.git'
-  full true
 end
 
 homebrew_cask_app 'caffeine'
 ```
+
+Legacy `full` tap values are accepted by `homebrew_tap_repo`, but current Homebrew no longer
+supports full-clone taps and the property is ignored.
 
 ## Built-in Chef Resource Name Collisions
 

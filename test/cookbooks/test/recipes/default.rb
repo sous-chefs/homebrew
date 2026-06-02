@@ -13,13 +13,10 @@ end
 homebrew_formula 'redis'
 homebrew_formula 'jq'
 
-homebrew_tap_repo 'homebrew/bundle' do
-  full true
-end
+homebrew_tap_repo 'homebrew/bundle'
 
 homebrew_tap_repo 'homebrew/services' do
   url 'https://github.com/homebrew/homebrew-services.git'
-  full true
 end
 
 homebrew_cask_app 'caffeine'
