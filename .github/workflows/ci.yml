@@ -20,23 +20,34 @@ jobs:
       issues: write
 
   integration:
-    needs: "lint-unit"
+    needs: lint-unit
+    if: always()
     runs-on: macos-latest
     strategy:
       matrix:
-        os: [macos-latest]
-        suite: ["default"]
+        os:
+          - macos-latest
+        suite:
+          - default
       fail-fast: false
     steps:
       - name: Check out code
         uses: actions/checkout@v6
-      - name: Install Chef
-        uses: actionshub/chef-install@6.0.0
-      - name: test-kitchen
+
+      - name: Install Cinc Workstation
+        uses: sous-chefs/.github/.github/actions/install-workstation@6.0.0
+
+      - name: Test Kitchen
         uses: actionshub/test-kitchen@3.0.0
         env:
-          CHEF_LICENSE: accept-no-persist
           KITCHEN_LOCAL_YAML: kitchen.exec.yml
         with:
           suite: ${{ matrix.suite }}
           os: ${{ matrix.os }}
+
+  final:
+    needs: integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Complete
+        run: echo "All tests passed"

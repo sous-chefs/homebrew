@@ -1,19 +1,33 @@
+---
 driver:
-  name: vagrant
-  provider: vmware_fusion
+  name: exec
+
+transport:
+  name: exec
 
 provisioner:
-  name: chef_zero
+  name: chef_infra
+  chef_omnibus_install: false
+  chef_license: accept
+  deprecations_as_errors: true
 
 verifier:
   name: inspec
   sudo: false
 
 platforms:
-  - name: macos-10.12
-    driver:
-      box: chef/macos-10.12  # private box in Chef's Atlas account
+  - name: macos-latest
+
+x-run_lists:
+  default: &default_run_list
+    - recipe[test::default]
+
+x-verifiers:
+  default: &default_verifier
+    inspec_tests:
+      - path: test/integration/default
 
 suites:
   - name: default
-    run_list: test::default
+    run_list: *default_run_list
+    verifier: *default_verifier
