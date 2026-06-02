@@ -7,7 +7,6 @@ transport:
 
 provisioner:
   name: chef_infra
-  product_name: chef
   chef_omnibus_install: false
   chef_license: accept
   deprecations_as_errors: true
