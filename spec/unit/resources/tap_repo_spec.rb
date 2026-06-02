@@ -10,7 +10,7 @@ describe 'homebrew_tap_repo' do
     allow(Dir).to receive(:home).and_call_original
     allow(Dir).to receive(:home).with('testuser').and_return('/Users/testuser')
     allow(File).to receive(:directory?).and_call_original
-    allow(File).to receive(:directory?).with('/opt/homebrew/Library/Taps/homebrew/homebrew-services').and_return(false)
+    allow(File).to receive(:directory?).with('/opt/homebrew/Library/Taps/hashicorp/homebrew-tap').and_return(false)
     allow_any_instance_of(HomebrewWrapper).to receive(:install_path).and_return('/opt/homebrew')
     allow_any_instance_of(HomebrewWrapper).to receive(:repository_path).and_return('/opt/homebrew')
     allow_any_instance_of(HomebrewWrapper).to receive(:owner).and_return('testuser')
@@ -18,38 +18,38 @@ describe 'homebrew_tap_repo' do
 
   context 'with default properties' do
     recipe do
-      homebrew_tap_repo 'homebrew/services'
+      homebrew_tap_repo 'hashicorp/tap'
     end
 
-    it { is_expected.to run_execute('tap homebrew/services').with(command: '/opt/homebrew/bin/brew tap homebrew/services') }
+    it { is_expected.to run_execute('tap hashicorp/tap').with(command: '/opt/homebrew/bin/brew tap hashicorp/tap') }
   end
 
   context 'with legacy full property and URL' do
     recipe do
-      homebrew_tap_repo 'homebrew/services' do
+      homebrew_tap_repo 'hashicorp/tap' do
         full true
-        url 'https://github.com/homebrew/homebrew-services.git'
+        url 'https://github.com/hashicorp/homebrew-tap.git'
       end
     end
 
     it do
-      is_expected.to run_execute('tap homebrew/services').with(
-        command: '/opt/homebrew/bin/brew tap homebrew/services https://github.com/homebrew/homebrew-services.git'
+      is_expected.to run_execute('tap hashicorp/tap').with(
+        command: '/opt/homebrew/bin/brew tap hashicorp/tap https://github.com/hashicorp/homebrew-tap.git'
       )
     end
   end
 
   context 'action :untap' do
     before do
-      allow(File).to receive(:directory?).with('/opt/homebrew/Library/Taps/homebrew/homebrew-services').and_return(true)
+      allow(File).to receive(:directory?).with('/opt/homebrew/Library/Taps/hashicorp/homebrew-tap').and_return(true)
     end
 
     recipe do
-      homebrew_tap_repo 'homebrew/services' do
+      homebrew_tap_repo 'hashicorp/tap' do
         action :untap
       end
     end
 
-    it { is_expected.to run_execute('untap homebrew/services').with(command: '/opt/homebrew/bin/brew untap homebrew/services') }
+    it { is_expected.to run_execute('untap hashicorp/tap').with(command: '/opt/homebrew/bin/brew untap hashicorp/tap') }
   end
 end

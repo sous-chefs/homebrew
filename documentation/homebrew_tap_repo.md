@@ -17,7 +17,7 @@ with Chef Infra's built-in `homebrew_tap` resource.
 
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
-| `tap_name` | String | name property | Tap name, such as `homebrew/services`. |
+| `tap_name` | String | name property | Tap name, such as `hashicorp/tap`. |
 | `url` | String | unset | Optional Git URL for the tap. |
 | `full` | true, false | `false` | Legacy compatibility property. Current Homebrew no longer supports full-clone taps, so this property is accepted but ignored. |
 | `homebrew_path` | String | calculated | Path to the `brew` executable. |
@@ -28,21 +28,21 @@ with Chef Infra's built-in `homebrew_tap` resource.
 ### Basic tap
 
 ```ruby
-homebrew_tap_repo 'homebrew/services'
+homebrew_tap_repo 'hashicorp/tap'
 ```
 
 ### Tap from a URL
 
 ```ruby
-homebrew_tap_repo 'homebrew/services' do
-  url 'https://github.com/homebrew/homebrew-services.git'
+homebrew_tap_repo 'hashicorp/tap' do
+  url 'https://github.com/hashicorp/homebrew-tap.git'
 end
 ```
 
 ### Remove a tap
 
 ```ruby
-homebrew_tap_repo 'homebrew/services' do
+homebrew_tap_repo 'hashicorp/tap' do
   action :untap
 end
 ```

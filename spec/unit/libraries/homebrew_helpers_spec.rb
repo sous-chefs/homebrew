@@ -50,7 +50,7 @@ RSpec.describe HomebrewCookbook::Helpers do
 
   describe '#tap_directory' do
     it 'returns the Homebrew tap directory fragment' do
-      expect(homebrew.tap_directory('homebrew/services')).to eq('homebrew/homebrew-services')
+      expect(homebrew.tap_directory('hashicorp/tap')).to eq('hashicorp/homebrew-tap')
     end
   end
 end

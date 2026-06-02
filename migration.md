@@ -34,7 +34,7 @@ node.default['homebrew']['enable-analytics'] = false
 node.default['homebrew']['formulas'] = %w(redis jq)
 node.default['homebrew']['casks'] = %w(caffeine)
 node.default['homebrew']['taps'] = [
-  { 'tap' => 'homebrew/services', 'url' => 'https://github.com/homebrew/homebrew-services.git' },
+  { 'tap' => 'hashicorp/tap', 'url' => 'https://github.com/hashicorp/homebrew-tap.git' },
 ]
 
 include_recipe 'homebrew::install_formulas'
@@ -52,8 +52,8 @@ end
 homebrew_formula 'redis'
 homebrew_formula 'jq'
 
-homebrew_tap_repo 'homebrew/services' do
-  url 'https://github.com/homebrew/homebrew-services.git'
+homebrew_tap_repo 'hashicorp/tap' do
+  url 'https://github.com/hashicorp/homebrew-tap.git'
 end
 
 homebrew_cask_app 'caffeine'
