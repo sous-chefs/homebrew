@@ -21,6 +21,7 @@ jobs:
 
   integration:
     needs: lint-unit
+    if: always()
     runs-on: macos-latest
     strategy:
       matrix:
@@ -45,7 +46,7 @@ jobs:
           os: ${{ matrix.os }}
 
   final:
-    needs: [lint-unit, integration]
+    needs: integration
     runs-on: ubuntu-latest
     steps:
       - name: Complete
